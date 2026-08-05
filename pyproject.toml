@@ -13,7 +13,8 @@ authors = [{ name = "Ernan Hughes" }]
 dependencies = ["numpy>=1.26"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8"]
+replay = ["scikit-learn>=1.4"]
+dev = ["pytest>=8", "scikit-learn>=1.4"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
