@@ -1,0 +1,61 @@
+{
+  "cache_a": "C:\\Projects\\relate_new\\.writer\\option-b\\cache\\gpu-batch10-a.sqlite3",
+  "cache_b": "C:\\Projects\\relate_new\\.writer\\option-b\\cache\\gpu-batch10-b.sqlite3",
+  "canonical_root": "C:\\Projects\\similarity_is_relative\\artifacts\\canonical\\option-b",
+  "embedding_reconstruction": {
+    "test": {
+      "array_sha256": "e24c9797f5068e9c84a170bacdc85e06a1c4fe6bbc2d7b1f64045bc166ef4320",
+      "cache_a_cache_b_exact": true,
+      "dimensions": 768,
+      "dtype": "float32",
+      "extraction_fingerprint_sha256": "149dc0147a9e7c1ea0f05fe9d2525614a2db86d693f8e1dc376e346f9812666d",
+      "rows": 4000
+    },
+    "train": {
+      "array_sha256": "ac23f6b58076c4f5aaa5eeb44046480ebafe93793a100abd764749d3f5c13767",
+      "cache_a_cache_b_exact": true,
+      "dimensions": 768,
+      "dtype": "float32",
+      "extraction_fingerprint_sha256": "c49d7f417c95f121cea39bb4d72ae27c0e427d7a66f45b47d8529bd0bfd6eef1",
+      "rows": 20000
+    },
+    "validation": {
+      "array_sha256": "7e74953f4bb69d598b663b88e6e42b6a1105bd75ebdc264ccbbd0300346fe242",
+      "cache_a_cache_b_exact": true,
+      "dimensions": 768,
+      "dtype": "float32",
+      "extraction_fingerprint_sha256": "bd181da134ff61f12164c1e804914cffce672db5b5a1c2d339e3a82c18f73780",
+      "rows": 4000
+    }
+  },
+  "hard_negative_pairs": 512000,
+  "primary_query_score_array_sha256": "dccf0698934142ceaf1fe0ccd5d35713600ef45f9719e3864468c40a5274dc70",
+  "published_verification": {
+    "exact_decision_match": true,
+    "file_sha256": "da1b9cf1244b47c71ac7adce91b7db502b4fd2d3b663e126d8cde7c87e239d6c",
+    "path": "C:\\Projects\\similarity_is_relative\\artifacts\\canonical\\option-b\\method-evaluation-v1\\option-b-method-evaluation-independent-v1.json"
+  },
+  "relate_e01_affected": false,
+  "scientific_decision": {
+    "gap": 0.19953710937500002,
+    "inconclusive_band": false,
+    "outcome": "REAL_PREMISE_SUPPORTED",
+    "queries_with_pairs": 4000,
+    "queries_without_pairs": 0,
+    "query_equal_weighted_accuracy": {
+      "predicted_executor": 0.7328515625,
+      "raw_cosine": 0.532458984375,
+      "raw_euclidean": 0.533314453125,
+      "token_length": 0.49868359375,
+      "true_oracle": 1.0
+    },
+    "raw_best": 0.533314453125,
+    "raw_best_methods": [
+      "raw_euclidean"
+    ],
+    "secondary_metric_override": false,
+    "threshold": 0.1
+  },
+  "scientific_scope": "historical_option_b_only",
+  "status": "OPTION_B_HISTORICAL_REPLAY_COMPLETE"
+}

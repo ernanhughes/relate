@@ -101,6 +101,27 @@ python -m relate.replay replay-pairs `
 
 The replay refuses to run when the NPZ dataset hash, manifest metadata, split hashes, row counts, labels, IDs, texts, or embedding dimensions do not match. It reproduces the original comparison between cosine-only, absolute difference, elementwise product, residual, full-pair, and shuffled-label readouts.
 
+### Historical Option B replay
+
+The original CodeBERT result can also be reconstructed without loading a model. Keep the copied GPU caches at:
+
+```text
+.writer/option-b/cache/gpu-batch10-a.sqlite3
+.writer/option-b/cache/gpu-batch10-b.sqlite3
+```
+
+Then point the replay at the committed canonical Option B artifact directory in the old research checkout:
+
+```powershell
+python -m relate.option_b_replay `
+    --canonical-root C:\Projects\similarity_is_relative\artifacts\canonical\option-b `
+    --output C:\Projects\relate_new\.writer\option-b\replay-option-b.json
+```
+
+The command opens both SQLite caches read-only. For every frozen train, validation, and test row it verifies the stable key, source hash, extraction fingerprint, dtype, dimension, payload hash, and row-array hash. It then requires both independently generated caches to reconstruct exactly the frozen canonical matrix hashes before recomputing the five historical hard-negative methods.
+
+The replay succeeds only when its complete scientific decision exactly equals the already published independent Option B verification. It does not regenerate embeddings, refit probes, change thresholds, or alter RELATE-E01.
+
 This is a replay of preserved inputs, not a reopening of the invalid RELATE-E01 identity.
 
 ## Install and test
@@ -127,6 +148,7 @@ RELATE contains:
 - the Python AST coordinates behind the original result;
 - read-only SQLite, NPZ, and NPY inventory;
 - deterministic replay of preserved external pair benchmarks;
+- read-only reconstruction and replay of the historical Option B result;
 - focused unit tests.
 
 RELATE does **not** contain an experiment manager, artifact ledger, authorization system, publication workflow, model downloader, or agent architecture.
