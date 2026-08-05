@@ -1,68 +1,132 @@
 # RELATE
 
-RELATE is a focused research project asking one question:
+**Search frozen embeddings by a relation they contain, not only by the cosine geometry they expose by default.**
 
-> Do frozen embeddings contain relation-specific predictive information that their default cosine or Euclidean geometry underexposes, and can that information be recovered in a way that adds value beyond strong supervised alternatives?
+RELATE is deliberately small. It takes embeddings you already have, learns a projection into one or more measurable relation coordinates, and ranks targets in that relation space.
 
-This repository is a clean restart. It does **not** inherit the architecture, workflow, experiment numbering, or project structure of either earlier attempt.
+```python
+import numpy as np
+from relate import RelationProjection
 
-## Source archives
+model = RelationProjection.fit(
+    training_embeddings,
+    training_relation_coordinates,
+    relation_names=("complexity", "depth", "call_sites"),
+)
 
-Two previous repositories are retained as historical source archives:
+hits = model.search(
+    source_embedding,
+    target_embeddings,
+    k=10,
+)
 
-1. [`ernanhughes/similarity_is_relative`](https://github.com/ernanhughes/similarity_is_relative) — the original project. It failed as a sustainable project, but contains one important bounded result: Option B showed that three independently predicted AST-derived coordinates exposed a structural relation substantially better than raw CodeBERT cosine or Euclidean geometry on a preregistered hard-negative evaluation.
-2. [`ernanhughes/relate_attempt`](https://github.com/ernanhughes/relate_attempt) — the second attempt. It sharpened the comparison against supervised metric-learning and direct pair models, but RELATE-E01 terminated as `EXPERIMENT_INVALID` when its preregistered shuffled-target control failed. Its primary test was not executed.
+for hit in hits:
+    print(hit.index, hit.relation_distance, hit.cosine_distance)
+```
 
-The archives are evidence and implementation sources. They are not the active project.
+That is the implementation. There is no experiment framework inside the package.
 
-## Scientific state carried forward
+## Why this exists
 
-### Established narrowly
+Cosine similarity collapses an embedding into one fixed notion of closeness. A frozen embedding can contain information that is predictable from its coordinates but poorly exposed by that default geometry.
 
-Option B established this bounded premise:
+The original real-code result used frozen CodeBERT embeddings and three objective Python AST coordinates:
 
-> In repository-separated real Python code, independently predicted cyclomatic complexity, maximum control nesting depth, and distinct call-site coordinates exposed a frozen three-way structural relation materially better than raw CodeBERT cosine or Euclidean geometry on the registered hard-negative test.
+1. cyclomatic complexity;
+2. maximum control nesting depth;
+3. distinct call-site count.
 
-Registered primary results:
+A ridge projection recovered those coordinates from the embeddings. Chebyshev distance in the recovered coordinate space reached `0.7328515625` hard-negative ordering accuracy, compared with `0.532458984375` for raw cosine and `0.533314453125` for raw Euclidean distance.
 
-| Method | Hard-negative triplet accuracy |
-|---|---:|
-| Raw CodeBERT cosine | `0.532458984375` |
-| Raw CodeBERT Euclidean | `0.533314453125` |
-| Predicted primitive executor | `0.732851562500` |
-| Gap over best raw geometry | `0.199537109375` |
+The product claim is intentionally narrower than the old research programme:
 
-This result was independently recomputed in the original repository.
+> Given useful relation labels, a small learned projection can expose relation-specific information in frozen embeddings that cosine search misses.
 
-### Still unanswered
+## Cosine can still help
 
-The stronger question remains unanswered:
+For a large target set, cosine can cheaply generate candidates and RELATE can rerank them:
 
-> Does the primitive-coordinate approach materially outperform strong supervised metric-learning and directly trained pair models given equivalent training access?
+```python
+hits = model.search(
+    source_embedding,
+    target_embeddings,
+    k=10,
+    candidate_pool=500,
+)
+```
 
-The second attempt did not answer this because RELATE-E01 stopped before its primary test.
+This does not blend unlike distance units. Cosine chooses a broad candidate pool; the learned relation defines the final order.
 
-## Repository rule
+## Python structural coordinates
 
-The scientific question controls the project. Infrastructure may support an experiment, but it may not become the project itself.
+The three coordinates from the successful code result are included as a small adapter:
 
-The new repository will therefore begin with:
+```python
+from relate import PYTHON_RELATION_NAMES, extract_python_structure
 
-- one concise research statement;
-- one migration inventory;
-- a small set of extracted, understandable scientific modules;
-- one finite next experiment;
-- ordinary reproducibility protections against mistakes;
-- an explicit stopping rule.
+training_relation_coordinates = np.vstack(
+    [extract_python_structure(source).as_array() for source in training_functions]
+)
 
-It will not initially include:
+model = RelationProjection.fit(
+    training_embeddings,
+    training_relation_coordinates,
+    relation_names=PYTHON_RELATION_NAMES,
+)
+```
 
-- generalized publication machinery;
-- capability or authorization frameworks;
-- tamper-proof ledger systems;
-- agent workflows;
-- broad plugin architectures;
-- large historical artifact trees;
-- inherited experiment numbering.
+Embedding generation is intentionally external. RELATE accepts NumPy-compatible arrays from any encoder.
 
-See [`docs/migration-inventory.md`](docs/migration-inventory.md) and [`docs/scientific-state.md`](docs/scientific-state.md).
+## Replay preserved assets
+
+The old benchmark SQLite database and preserved NPZ/NPY arrays can be inspected and replayed without generating a single new embedding.
+
+First inventory the local assets:
+
+```powershell
+python -m relate.inventory C:\Projects\relate `
+    --output C:\Projects\relate\replay-inventory.json
+```
+
+This opens `.writer/benchmarks/embedding-cache.sqlite3` read-only and records every embedding contract, row count, dimension, NPZ key, array shape, dtype, model identifier, dataset hash, and standalone NPY file it can find. Large array values are not loaded merely to produce the inventory.
+
+The SQLite database contains text and embedding vectors. It does not contain the frozen pair labels and split assignments. A faithful PAWS or BigClone replay therefore uses the per-run `real_embeddings.npz` together with its sibling `manifests` directory:
+
+```powershell
+python -m relate.replay replay-pairs `
+    --snapshot experiments\benchmarks\outputs\paws\mxbai-embed-large\real_embeddings.npz `
+    --manifests experiments\benchmarks\outputs\paws\mxbai-embed-large\manifests `
+    --output replay-paws.json
+```
+
+The replay refuses to run when the NPZ dataset hash, manifest metadata, split hashes, row counts, labels, IDs, texts, or embedding dimensions do not match. It reproduces the original comparison between cosine-only, absolute difference, elementwise product, residual, full-pair, and shuffled-label readouts.
+
+This is a replay of preserved inputs, not a reopening of the invalid RELATE-E01 identity.
+
+## Install and test
+
+```bash
+python -m pip install -e ".[dev]"
+pytest
+```
+
+For users who only need replay support without the test dependency:
+
+```bash
+python -m pip install -e ".[replay]"
+```
+
+## Scope
+
+RELATE contains:
+
+- a NumPy-only ridge projection;
+- robust scaling of relation coordinates;
+- Chebyshev relation search;
+- optional cosine candidate generation;
+- the Python AST coordinates behind the original result;
+- read-only SQLite, NPZ, and NPY inventory;
+- deterministic replay of preserved external pair benchmarks;
+- focused unit tests.
+
+RELATE does **not** contain an experiment manager, artifact ledger, authorization system, publication workflow, model downloader, or agent architecture.
