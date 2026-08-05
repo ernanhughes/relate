@@ -79,16 +79,16 @@ Embedding generation is intentionally external. RELATE accepts NumPy-compatible 
 
 ## Replay preserved assets
 
-The old benchmark SQLite database and NPZ snapshots can be inspected and replayed without generating a single new embedding.
+The old benchmark SQLite database and preserved NPZ/NPY arrays can be inspected and replayed without generating a single new embedding.
 
 First inventory the local assets:
 
 ```powershell
-python -m relate.replay inventory C:\Projects\relate `
+python -m relate.inventory C:\Projects\relate `
     --output C:\Projects\relate\replay-inventory.json
 ```
 
-This opens `.writer/benchmarks/embedding-cache.sqlite3` read-only and records every embedding contract, row count, dimension, NPZ key, shape, dtype, model identifier, and dataset hash it can find.
+This opens `.writer/benchmarks/embedding-cache.sqlite3` read-only and records every embedding contract, row count, dimension, NPZ key, array shape, dtype, model identifier, dataset hash, and standalone NPY file it can find. Large array values are not loaded merely to produce the inventory.
 
 The SQLite database contains text and embedding vectors. It does not contain the frozen pair labels and split assignments. A faithful PAWS or BigClone replay therefore uses the per-run `real_embeddings.npz` together with its sibling `manifests` directory:
 
@@ -125,7 +125,7 @@ RELATE contains:
 - Chebyshev relation search;
 - optional cosine candidate generation;
 - the Python AST coordinates behind the original result;
-- read-only SQLite and NPZ inventory;
+- read-only SQLite, NPZ, and NPY inventory;
 - deterministic replay of preserved external pair benchmarks;
 - focused unit tests.
 
