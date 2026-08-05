@@ -77,11 +77,43 @@ model = RelationProjection.fit(
 
 Embedding generation is intentionally external. RELATE accepts NumPy-compatible arrays from any encoder.
 
+## Replay preserved assets
+
+The old benchmark SQLite database and NPZ snapshots can be inspected and replayed without generating a single new embedding.
+
+First inventory the local assets:
+
+```powershell
+python -m relate.replay inventory C:\Projects\relate `
+    --output C:\Projects\relate\replay-inventory.json
+```
+
+This opens `.writer/benchmarks/embedding-cache.sqlite3` read-only and records every embedding contract, row count, dimension, NPZ key, shape, dtype, model identifier, and dataset hash it can find.
+
+The SQLite database contains text and embedding vectors. It does not contain the frozen pair labels and split assignments. A faithful PAWS or BigClone replay therefore uses the per-run `real_embeddings.npz` together with its sibling `manifests` directory:
+
+```powershell
+python -m relate.replay replay-pairs `
+    --snapshot experiments\benchmarks\outputs\paws\mxbai-embed-large\real_embeddings.npz `
+    --manifests experiments\benchmarks\outputs\paws\mxbai-embed-large\manifests `
+    --output replay-paws.json
+```
+
+The replay refuses to run when the NPZ dataset hash, manifest metadata, split hashes, row counts, labels, IDs, texts, or embedding dimensions do not match. It reproduces the original comparison between cosine-only, absolute difference, elementwise product, residual, full-pair, and shuffled-label readouts.
+
+This is a replay of preserved inputs, not a reopening of the invalid RELATE-E01 identity.
+
 ## Install and test
 
 ```bash
 python -m pip install -e ".[dev]"
 pytest
+```
+
+For users who only need replay support without the test dependency:
+
+```bash
+python -m pip install -e ".[replay]"
 ```
 
 ## Scope
@@ -93,6 +125,8 @@ RELATE contains:
 - Chebyshev relation search;
 - optional cosine candidate generation;
 - the Python AST coordinates behind the original result;
+- read-only SQLite and NPZ inventory;
+- deterministic replay of preserved external pair benchmarks;
 - focused unit tests.
 
-RELATE does **not** contain an experiment manager, artifact ledger, authorization system, publication workflow, benchmark framework, model downloader, or agent architecture.
+RELATE does **not** contain an experiment manager, artifact ledger, authorization system, publication workflow, model downloader, or agent architecture.
