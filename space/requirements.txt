@@ -1,0 +1,5 @@
+gradio>=5.44,<7
+numpy>=2.0,<3
+torch>=2.4,<3
+transformers>=4.45,<6
+git+https://github.com/ernanhughes/relate.git@main
