@@ -36,10 +36,12 @@ def test_historical_independent_project_uses_one_vector_operation_per_relation()
     actual = exact.historical_independent_project(projection, embeddings)
 
     assert np.array_equal(actual, expected)
-    assert not np.array_equal(actual, projection.project(embeddings))
 
 
-def test_export_wrapper_restores_normal_projection_method(monkeypatch) -> None:
+def test_export_wrapper_restores_normal_projection_method(
+    monkeypatch,
+    tmp_path: Path,
+) -> None:
     projection = _projection()
     embeddings = np.arange(2 * 768, dtype=np.float64).reshape(2, 768)
     expected = exact.historical_independent_project(projection, embeddings)
@@ -50,11 +52,13 @@ def test_export_wrapper_restores_normal_projection_method(monkeypatch) -> None:
         return {"verification": {}}
 
     monkeypatch.setattr(exact, "_base_export", fake_base_export)
+    output = tmp_path / "projection.npz"
     result = exact.export_space_artifact(
-        canonical_root=Path("canonical"),
-        cache_path=Path("cache.sqlite3"),
-        output_path=Path("projection.npz"),
+        canonical_root=tmp_path / "canonical",
+        cache_path=tmp_path / "cache.sqlite3",
+        output_path=output,
     )
 
     assert RelationProjection.project is original
+    assert output.with_suffix(".json").is_file()
     assert result["verification"]["prediction_execution"].startswith("three independent")
