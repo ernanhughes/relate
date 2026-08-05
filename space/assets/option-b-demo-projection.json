@@ -1,0 +1,35 @@
+{
+  "artifact_id": "relate-option-b-space-projection-v1",
+  "model": {
+    "max_length": 256,
+    "pooling": "attention-mask mean pooling",
+    "repo_id": "microsoft/codebert-base",
+    "revision": "3b0952feddeffad0063f274080e3c23d75e7eb39"
+  },
+  "projection": {
+    "coefficient_sha256": "8550404c91d563b5dcca34d65b83bf8197eb5c15e713192f3a7c96972d630da6",
+    "embedding_dimensions": 768,
+    "file_sha256": "68450add36e5d0cf0bf6994f5dd0d9a00a8632e2433f13b5cd828394885fd75d",
+    "intercept_sha256": "6df70e29295eef421466c02382a2fc7ef068a58ba994776c1e2bd2f652775b39",
+    "path": "assets/option-b-demo-projection.npz",
+    "relation_median_sha256": "61ca5fc8dc6ab7e153f4a00e62cbc402bfd35a3a23f6f5753e792a53627de380",
+    "relation_names": [
+      "cyclomatic_complexity",
+      "max_control_depth",
+      "distinct_call_sites"
+    ],
+    "relation_scale_sha256": "61ca5fc8dc6ab7e153f4a00e62cbc402bfd35a3a23f6f5753e792a53627de380",
+    "selected_alpha": 1.0
+  },
+  "relate_e01_affected": false,
+  "scientific_scope": "historical_option_b_live_readout",
+  "status": "SPACE_PROJECTION_EXPORTED_AND_VERIFIED",
+  "verification": {
+    "prediction_execution": "three independent float64 matrix-vector operations",
+    "probe_bundle_file_sha256": "85094d1668bb5d9561c7c0208c3ceac5a56b4a37265263c1713a18e5ff151bd4",
+    "published_test_prediction_array_sha256": "c14b773c4952721c26de051c45da9c5b36779af122d5e43095af0dd8e51bc4d9",
+    "published_test_predictions_exact": true,
+    "test_embedding_array_sha256": "e24c9797f5068e9c84a170bacdc85e06a1c4fe6bbc2d7b1f64045bc166ef4320",
+    "train_embedding_array_sha256": "ac23f6b58076c4f5aaa5eeb44046480ebafe93793a100abd764749d3f5c13767"
+  }
+}
