@@ -1,0 +1,18 @@
+{
+  "applied": {
+    "x": {
+      "far_at_accept": 0.1,
+      "frr_at_reject": 0.1
+    },
+    "y": {
+      "far_at_accept": 0.18583333333333332,
+      "frr_at_reject": 0.08333333333333333
+    }
+  },
+  "auc_x": 0.7494722222222222,
+  "eer_rate_x": 0.3333333333333333,
+  "eer_threshold_x": 0.5763910076191582,
+  "far_ratio_y_over_x": 1.8583333333333332,
+  "threshold_high": 0.6640071967510159,
+  "threshold_low": 0.5009522843269384
+}

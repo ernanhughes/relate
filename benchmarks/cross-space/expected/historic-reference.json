@@ -1,0 +1,30 @@
+{
+  "status": "EXTERNAL",
+  "note": "Preserved prose evidence, NOT recomputed here. The book's cross-space numbers came from five local sentence encoders (and a second-wave mxbai->Qwen benchmark) that are not part of this repository. The native-pair report in expected/space-comparison-xy.json mirrors the structure on synthetic native spaces instead.",
+  "experiment": "Wave 3 paired ladder (space-comparison, ladder-8property-matrix, relation-preservation) + Wave 6 mxbai->Qwen benchmark",
+  "results": {
+    "neighborhood_overlap_same_regime": 0.88,
+    "neighborhood_overlap_cross_family": [0.7, 0.71],
+    "linear_cka_range": [0.81, 0.99],
+    "paraphrase_vs_negation_gap_native": 0.033,
+    "paraphrase_vs_negation_gap_bridged": -0.107,
+    "counterpart_recall_at_10": 1.0,
+    "neighborhood_agreement_wave6": [0.796, 0.815]
+  },
+  "observation": "coarse geometry (neighborhoods, CKA, relation ordering) transfers between independently trained encoders; fine distinctions (hard-negative margin, polarity separation, calibration) transfer poorly and can invert",
+  "mirror": {
+    "cka": 0.948,
+    "counterpart_top1": 1.0,
+    "neighborhood_overlap": 0.513,
+    "negation_delta": "< -0.10",
+    "temporal_delta": "< -0.10",
+    "topic_delta": "|.| < 0.05",
+    "transfer_far_ratio_y_over_x": "> 1.5"
+  },
+  "sources": [
+    "experiments/embeddings-from-first-principles/wave3/artifacts/space-comparison.json",
+    "experiments/embeddings-from-first-principles/wave3/artifacts/relation-preservation.json",
+    "experiments/embeddings-from-first-principles/wave6/artifacts/cross-space-benchmark.json",
+    "book Chapters 16-23"
+  ]
+}

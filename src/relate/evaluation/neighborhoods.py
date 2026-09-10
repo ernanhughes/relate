@@ -122,6 +122,10 @@ class SpaceComparisonReport:
     neighborhood: NeighborhoodReport | None = None
     counterpart: CounterpartReport | None = None
     hard_negatives: HardNegativeDelta | None = None
+    correspondence_hash: str = ""
+    scorer: str = ""
+    metric: str = ""
+    k: int = 0
 
 
 def _top_k(similarities: np.ndarray, k: int) -> np.ndarray:

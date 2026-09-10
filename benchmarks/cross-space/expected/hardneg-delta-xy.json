@@ -1,0 +1,15 @@
+{
+  "accuracy_delta": -0.1233333333333334,
+  "group_deltas": {
+    "typed": -0.1233333333333334
+  },
+  "mean_margin_delta": -0.01909514173668969,
+  "median_margin_delta": -0.052275844417008,
+  "relation_deltas": {
+    "negation": -0.21333333333333332,
+    "relation-swap": -0.08000000000000007,
+    "temporal-mismatch": -0.20333333333333325,
+    "topic-related": 0.0033333333333332993
+  },
+  "tie_rate_delta": 0.0
+}

@@ -1,0 +1,38 @@
+{
+  "benchmark_id": "cross-space-v1",
+  "code_version": "relate-search 0.1.0",
+  "correspondence_hash": "24ef89509db0d882",
+  "k": 10,
+  "permutation_seed": 5,
+  "scorer": "cosine_similarity",
+  "seed": 0,
+  "source_space": {
+    "derivation": "",
+    "derived_from": "",
+    "dimensions": 32,
+    "dtype": "float32",
+    "model": "synthetic-native-x-v1",
+    "normalize": true,
+    "post_processing": "",
+    "prefixes": "",
+    "revision": "",
+    "sequence_length": 0,
+    "tokenizer": "",
+    "truncation": ""
+  },
+  "target_space": {
+    "derivation": "",
+    "derived_from": "",
+    "dimensions": 32,
+    "dtype": "float32",
+    "model": "synthetic-native-y-v1",
+    "normalize": true,
+    "post_processing": "",
+    "prefixes": "",
+    "revision": "fine-dims-weakened",
+    "sequence_length": 0,
+    "tokenizer": "",
+    "truncation": ""
+  },
+  "tie_tol": 1e-09
+}

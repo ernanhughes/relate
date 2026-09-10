@@ -1,0 +1,23 @@
+{
+  "identity": {
+    "cka": 1.0,
+    "counterpart_top1": 1.0,
+    "hard_negative_delta": 0.0,
+    "neighborhood_overlap": 1.0,
+    "top1_agreement": 1.0
+  },
+  "native_xy": {
+    "cka": 0.9475084648569483,
+    "counterpart_top1": 1.0,
+    "hard_negative_delta": -0.1233333333333334,
+    "neighborhood_overlap": 0.5126666666666666,
+    "top1_agreement": 0.36833333333333335
+  },
+  "permuted": {
+    "cka": 0.005931356085958305,
+    "counterpart_top1": 0.0,
+    "hard_negative_delta": null,
+    "neighborhood_overlap": 0.005111111111111111,
+    "top1_agreement": 0.0
+  }
+}

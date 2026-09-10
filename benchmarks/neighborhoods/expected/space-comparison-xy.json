@@ -1,4 +1,5 @@
 {
+  "correspondence_hash": "",
   "counterpart": {
     "mrr": 1.0,
     "n_queries": 2000,
@@ -58038,6 +58039,8 @@
     },
     "tie_rate_delta": 0.0
   },
+  "k": 0,
+  "metric": "",
   "neighborhood": {
     "k": 10,
     "mean_overlap": 0.6257999999999999,
@@ -116048,6 +116051,7 @@
     "rank_correlation": 0.5235988674625038,
     "top1_agreement": 0.5225
   },
+  "scorer": "",
   "source_space_hash": "945065efb2d54184",
   "target_space_hash": "230cb25956590395"
 }
