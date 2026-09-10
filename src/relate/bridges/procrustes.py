@@ -1,4 +1,9 @@
-"""Ordinary linear bridge producer: Y ~= XW, no constraints."""
+"""Orthogonal Procrustes producer: Y ~= XW with W'W = I.
+
+The geometry-preserving linear control: its rigid-motion assumption is
+interpretable, which is why it earns first-class status rather than being
+merely one optimizer among many.
+"""
 
 from __future__ import annotations
 
@@ -12,9 +17,10 @@ from relate.bridges.base import (
     resolve_anchors,
 )
 from relate.evaluation.cross_space import CorrespondenceSet
+from relate.model import RelateError
 
 
-def fit_linear(
+def fit_procrustes(
     *,
     source_vectors: npt.ArrayLike,
     target_vectors: npt.ArrayLike,
@@ -22,14 +28,12 @@ def fit_linear(
     spec: BridgeSpec,
     coverage: dict | None = None,
 ) -> Bridge:
-    """Least-squares map on correspondence-resolved anchors (NumPy only)."""
-    if spec.method != "linear":
-        from relate.model import RelateError
-
-        raise RelateError("linear producer needs a linear spec")
+    """Orthogonal Procrustes: M = U V' from SVD(X'Y) (NumPy only)."""
+    if spec.method != "procrustes":
+        raise RelateError("procrustes producer needs a procrustes spec")
     source, target = resolve_anchors(source_vectors, target_vectors, correspondence)
-    mapping, _, _, _ = np.linalg.lstsq(source, target, rcond=None)
-    mapping = np.asarray(mapping, dtype=np.float64)
+    left, _, right_transposed = np.linalg.svd(source.T @ target, full_matrices=False)
+    mapping = np.asarray(left @ right_transposed, dtype=np.float64)
     bias = np.zeros(mapping.shape[1])
     return assemble_bridge(
         spec=spec,

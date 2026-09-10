@@ -1,0 +1,38 @@
+{
+  "constant_target_centroid": {
+    "derivation": "bridge:{\"bridge_id\": \"bb3ff31bb054fd77\", \"target_reference_space_hash\": \"0b31bbcec838d12d\"}",
+    "derived_from": "bd51849d47c9023c",
+    "dimensions": 32,
+    "space_hash": "c3f76ea994756fdb"
+  },
+  "identity": {
+    "derivation": "bridge:{\"bridge_id\": \"91519658de8104b7\", \"target_reference_space_hash\": \"0b31bbcec838d12d\"}",
+    "derived_from": "bd51849d47c9023c",
+    "dimensions": 32,
+    "space_hash": "deda1a0118e1912a"
+  },
+  "linear": {
+    "derivation": "bridge:{\"bridge_id\": \"fdf3af31eff664e3\", \"target_reference_space_hash\": \"0b31bbcec838d12d\"}",
+    "derived_from": "bd51849d47c9023c",
+    "dimensions": 32,
+    "space_hash": "5eda5e2da27a0c72"
+  },
+  "procrustes": {
+    "derivation": "bridge:{\"bridge_id\": \"b7dea8f88a06bf27\", \"target_reference_space_hash\": \"0b31bbcec838d12d\"}",
+    "derived_from": "bd51849d47c9023c",
+    "dimensions": 32,
+    "space_hash": "6dfc82fb8de823bf"
+  },
+  "random_map": {
+    "derivation": "bridge:{\"bridge_id\": \"4b16f0d61031f4f7\", \"target_reference_space_hash\": \"0b31bbcec838d12d\"}",
+    "derived_from": "bd51849d47c9023c",
+    "dimensions": 32,
+    "space_hash": "fa40216743db972a"
+  },
+  "ridge": {
+    "derivation": "bridge:{\"bridge_id\": \"bdf54c244d9d9d12\", \"target_reference_space_hash\": \"0b31bbcec838d12d\"}",
+    "derived_from": "bd51849d47c9023c",
+    "dimensions": 32,
+    "space_hash": "2390112597535d1d"
+  }
+}

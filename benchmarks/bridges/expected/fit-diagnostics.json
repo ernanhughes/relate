@@ -1,0 +1,14 @@
+{
+  "linear": {
+    "kind": "FIT DIAGNOSTIC, not preservation evidence",
+    "train_reconstruction_cosine": 0.9873654640084085
+  },
+  "procrustes": {
+    "kind": "FIT DIAGNOSTIC, not preservation evidence",
+    "train_reconstruction_cosine": 0.9530663803823977
+  },
+  "ridge": {
+    "kind": "FIT DIAGNOSTIC, not preservation evidence",
+    "train_reconstruction_cosine": 0.9871938591901109
+  }
+}

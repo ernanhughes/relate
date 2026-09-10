@@ -3,6 +3,7 @@
 import numpy as np
 
 from relate import (
+    BridgeSpec,
     CalibrationRecord,
     Observatory,
     RelationProjection,
@@ -12,6 +13,8 @@ from relate import (
     compare_spaces,
     fit_bridge,
 )
+from relate.bridges import bridge_output_space
+from relate.evaluation import identity_correspondence
 from relate.spaces.derivation import derive
 from relate.transformations import check_compression
 
@@ -54,13 +57,21 @@ def test_bridge_procrustes_recovers_rotation():
     y = x @ q
     a = SpaceIdentity(model="a", dimensions=8)
     b = SpaceIdentity(model="b", dimensions=8)
-    bridge = fit_bridge(x, y, method="procrustes",
-                        source_hash=a.space_hash, target_hash=b.space_hash)
-    assert bridge.usable_for("retrieval") is False  # fail-closed: no profile yet
-    mapped = bridge.apply(x)
+    ids = [f"row-{i}" for i in range(30)]
+    correspondence = identity_correspondence(ids)
+    bridge = fit_bridge(
+        source_vectors=x, target_vectors=y, correspondence=correspondence,
+        spec=BridgeSpec(source_space_hash=a.space_hash,
+                        target_space_hash=b.space_hash, method="procrustes"),
+    )
+    assert not hasattr(bridge, "usable_for")
+    mapped = bridge.transform(x)
     cos = np.mean(np.sum(mapped * y, axis=1) / (
         np.linalg.norm(mapped, axis=1) * np.linalg.norm(y, axis=1)))
     assert cos > 0.99
+    derived = bridge_output_space(a, bridge, b)
+    assert derived.space_hash != b.space_hash
+    assert derived.derived_from == a.space_hash
 
 
 def test_observatory_evaluate_bridge_and_policy():
@@ -70,7 +81,11 @@ def test_observatory_evaluate_bridge_and_policy():
     runtime = Observatory()
     a = runtime.register_space(model="a", dimensions=8)
     b = runtime.register_space(model="b", dimensions=8)
-    bridge = runtime.fit_bridge(x, y, source_space=a, target_space=b)
+    ids = [f"row-{i}" for i in range(40)]
+    bridge = runtime.fit_bridge(
+        x, y, source_space=a, target_space=b,
+        correspondence=identity_correspondence(ids),
+    )
     profile = runtime.evaluate_bridge(bridge, source=x, target=y)
     assert profile.usable_for("retrieval") is True
     assert "threshold_transfer" not in profile.usable_scopes

@@ -1,0 +1,74 @@
+{
+  "constant_target_centroid": {
+    "cka": -7.977556935466754e-18,
+    "counterpart_top1": 0.0016666666666666668,
+    "hard_negative_delta": 0.6125,
+    "neighborhood_overlap": 0.0135,
+    "relation_deltas": {
+      "negation": 0.5,
+      "relation-swap": 0.48,
+      "temporal-mismatch": 0.5,
+      "topic-related": 0.97
+    }
+  },
+  "identity": {
+    "cka": 0.948695817015358,
+    "counterpart_top1": 1.0,
+    "hard_negative_delta": -0.12249999999999994,
+    "neighborhood_overlap": 0.5964999999999999,
+    "relation_deltas": {
+      "negation": -0.19999999999999996,
+      "relation-swap": -0.08999999999999997,
+      "temporal-mismatch": -0.19999999999999996,
+      "topic-related": 0.0
+    }
+  },
+  "linear": {
+    "cka": 0.9855680210751736,
+    "counterpart_top1": 1.0,
+    "hard_negative_delta": -0.03499999999999992,
+    "neighborhood_overlap": 0.7943333333333333,
+    "relation_deltas": {
+      "negation": -0.06000000000000005,
+      "relation-swap": -0.050000000000000044,
+      "temporal-mismatch": -0.030000000000000027,
+      "topic-related": 0.0
+    }
+  },
+  "procrustes": {
+    "cka": 0.9486958170153581,
+    "counterpart_top1": 1.0,
+    "hard_negative_delta": -0.12249999999999994,
+    "neighborhood_overlap": 0.5964999999999999,
+    "relation_deltas": {
+      "negation": -0.19999999999999996,
+      "relation-swap": -0.08999999999999997,
+      "temporal-mismatch": -0.19999999999999996,
+      "topic-related": 0.0
+    }
+  },
+  "random_map": {
+    "cka": 0.793185220118219,
+    "counterpart_top1": 0.005,
+    "hard_negative_delta": -0.12,
+    "neighborhood_overlap": 0.3858333333333333,
+    "relation_deltas": {
+      "negation": -0.14,
+      "relation-swap": -0.14,
+      "temporal-mismatch": -0.20999999999999996,
+      "topic-related": 0.010000000000000009
+    }
+  },
+  "ridge": {
+    "cka": 0.9853808433858724,
+    "counterpart_top1": 1.0,
+    "hard_negative_delta": -0.03249999999999997,
+    "neighborhood_overlap": 0.7876666666666667,
+    "relation_deltas": {
+      "negation": -0.06000000000000005,
+      "relation-swap": -0.050000000000000044,
+      "temporal-mismatch": -0.020000000000000018,
+      "topic-related": 0.0
+    }
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "benchmark_id": "bridges-v1",
+  "bridges": {
+    "constant_target_centroid": {
+      "anchor_set_hash": "0d62b0de54515852",
+      "bridge_id": "bb3ff31bb054fd77",
+      "method": "constant_target_centroid",
+      "parameter_hash": "53d38de4e5405138",
+      "provenance": {
+        "anchor_correspondence_hash": "0d62b0de54515852",
+        "code_identity": "relate-search 0.1.0",
+        "coverage": {},
+        "hyperparameters": {},
+        "method": "constant_target_centroid",
+        "n_anchors": 1200,
+        "seed": null,
+        "source_dimensions": 32,
+        "source_space_hash": "bd51849d47c9023c",
+        "target_dimensions": 32,
+        "target_space_hash": "0b31bbcec838d12d"
+      }
+    },
+    "identity": {
+      "anchor_set_hash": "none",
+      "bridge_id": "91519658de8104b7",
+      "method": "identity",
+      "parameter_hash": "dc9026506111765d",
+      "provenance": {
+        "anchor_correspondence_hash": "none",
+        "code_identity": "relate-search 0.1.0",
+        "coverage": {},
+        "hyperparameters": {
+          "dimensions": 32
+        },
+        "method": "identity",
+        "n_anchors": 0,
+        "seed": null,
+        "source_dimensions": 32,
+        "source_space_hash": "bd51849d47c9023c",
+        "target_dimensions": 32,
+        "target_space_hash": "0b31bbcec838d12d"
+      }
+    },
+    "linear": {
+      "anchor_set_hash": "0d62b0de54515852",
+      "bridge_id": "fdf3af31eff664e3",
+      "method": "linear",
+      "parameter_hash": "fdddaecf7923f58b",
+      "provenance": {
+        "anchor_correspondence_hash": "0d62b0de54515852",
+        "code_identity": "relate-search 0.1.0",
+        "coverage": {},
+        "hyperparameters": {},
+        "method": "linear",
+        "n_anchors": 1200,
+        "seed": null,
+        "source_dimensions": 32,
+        "source_space_hash": "bd51849d47c9023c",
+        "target_dimensions": 32,
+        "target_space_hash": "0b31bbcec838d12d"
+      }
+    },
+    "procrustes": {
+      "anchor_set_hash": "0d62b0de54515852",
+      "bridge_id": "b7dea8f88a06bf27",
+      "method": "procrustes",
+      "parameter_hash": "1b010a23bc28894e",
+      "provenance": {
+        "anchor_correspondence_hash": "0d62b0de54515852",
+        "code_identity": "relate-search 0.1.0",
+        "coverage": {},
+        "hyperparameters": {},
+        "method": "procrustes",
+        "n_anchors": 1200,
+        "seed": null,
+        "source_dimensions": 32,
+        "source_space_hash": "bd51849d47c9023c",
+        "target_dimensions": 32,
+        "target_space_hash": "0b31bbcec838d12d"
+      }
+    },
+    "random_map": {
+      "anchor_set_hash": "none",
+      "bridge_id": "4b16f0d61031f4f7",
+      "method": "random_map",
+      "parameter_hash": "ed9379aec2bda575",
+      "provenance": {
+        "anchor_correspondence_hash": "none",
+        "code_identity": "relate-search 0.1.0",
+        "coverage": {},
+        "hyperparameters": {
+          "seed": 0
+        },
+        "method": "random_map",
+        "n_anchors": 0,
+        "seed": 0,
+        "source_dimensions": 32,
+        "source_space_hash": "bd51849d47c9023c",
+        "target_dimensions": 32,
+        "target_space_hash": "0b31bbcec838d12d"
+      }
+    },
+    "ridge": {
+      "anchor_set_hash": "0d62b0de54515852",
+      "bridge_id": "bdf54c244d9d9d12",
+      "method": "ridge",
+      "parameter_hash": "5298ee86b9db0c16",
+      "provenance": {
+        "anchor_correspondence_hash": "0d62b0de54515852",
+        "code_identity": "relate-search 0.1.0",
+        "coverage": {},
+        "hyperparameters": {
+          "alpha": 1.0
+        },
+        "method": "ridge",
+        "n_anchors": 1200,
+        "seed": null,
+        "source_dimensions": 32,
+        "source_space_hash": "bd51849d47c9023c",
+        "target_dimensions": 32,
+        "target_space_hash": "0b31bbcec838d12d"
+      }
+    }
+  },
+  "code_version": "relate-search 0.1.0",
+  "eval_correspondence_hash": "c6c8cd43e7845e2b",
+  "k": 10,
+  "random_seed": 0,
+  "scorer": "cosine_similarity",
+  "seed": 0,
+  "source_space": {
+    "derivation": "",
+    "derived_from": "",
+    "dimensions": 32,
+    "dtype": "float32",
+    "model": "synthetic-bridges-x-v1",
+    "normalize": true,
+    "post_processing": "",
+    "prefixes": "",
+    "revision": "",
+    "sequence_length": 0,
+    "tokenizer": "",
+    "truncation": ""
+  },
+  "target_space": {
+    "derivation": "",
+    "derived_from": "",
+    "dimensions": 32,
+    "dtype": "float32",
+    "model": "synthetic-bridges-y-v1",
+    "normalize": true,
+    "post_processing": "",
+    "prefixes": "",
+    "revision": "fine-dims-weakened",
+    "sequence_length": 0,
+    "tokenizer": "",
+    "truncation": ""
+  },
+  "tie_tol": 1e-09,
+  "train_correspondence_hash": "0d62b0de54515852"
+}

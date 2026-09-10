@@ -13,11 +13,12 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from relate.bridges.base import Bridge
-from relate.bridges.linear import fit_bridge
+from relate.bridges.base import Bridge, BridgeSpec, bridge_output_space
+from relate.bridges.fit import fit_bridge
 from relate.bridges.registry import BridgeRegistry
 from relate.evaluation.baselines import ScoreFn, cosine_scorer
 from relate.evaluation.cards import EvaluationCard
+from relate.evaluation.cross_space import CorrespondenceSet
 from relate.evaluation.hard_negatives import HardNegativeObservation
 from relate.evaluation.neighborhoods import (
     hubness_counts,
@@ -87,17 +88,43 @@ class Observatory:
                **kwargs):
         return relation.projection.search(query_vector, targets, k=k, **kwargs)
 
-    # -- bridges --------------------------------------------------------
-    def fit_bridge(self, source: np.ndarray, target: np.ndarray, *,
-                   source_space: SpaceIdentity, target_space: SpaceIdentity,
-                   method: str = "procrustes", **kwargs) -> Bridge:
+    # -- bridges (producers only; judgment lives in evaluation) ------------
+    def fit_bridge(
+        self,
+        source: np.ndarray,
+        target: np.ndarray,
+        *,
+        source_space: SpaceIdentity,
+        target_space: SpaceIdentity,
+        correspondence: CorrespondenceSet,
+        method: str = "procrustes",
+        params: dict | None = None,
+        coverage: dict | None = None,
+    ) -> Bridge:
+        """Fit a directional producer on explicit anchor correspondence."""
+        spec = BridgeSpec(
+            source_space_hash=source_space.space_hash,
+            target_space_hash=target_space.space_hash,
+            method=method,
+            params=dict(params or {}),
+        )
         bridge = fit_bridge(
-            source, target, method=method,
-            source_hash=source_space.space_hash,
-            target_hash=target_space.space_hash,
-            **kwargs,
+            source_vectors=source,
+            target_vectors=target,
+            correspondence=correspondence,
+            spec=spec,
+            coverage=coverage,
         )
         return self.bridges.register(bridge)
+
+    def bridge_space(
+        self,
+        source_space: SpaceIdentity,
+        bridge: Bridge,
+        target_reference: SpaceIdentity,
+    ) -> SpaceIdentity:
+        """Derived identity for a bridge's candidates (never the native hash)."""
+        return bridge_output_space(source_space, bridge, target_reference)
 
     def evaluate_bridge(
         self,
@@ -114,7 +141,7 @@ class Observatory:
         """
         src = np.asarray(source, dtype=np.float64)
         tgt = np.asarray(target, dtype=np.float64)
-        mapped = bridge.apply(src)
+        mapped = bridge.transform(src)
         # counterpart Recall@1 (cosine)
         mapped_n = mapped / np.linalg.norm(mapped, axis=1, keepdims=True).clip(min=1e-12)
         tgt_n = tgt / np.linalg.norm(tgt, axis=1, keepdims=True).clip(min=1e-12)
@@ -137,18 +164,6 @@ class Observatory:
              "neighborhood": float(np.mean(agree)) if agree else 0.0},
             thresholds=thresholds or {"retrieval": 0.8, "neighborhood": 0.7},
         )
-        # Bridges are frozen dataclasses; register a copy carrying the profile.
-        bridged = Bridge(
-            source_space_hash=bridge.source_space_hash,
-            target_space_hash=bridge.target_space_hash,
-            direction=bridge.direction,
-            method=bridge.method,
-            mapping=np.asarray(bridge.mapping),
-            anchor_coverage=bridge.anchor_coverage,
-            status=bridge.status,
-            preservation=profile,
-        )
-        self.bridges.register(bridged)
         return profile
 
     # -- evidence -------------------------------------------------------
