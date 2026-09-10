@@ -1,0 +1,22 @@
+{
+  "+density": {
+    "test_balanced_accuracy": 0.8660902255639098,
+    "train_balanced_accuracy": 0.9027611940298508
+  },
+  "+hubness": {
+    "test_balanced_accuracy": 0.8773308270676692,
+    "train_balanced_accuracy": 0.9064925373134329
+  },
+  "all-geometric": {
+    "test_balanced_accuracy": 0.9061654135338346,
+    "train_balanced_accuracy": 0.9301492537313434
+  },
+  "score": {
+    "test_balanced_accuracy": 0.6771804511278195,
+    "train_balanced_accuracy": 0.7182089552238806
+  },
+  "score+margin": {
+    "test_balanced_accuracy": 0.8535714285714285,
+    "train_balanced_accuracy": 0.885223880597015
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "geometric_balanced_accuracy": 0.9061654135338346,
+  "rule": "correct with p=0.95 where |margin| confident else p=0.55",
+  "source": "simulated-generic-verifier-v1",
+  "stacked_balanced_accuracy": 0.9061654135338346,
+  "standalone_balanced_accuracy": 0.7296616541353383
+}

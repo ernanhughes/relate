@@ -27,6 +27,48 @@ NEIGHBORHOOD_METRICS = ("cosine", "euclidean")
 
 
 @dataclass(frozen=True, slots=True)
+class LocalDensity:
+    """Mean similarity to the k nearest neighbors (excluding self).
+
+    Convention: cosine similarity, higher = denser. Carries its own
+    specification so two densities measured under different k/metric are
+    never compared silently.
+    """
+
+    value: float
+    k: int
+    metric: str
+
+
+@dataclass(frozen=True, slots=True)
+class Hubness:
+    """How often a row appears in other rows' top-k neighborhoods.
+
+    Raw count plus normalization by the number of other rows. An
+    observable statistic, not a vague score.
+    """
+
+    count: int
+    normalized: float
+    k: int
+    corpus_size: int
+
+
+@dataclass(frozen=True, slots=True)
+class NeighborhoodStability:
+    """Shared-neighborhood fraction between two rows' k-neighborhoods.
+
+    ``|NN(first) ∩ NN(second)| / k``: how embedded the candidate is in
+    the query's surroundings. A narrow, precisely specified proxy -- not
+    a perturbation study, not a verdict.
+    """
+
+    value: float
+    k: int
+    metric: str
+
+
+@dataclass(frozen=True, slots=True)
 class NeighborhoodObservation:
     item_id: str
     overlap: float
@@ -80,6 +122,85 @@ class SpaceComparisonReport:
     neighborhood: NeighborhoodReport | None = None
     counterpart: CounterpartReport | None = None
     hard_negatives: HardNegativeDelta | None = None
+
+
+def _top_k(similarities: np.ndarray, k: int) -> np.ndarray:
+    order = np.argsort(-similarities, axis=1)
+    return order[:, :k]
+
+
+def local_density(
+    vectors: npt.ArrayLike, index: int, *, k: int = 10, metric: str = "cosine"
+) -> LocalDensity:
+    """Mean similarity from one row to its k nearest neighbors."""
+    matrix = np.asarray(vectors, dtype=np.float64)
+    if matrix.ndim != 2 or not np.isfinite(matrix).all():
+        raise RelateError("vectors must be a finite two-dimensional matrix")
+    if not 0 <= index < matrix.shape[0]:
+        raise RelateError("index is out of range")
+    if not isinstance(k, int) or isinstance(k, bool) or k <= 0:
+        raise RelateError("k must be a positive integer")
+    k = min(k, matrix.shape[0] - 1)
+    similarities = _similarity(matrix, metric)
+    np.fill_diagonal(similarities, -np.inf)
+    neighbors = _top_k(similarities, k)[index]
+    return LocalDensity(
+        value=float(similarities[index, neighbors].mean()), k=k, metric=metric
+    )
+
+
+def hubness_counts(
+    vectors: npt.ArrayLike, *, k: int = 10, metric: str = "cosine"
+) -> tuple[int, ...]:
+    """Per-row count of appearances in other rows' top-k neighborhoods."""
+    matrix = np.asarray(vectors, dtype=np.float64)
+    if matrix.ndim != 2 or not np.isfinite(matrix).all():
+        raise RelateError("vectors must be a finite two-dimensional matrix")
+    if not isinstance(k, int) or isinstance(k, bool) or k <= 0:
+        raise RelateError("k must be a positive integer")
+    k = min(k, matrix.shape[0] - 1)
+    similarities = _similarity(matrix, metric)
+    np.fill_diagonal(similarities, -np.inf)
+    members = _top_k(similarities, k).ravel()
+    counts = np.bincount(members, minlength=matrix.shape[0])
+    return tuple(int(c) for c in counts)
+
+
+def make_hubness(count: int, corpus_size: int, k: int) -> Hubness:
+    """Wrap a raw hub count with its normalization and specification."""
+    if corpus_size < 2:
+        raise RelateError("hubness needs at least two rows")
+    return Hubness(
+        count=int(count),
+        normalized=float(count) / float(corpus_size - 1),
+        k=int(k),
+        corpus_size=int(corpus_size),
+    )
+
+
+def shared_neighborhood_stability(
+    vectors: npt.ArrayLike,
+    first_index: int,
+    second_index: int,
+    *,
+    k: int = 10,
+    metric: str = "cosine",
+) -> NeighborhoodStability:
+    """Fraction of first's k-neighbors that also neighbor second."""
+    matrix = np.asarray(vectors, dtype=np.float64)
+    if matrix.ndim != 2 or not np.isfinite(matrix).all():
+        raise RelateError("vectors must be a finite two-dimensional matrix")
+    n = matrix.shape[0]
+    if not 0 <= first_index < n or not 0 <= second_index < n:
+        raise RelateError("row index out of range")
+    if not isinstance(k, int) or isinstance(k, bool) or k <= 0:
+        raise RelateError("k must be a positive integer")
+    k = min(k, n - 1)
+    similarities = _similarity(matrix, metric)
+    np.fill_diagonal(similarities, -np.inf)
+    neighborhoods = _top_k(similarities, k)
+    shared = set(neighborhoods[first_index]) & set(neighborhoods[second_index])
+    return NeighborhoodStability(value=len(shared) / k, k=k, metric=metric)
 
 
 def _matrices(

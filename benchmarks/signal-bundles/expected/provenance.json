@@ -1,0 +1,22 @@
+{
+  "benchmark_id": "signal-bundles-v1",
+  "code_version": "relate-search 0.1.0",
+  "k": 10,
+  "scorer": "cosine_similarity",
+  "seed": 0,
+  "space": {
+    "derivation": "",
+    "derived_from": "",
+    "dimensions": 32,
+    "dtype": "float32",
+    "model": "synthetic-signals-v1",
+    "normalize": true,
+    "post_processing": "",
+    "prefixes": "",
+    "revision": "",
+    "sequence_length": 0,
+    "tokenizer": "",
+    "truncation": ""
+  },
+  "tie_tol": 1e-09
+}

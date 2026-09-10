@@ -1,0 +1,32 @@
+{
+  "calibration_decision": null,
+  "external": null,
+  "hubness": 0.005005005005005005,
+  "local_density": 0.6981389746276244,
+  "margin": 0.9096600585284471,
+  "neighborhood_stability": 0.3,
+  "provenance": {
+    "calibration_id": "",
+    "density": {
+      "k": 10,
+      "metric": "cosine",
+      "value": 0.6981389746276244
+    },
+    "external_source": "",
+    "hubness": {
+      "corpus_size": 1000,
+      "count": 5,
+      "k": 10,
+      "normalized": 0.005005005005005005
+    },
+    "margin_case_id": "easy-120",
+    "scorer_id": "cosine_similarity",
+    "space_hash": "1b36dafaa984baac",
+    "stability": {
+      "k": 10,
+      "metric": "cosine",
+      "value": 0.3
+    }
+  },
+  "score": 0.6533573307205408
+}

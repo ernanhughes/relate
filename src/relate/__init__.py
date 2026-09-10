@@ -9,7 +9,14 @@ from relate.model import RelateError, RelationProjection, SearchHit
 from relate.observatory import Observatory
 from relate.python import PYTHON_RELATION_NAMES, PythonStructure, extract_python_structure
 from relate.relations import Relation
-from relate.retrieval import CalibrationRecord, RetrievalPolicy, SignalBundle
+from relate.retrieval import (
+    CalibrationRecord,
+    ExternalSignals,
+    RetrievalPolicy,
+    SignalBundle,
+    SignalProvenance,
+    build_signal_bundle,
+)
 from relate.spaces import SpaceIdentity, SpaceRegistry, compare_spaces
 from relate.transformations import CompressionRecord, TransformationRecord
 
@@ -20,6 +27,7 @@ __all__ = [
     "CalibrationRecord",
     "CompressionRecord",
     "EvaluationCard",
+    "ExternalSignals",
     "Observatory",
     "PreservationProfile",
     "PythonStructure",
@@ -29,9 +37,11 @@ __all__ = [
     "RetrievalPolicy",
     "SearchHit",
     "SignalBundle",
+    "SignalProvenance",
     "SpaceIdentity",
     "SpaceRegistry",
     "TransformationRecord",
+    "build_signal_bundle",
     "compare_spaces",
     "extract_python_structure",
     "fit_bridge",

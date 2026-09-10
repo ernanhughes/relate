@@ -1,0 +1,6 @@
+{
+  "ambiguity_fraction": 0.3076923076923077,
+  "auc": 0.8652238805970149,
+  "eer_rate": 0.2817910447761194,
+  "evaluation_id": "signals-train-calibration-v1"
+}

@@ -6,6 +6,7 @@ from relate import (
     CalibrationRecord,
     Observatory,
     RelationProjection,
+    RetrievalPolicy,
     SignalBundle,
     SpaceIdentity,
     compare_spaces,
@@ -82,7 +83,7 @@ def test_calibration_and_signals():
     assert cal.decide(0.75) == "escalate"
     assert cal.decide(0.95) == "accept"
     assert cal.is_stale_for(corpus="other") is True
-    assert SignalBundle(score=0.79, margin=0.02).route() == "verify"
+    assert RetrievalPolicy(name="demo").route(SignalBundle(score=0.79, margin=0.02)) == "verify"
 
 
 def test_compression_fail_closed():

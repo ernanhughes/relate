@@ -1,0 +1,27 @@
+{
+  "status": "EXTERNAL",
+  "note": "Preserved prose evidence, NOT recomputed here. The Wave-1 signal-ablation classifiers ran on measured embeddings from five local encoders plus an NLI cross-encoder; those assets are not part of this repository. The ablation in expected/ablation.json mirrors the progression through production bundle APIs on synthetic vectors instead.",
+  "experiment": "Wave-1 signal ablation (wave1/artifacts/signal-ablation.json): classify correct vs near-wrong hard cases from score-only, geometric, and cross-encoder signals",
+  "results": {
+    "score_only_balanced_accuracy": 0.76,
+    "all_geometric_balanced_accuracy": 0.9,
+    "plus_cross_encoder_balanced_accuracy": 0.897
+  },
+  "observation": "geometric signals (margin, density, rank, hubness) rescue hard cases the raw score cannot; a generic external verifier adds nothing reliable",
+  "mirror": {
+    "score": 0.6772,
+    "score+margin": 0.8536,
+    "+density": 0.8661,
+    "+hubness": 0.8773,
+    "all-geometric": 0.9062,
+    "external-alone": 0.7297,
+    "stacked": 0.9062,
+    "why_score_starts_lower": "mirror negatives are adversarially mined for every third anchor, so positives sit between easy and hard negatives in score; the historic mix was less adversarial",
+    "why_stacked_matches": "the simulated verifier is right where geometry is confident and coin-flip where it is hard, then joins the probe as one more feature -- redundancy, not harm, exactly the book's 0.900 vs 0.897 shape"
+  },
+  "sources": [
+    "experiments/embeddings-from-first-principles/wave1/artifacts/signal-ablation.json",
+    "experiments/embeddings-from-first-principles/wave1/WAVE1_FINDINGS.md row 1.12",
+    "book Chapter 15 (geometric bundle lifts hard-case accuracy 0.76 -> 0.90)"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "ablation": {
+    "+density": 0.8660902255639098,
+    "+hubness": 0.8773308270676692,
+    "all-geometric": 0.9061654135338346,
+    "score": 0.6771804511278195,
+    "score+margin": 0.8535714285714285
+  },
+  "completeness": {
+    "full": 221,
+    "partial": 12
+  },
+  "external_alone": 0.7296616541353383,
+  "n_test": 233,
+  "n_train": 234,
+  "stacked": 0.9061654135338346
+}

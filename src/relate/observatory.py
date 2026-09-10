@@ -16,11 +16,24 @@ import numpy as np
 from relate.bridges.base import Bridge
 from relate.bridges.linear import fit_bridge
 from relate.bridges.registry import BridgeRegistry
+from relate.evaluation.baselines import ScoreFn, cosine_scorer
 from relate.evaluation.cards import EvaluationCard
+from relate.evaluation.hard_negatives import HardNegativeObservation
+from relate.evaluation.neighborhoods import (
+    hubness_counts,
+    local_density,
+    make_hubness,
+    shared_neighborhood_stability,
+)
 from relate.evaluation.preservation import PreservationProfile, make_preservation_profile
 from relate.model import RelateError, RelationProjection
 from relate.relations.base import Relation, fit_relation
 from relate.retrieval.calibration import CalibrationRecord
+from relate.retrieval.signals import (
+    ExternalSignals,
+    SignalBundle,
+    build_signal_bundle,
+)
 from relate.spaces.comparison import SpaceComparison, compare_spaces
 from relate.spaces.identity import SpaceIdentity
 from relate.spaces.registry import SpaceRegistry
@@ -149,3 +162,61 @@ class Observatory:
 
     def check_compression(self, **kwargs) -> CompressionRecord:
         return check_compression(**kwargs)
+
+    # -- result inspection ------------------------------------------------
+    def inspect_result(
+        self,
+        *,
+        query_vector,
+        candidate_vector,
+        context_vectors,
+        candidate_index: int,
+        k: int = 10,
+        metric: str = "cosine",
+        scorer: ScoreFn | None = None,
+        scorer_id: str = "",
+        space_hash: str = "",
+        observation: HardNegativeObservation | None = None,
+        margin: float | None = None,
+        calibration: CalibrationRecord | None = None,
+        calibration_id: str = "",
+        external: ExternalSignals | None = None,
+    ) -> SignalBundle:
+        """Compose a SignalBundle for one retrieval result.
+
+        Orchestration only: the score comes from the injected scorer
+        (cosine by default), geometry from the existing neighborhood
+        primitives, the margin from the supplied 3A observation, and the
+        calibration outcome from the supplied record. Search behavior is
+        unchanged; this is the inspect-after-search step.
+        """
+        scorer = scorer or cosine_scorer()
+        query = np.asarray(query_vector, dtype=np.float64)
+        candidate = np.asarray(candidate_vector, dtype=np.float64)
+        context = np.asarray(context_vectors, dtype=np.float64)
+        if context.ndim != 2 or not np.isfinite(context).all():
+            raise RelateError("context_vectors must be a finite matrix")
+        if not 0 <= candidate_index < context.shape[0]:
+            raise RelateError("candidate_index is out of range")
+        score = float(scorer(query, candidate))
+
+        density = local_density(context, candidate_index, k=k, metric=metric)
+        counts = hubness_counts(context, k=k, metric=metric)
+        hubness = make_hubness(counts[candidate_index], context.shape[0], k)
+        extended = np.vstack([context, query[None, :]])
+        stability = shared_neighborhood_stability(
+            extended, context.shape[0], candidate_index, k=k, metric=metric
+        )
+        return build_signal_bundle(
+            score=score,
+            observation=observation,
+            margin=margin,
+            density=density,
+            hubness=hubness,
+            stability=stability,
+            calibration=calibration,
+            external=external,
+            scorer_id=scorer_id or getattr(scorer, "scorer_id", ""),
+            space_hash=space_hash,
+            calibration_id=calibration_id,
+        )
