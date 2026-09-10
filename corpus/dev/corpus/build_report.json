@@ -1,0 +1,65 @@
+{
+  "counts": {
+    "items": 54,
+    "pairs": 36,
+    "queries": 3
+  },
+  "validation": {
+    "errors": [],
+    "warnings": [
+      "overlap strata: relation 'entailment' has 0% in the 'low' band (spec 5 target >= 25%); DEV-stage warning, must hold at freeze",
+      "overlap strata: relation 'topic-related' has 0% in the 'high' band (spec 5 target >= 25%); DEV-stage warning, must hold at freeze"
+    ],
+    "coverage": {
+      "items": 54,
+      "pairs": 36,
+      "queries": 3,
+      "relations": {
+        "contradiction": 3,
+        "entailment": 3,
+        "entity-related": 3,
+        "equivalent": 2,
+        "negation": 5,
+        "paraphrase": 4,
+        "partial-support": 2,
+        "relation-swap": 2,
+        "temporal-mismatch": 3,
+        "topic-related": 5,
+        "unrelated": 4
+      },
+      "domains": {
+        "biomed-claims": 7,
+        "corporate-events": 9,
+        "everyday-statements": 12,
+        "geo-civics": 19,
+        "product-support": 7
+      },
+      "provenance": {
+        "authored": 47,
+        "perturbed": 7
+      },
+      "template_families": 40,
+      "entity_families": 23,
+      "overlap_bands_balanced_relations": {
+        "paraphrase": {
+          "mid": 1,
+          "high": 2,
+          "low": 1
+        },
+        "entailment": {
+          "mid": 2,
+          "high": 1
+        },
+        "contradiction": {
+          "low": 1,
+          "mid": 1,
+          "high": 1
+        },
+        "topic-related": {
+          "mid": 3,
+          "low": 2
+        }
+      }
+    }
+  }
+}

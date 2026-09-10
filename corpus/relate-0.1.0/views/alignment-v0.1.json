@@ -1,0 +1,6 @@
+{
+  "anchor_pool": "split_entity:train",
+  "description": "held-out item pool for cross-space bridge fitting; anchors drawn from split_entity train, evaluation on split_entity test",
+  "eval_pool": "split_entity:test",
+  "per_relation_eval": true
+}

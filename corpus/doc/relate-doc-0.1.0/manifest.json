@@ -1,0 +1,65 @@
+{
+  "corpus_hash": "111cc2bb9008557d632061f98a0e4f847b91293e31bcdb2d78285a35de7f7914",
+  "files": {
+    "compressions.jsonl": "afd0fbe4246d41d520a9260e87dc8a5d6d8a49cf0f28c61072e6f334dd75716c",
+    "corpus_hash.txt": "25e1a9d1f74607810d00125edf2be7136a44a1c21da86d39c88195d2f939d743",
+    "datasheet.md": "392f25f8ecfae02230bf07ce89559393f66f5094b0e1108f5f5a6ff39b83c3a8",
+    "documents.jsonl": "0485ac88e69847e7efea0e24335eff788fd71bd14e4c8899550ed7087c4c53cb",
+    "domain.json": "7c52ac5c77800a5858789ce25367b5e1fe3bcf5ef12b3bc667b1aba89dd14a21",
+    "entity.json": "053cfd24f9fb8db22ac2e890bba6f79f857e60ab68803a6123ea1d93f66824ad",
+    "lexical.json": "f910ddbdfa2cea9bc9f2778acc6f65344f26cefe3b044c04fb8330d11ca172d7",
+    "template.json": "1a8e4295908bcfd56273cf4e68eb83cabdeb6d455406faf19463590e4b0e7fd9",
+    "transformation_pairs.jsonl": "d025bcda1533775b6a6fab449d2fd749469c68262eeb16c9982d3ef57a82d9bc"
+  },
+  "stats": {
+    "by_domain": {
+      "biomed-claims": 15,
+      "corporate-events": 15,
+      "geo-civics": 15
+    },
+    "compressions": 595,
+    "compressions_by_kind": {
+      "abstractive_10": 45,
+      "abstractive_25": 45,
+      "conclusion_changed": 45,
+      "extractive_25": 45,
+      "extractive_50": 45,
+      "faithful": 45,
+      "minority_entity_dropped": 15,
+      "negation_inserted": 45,
+      "number_changed": 35,
+      "number_dropped": 35,
+      "relation_reversed": 25,
+      "temporal_value_shifted": 35,
+      "truncation_10": 45,
+      "truncation_25": 45,
+      "truncation_50": 45
+    },
+    "documents": 45,
+    "entity_families": 45,
+    "faithfulness_family": 280,
+    "method_family": 315,
+    "rare_entity_claims": 15,
+    "reversible_transformation_pairs": 90,
+    "template_families": 6,
+    "total_atomic_claims": 270,
+    "transformation_by_type": {
+      "active_to_passive": 45,
+      "claim_strengthened": 15,
+      "claim_weakened": 15,
+      "formal_to_informal": 35,
+      "present_to_past": 35,
+      "relation_swap": 10,
+      "statement_to_negation": 45,
+      "temporal_shift": 25,
+      "verbose_to_concise": 35
+    },
+    "transformation_pairs": 260,
+    "word_count": {
+      "max": 173,
+      "mean": 78,
+      "min": 34
+    }
+  },
+  "version": "0.1.0"
+}

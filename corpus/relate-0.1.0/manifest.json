@@ -1,0 +1,30 @@
+{
+  "corpus_hash": "8cad6816d90e06bc49e5b0b64cd460945e17ea4b1ec3c46054409669eda525b3",
+  "counts": {
+    "entity_families": 250,
+    "items": 1173,
+    "pairs": 1181,
+    "queries": 269,
+    "template_families": 63
+  },
+  "files": {
+    "alignment-v0.1.json": "a05f3014bdacd644892c5a33dda9f6935edf4dfc6c396a8d4bb04cb37268d6da",
+    "bm25_scores.jsonl": "9bb42856b4c9641688d6f9bbbbc58a7086e487132dae154e6919bfadecb14e99",
+    "calibration-v0.1.json": "7197f433f25c22b11f4eb98949ce5754403858faa09676a74101e7758670d5e1",
+    "corpus_hash.txt": "7a0135ba5cca47dafb0371b98eb6661632228dcf97d40a3f811f65bb620e57e2",
+    "datasheet.md": "da66e9222a2839bfcb4f38a9fbfcbb5ba687f5f57b1d5a658641c4851390c648",
+    "dimensionality-v0.1.json": "9dca54e440371a1358b89f10ba213db9dcfe6652febd01aa27d6fc0bca5e4996",
+    "domain.json": "c03b47a44afcabd30db591bc96af41691fa03273627e52fe30efbee58b618ba8",
+    "entity.json": "a815c1223e643dfafe33c2551db66023bad6204e50fa43bdf0683859e206aa9c",
+    "hard-negative-v0.1.json": "1bb6f362e37057b62057ee8ba923284fb2651a6d3c7c130883d32deefa1a0e32",
+    "items.jsonl": "a4319edea94e2559fe8f7cd9009b58bc013c98d91a0637e0ab2c44cba56447df",
+    "pairs.jsonl": "5e8ed9b2da9876a7f970be9c91eaae565c601a46702589ab5dd5c2337a1b3bf3",
+    "queries.jsonl": "a0e825d46ec8459e3c297a2fb3b71d0f77a06eb57b6eba872d1b8a554b8c5d17",
+    "random.json": "7665fa00db4e9abd80530aafab69622e64a0a221f9c76a38094fb704b1d7ea62",
+    "relation-v0.1.json": "98e3aa511b4963d70d89d0c6843c19128a55988ee5458c88d2eeca6174bc915f",
+    "retrieval-v0.1.json": "033b79e7c81ad289cfc5c798b6ef283500f7c27522f0d87ad885996b9b44b30b",
+    "template.json": "bf1314a002d234b9f4c34fe3beb312950ea2977d03f5979fd800ccef924b8de7"
+  },
+  "version": "0.1.0",
+  "warnings": 0
+}
