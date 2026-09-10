@@ -1,0 +1,44 @@
+{
+  "constant_target_centroid": {
+    "negation_delta": 0.7,
+    "neighborhood_use": "FAIL",
+    "retrieval": "FAIL",
+    "threshold_transfer": "FAIL",
+    "transfer_measured": false
+  },
+  "identity": {
+    "negation_delta": 0.19999999999999996,
+    "neighborhood_use": "PASS",
+    "retrieval": "PASS",
+    "threshold_transfer": "FAIL",
+    "transfer_measured": true
+  },
+  "linear": {
+    "negation_delta": 0.21999999999999997,
+    "neighborhood_use": "PASS",
+    "retrieval": "PASS",
+    "threshold_transfer": "FAIL",
+    "transfer_measured": true
+  },
+  "procrustes": {
+    "negation_delta": 0.19999999999999996,
+    "neighborhood_use": "PASS",
+    "retrieval": "PASS",
+    "threshold_transfer": "FAIL",
+    "transfer_measured": true
+  },
+  "random_map": {
+    "negation_delta": 0.19999999999999996,
+    "neighborhood_use": "FAIL",
+    "retrieval": "FAIL",
+    "threshold_transfer": "FAIL",
+    "transfer_measured": true
+  },
+  "ridge": {
+    "negation_delta": 0.22999999999999998,
+    "neighborhood_use": "PASS",
+    "retrieval": "PASS",
+    "threshold_transfer": "FAIL",
+    "transfer_measured": true
+  }
+}

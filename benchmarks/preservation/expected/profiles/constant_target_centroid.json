@@ -1,0 +1,164 @@
+{
+  "bridge_id": "3188a33961794d96",
+  "candidate_space_hash": "b904ba27dc472913",
+  "evaluation_correspondence_hash": "c6c8cd43e7845e2b",
+  "provenance": {
+    "bridge_id": "3188a33961794d96",
+    "candidate_space_hash": "b904ba27dc472913",
+    "evaluation_correspondence_hash": "c6c8cd43e7845e2b",
+    "evaluator_version": "",
+    "policy_ids": [
+      "a227ca5db14e560c",
+      "3ae648c5dc491701",
+      "5befb92021eb76f4"
+    ],
+    "scorer": "cosine_similarity",
+    "source_space_hash": "f24aa9f4758853b9",
+    "target_space_hash": "ab8cf1a049f08203"
+  },
+  "results": [
+    {
+      "capability": "representation_similarity",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "cka",
+      "ratio": -1.2461960146493952e-17,
+      "reference_frame": "target_native",
+      "reference_value": 1.0,
+      "value": -1.2461960146493952e-17
+    },
+    {
+      "capability": "neighborhood_structure",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "overlap_at_10",
+      "ratio": 0.0115,
+      "reference_frame": "target_native",
+      "reference_value": 1.0,
+      "value": 0.0115
+    },
+    {
+      "capability": "neighborhood_structure",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "top1_agreement",
+      "ratio": 0.0,
+      "reference_frame": "target_native",
+      "reference_value": 1.0,
+      "value": 0.0
+    },
+    {
+      "capability": "counterpart_recovery",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "recall_at_1",
+      "ratio": 0.0016666666666666668,
+      "reference_frame": "target_native",
+      "reference_value": 1.0,
+      "value": 0.0016666666666666668
+    },
+    {
+      "capability": "counterpart_recovery",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "mrr",
+      "ratio": 0.011624964036615993,
+      "reference_frame": "target_native",
+      "reference_value": 1.0,
+      "value": 0.011624964036615993
+    },
+    {
+      "capability": "hard_negative_ordering",
+      "delta": 0.735,
+      "evidence_id": "",
+      "metric": "accuracy_delta",
+      "ratio": null,
+      "reference_frame": "target_native",
+      "reference_value": 0.0,
+      "value": 0.735
+    },
+    {
+      "capability": "hard_negative_ordering/negation",
+      "delta": 0.7,
+      "evidence_id": "",
+      "metric": "accuracy_delta",
+      "ratio": null,
+      "reference_frame": "target_native",
+      "reference_value": 0.0,
+      "value": 0.7
+    },
+    {
+      "capability": "hard_negative_ordering/relation-swap",
+      "delta": 0.57,
+      "evidence_id": "",
+      "metric": "accuracy_delta",
+      "ratio": null,
+      "reference_frame": "target_native",
+      "reference_value": 0.0,
+      "value": 0.57
+    },
+    {
+      "capability": "hard_negative_ordering/temporal-mismatch",
+      "delta": 0.7,
+      "evidence_id": "",
+      "metric": "accuracy_delta",
+      "ratio": null,
+      "reference_frame": "target_native",
+      "reference_value": 0.0,
+      "value": 0.7
+    },
+    {
+      "capability": "hard_negative_ordering/topic-related",
+      "delta": 0.97,
+      "evidence_id": "",
+      "metric": "accuracy_delta",
+      "ratio": null,
+      "reference_frame": "target_native",
+      "reference_value": 0.0,
+      "value": 0.97
+    }
+  ],
+  "source_space_hash": "f24aa9f4758853b9",
+  "target_space_hash": "ab8cf1a049f08203",
+  "verdicts": [
+    {
+      "failed_capabilities": [
+        "counterpart_recovery/recall_at_1",
+        "hard_negative_ordering/accuracy_delta"
+      ],
+      "rationale": "failed: counterpart_recovery/recall_at_1 (recall_at_1 min_value 0.9, gate not met); failed: hard_negative_ordering/accuracy_delta (accuracy_delta max_abs_delta 0.15, gate not met); advisory miss: neighborhood_structure/overlap_at_10 (overlap_at_10 min_value 0.5)",
+      "required_capabilities": [
+        "counterpart_recovery/recall_at_1",
+        "hard_negative_ordering/accuracy_delta"
+      ],
+      "scope": "retrieval",
+      "verdict": "FAIL"
+    },
+    {
+      "failed_capabilities": [
+        "calibration_transfer/far_increase",
+        "calibration_transfer/frr_increase",
+        "calibration_transfer/threshold_shift"
+      ],
+      "rationale": "failed: calibration_transfer/far_increase (far_increase max_delta 0.05, unmeasured); failed: calibration_transfer/frr_increase (frr_increase max_delta 0.05, unmeasured); failed: calibration_transfer/threshold_shift (threshold_shift max_abs_delta 0.05, unmeasured)",
+      "required_capabilities": [
+        "calibration_transfer/far_increase",
+        "calibration_transfer/frr_increase",
+        "calibration_transfer/threshold_shift"
+      ],
+      "scope": "threshold_transfer",
+      "verdict": "FAIL"
+    },
+    {
+      "failed_capabilities": [
+        "neighborhood_structure/overlap_at_10"
+      ],
+      "rationale": "failed: neighborhood_structure/overlap_at_10 (overlap_at_10 min_value 0.5, gate not met)",
+      "required_capabilities": [
+        "neighborhood_structure/overlap_at_10"
+      ],
+      "scope": "neighborhood_use",
+      "verdict": "FAIL"
+    }
+  ]
+}

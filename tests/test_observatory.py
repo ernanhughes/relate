@@ -86,9 +86,11 @@ def test_observatory_evaluate_bridge_and_policy():
         x, y, source_space=a, target_space=b,
         correspondence=identity_correspondence(ids),
     )
-    profile = runtime.evaluate_bridge(bridge, source=x, target=y)
+    profile = runtime.evaluate_bridge(bridge, x, y)
     assert profile.usable_for("retrieval") is True
     assert "threshold_transfer" not in profile.usable_scopes
+    assert profile.candidate_space_hash != b.space_hash
+    assert "retrieval" in profile.explain("retrieval")
 
 
 def test_calibration_and_signals():

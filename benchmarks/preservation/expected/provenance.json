@@ -1,0 +1,43 @@
+{
+  "benchmark_id": "preservation-v1",
+  "code_version": "relate-search 0.1.0",
+  "eval_correspondence_hash": "c6c8cd43e7845e2b",
+  "k": 10,
+  "policy_ids": [
+    "a227ca5db14e560c",
+    "3ae648c5dc491701",
+    "5befb92021eb76f4"
+  ],
+  "scorer": "cosine_similarity",
+  "seed": 0,
+  "source_space": {
+    "derivation": "",
+    "derived_from": "",
+    "dimensions": 32,
+    "dtype": "float32",
+    "model": "synthetic-preservation-coarse-v1",
+    "normalize": true,
+    "post_processing": "",
+    "prefixes": "",
+    "revision": "fine-dims-weakened",
+    "sequence_length": 0,
+    "tokenizer": "",
+    "truncation": ""
+  },
+  "target_space": {
+    "derivation": "",
+    "derived_from": "",
+    "dimensions": 32,
+    "dtype": "float32",
+    "model": "synthetic-preservation-fine-v1",
+    "normalize": true,
+    "post_processing": "",
+    "prefixes": "",
+    "revision": "",
+    "sequence_length": 0,
+    "tokenizer": "",
+    "truncation": ""
+  },
+  "tie_tol": 1e-09,
+  "train_correspondence_hash": "0d62b0de54515852"
+}

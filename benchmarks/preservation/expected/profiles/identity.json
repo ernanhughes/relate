@@ -1,0 +1,237 @@
+{
+  "bridge_id": "2af0808ebd44d836",
+  "candidate_space_hash": "46fe830b8b3524f3",
+  "evaluation_correspondence_hash": "c6c8cd43e7845e2b",
+  "provenance": {
+    "bridge_id": "2af0808ebd44d836",
+    "candidate_space_hash": "46fe830b8b3524f3",
+    "evaluation_correspondence_hash": "c6c8cd43e7845e2b",
+    "evaluator_version": "",
+    "policy_ids": [
+      "a227ca5db14e560c",
+      "3ae648c5dc491701",
+      "5befb92021eb76f4"
+    ],
+    "scorer": "cosine_similarity",
+    "source_space_hash": "f24aa9f4758853b9",
+    "target_space_hash": "ab8cf1a049f08203"
+  },
+  "results": [
+    {
+      "capability": "representation_similarity",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "cka",
+      "ratio": 0.948695817015358,
+      "reference_frame": "target_native",
+      "reference_value": 1.0,
+      "value": 0.948695817015358
+    },
+    {
+      "capability": "representation_similarity",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "cosine_matrix_correlation",
+      "ratio": 0.9420321354237154,
+      "reference_frame": "target_native",
+      "reference_value": 1.0,
+      "value": 0.9420321354237154
+    },
+    {
+      "capability": "representation_similarity",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "distance_matrix_correlation",
+      "ratio": 0.9421161159278841,
+      "reference_frame": "target_native",
+      "reference_value": 1.0,
+      "value": 0.9421161159278841
+    },
+    {
+      "capability": "neighborhood_structure",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "overlap_at_10",
+      "ratio": 0.5964999999999999,
+      "reference_frame": "target_native",
+      "reference_value": 1.0,
+      "value": 0.5964999999999999
+    },
+    {
+      "capability": "neighborhood_structure",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "top1_agreement",
+      "ratio": 0.4,
+      "reference_frame": "target_native",
+      "reference_value": 1.0,
+      "value": 0.4
+    },
+    {
+      "capability": "counterpart_recovery",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "recall_at_1",
+      "ratio": 1.0,
+      "reference_frame": "target_native",
+      "reference_value": 1.0,
+      "value": 1.0
+    },
+    {
+      "capability": "counterpart_recovery",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "mrr",
+      "ratio": 1.0,
+      "reference_frame": "target_native",
+      "reference_value": 1.0,
+      "value": 1.0
+    },
+    {
+      "capability": "hard_negative_ordering",
+      "delta": 0.12249999999999994,
+      "evidence_id": "",
+      "metric": "accuracy_delta",
+      "ratio": null,
+      "reference_frame": "target_native",
+      "reference_value": 0.0,
+      "value": 0.12249999999999994
+    },
+    {
+      "capability": "hard_negative_ordering/negation",
+      "delta": 0.19999999999999996,
+      "evidence_id": "",
+      "metric": "accuracy_delta",
+      "ratio": null,
+      "reference_frame": "target_native",
+      "reference_value": 0.0,
+      "value": 0.19999999999999996
+    },
+    {
+      "capability": "hard_negative_ordering/relation-swap",
+      "delta": 0.08999999999999997,
+      "evidence_id": "",
+      "metric": "accuracy_delta",
+      "ratio": null,
+      "reference_frame": "target_native",
+      "reference_value": 0.0,
+      "value": 0.08999999999999997
+    },
+    {
+      "capability": "hard_negative_ordering/temporal-mismatch",
+      "delta": 0.19999999999999996,
+      "evidence_id": "",
+      "metric": "accuracy_delta",
+      "ratio": null,
+      "reference_frame": "target_native",
+      "reference_value": 0.0,
+      "value": 0.19999999999999996
+    },
+    {
+      "capability": "hard_negative_ordering/topic-related",
+      "delta": 0.0,
+      "evidence_id": "",
+      "metric": "accuracy_delta",
+      "ratio": null,
+      "reference_frame": "target_native",
+      "reference_value": 0.0,
+      "value": 0.0
+    },
+    {
+      "capability": "calibration_transfer",
+      "delta": 0.07249999999999998,
+      "evidence_id": "native-operating-point",
+      "metric": "far_increase",
+      "ratio": null,
+      "reference_frame": "target_native",
+      "reference_value": 0.1,
+      "value": 0.1725
+    },
+    {
+      "capability": "calibration_transfer",
+      "delta": 0.04000000000000001,
+      "evidence_id": "native-operating-point",
+      "metric": "frr_increase",
+      "ratio": null,
+      "reference_frame": "target_native",
+      "reference_value": 0.1,
+      "value": 0.14
+    },
+    {
+      "capability": "calibration_transfer",
+      "delta": 0.015000000000000013,
+      "evidence_id": "native-operating-point",
+      "metric": "ambiguity_increase",
+      "ratio": null,
+      "reference_frame": "target_native",
+      "reference_value": 0.54375,
+      "value": 0.55875
+    },
+    {
+      "capability": "calibration_transfer",
+      "delta": 0.019895499688493024,
+      "evidence_id": "eer-operating-point",
+      "metric": "threshold_shift",
+      "ratio": null,
+      "reference_frame": "target_native",
+      "reference_value": 0.5784456953643153,
+      "value": 0.5983411950528084
+    },
+    {
+      "capability": "round_trip",
+      "delta": null,
+      "evidence_id": "reverse-fit",
+      "metric": "mean_cosine",
+      "ratio": null,
+      "reference_frame": "source_native",
+      "reference_value": 1.0,
+      "value": 1.0
+    },
+    {
+      "capability": "round_trip",
+      "delta": null,
+      "evidence_id": "reverse-fit",
+      "metric": "neighborhood_overlap",
+      "ratio": null,
+      "reference_frame": "source_native",
+      "reference_value": 1.0,
+      "value": 1.0
+    }
+  ],
+  "source_space_hash": "f24aa9f4758853b9",
+  "target_space_hash": "ab8cf1a049f08203",
+  "verdicts": [
+    {
+      "failed_capabilities": [],
+      "rationale": "",
+      "required_capabilities": [
+        "counterpart_recovery/recall_at_1",
+        "hard_negative_ordering/accuracy_delta"
+      ],
+      "scope": "retrieval",
+      "verdict": "PASS"
+    },
+    {
+      "failed_capabilities": [
+        "calibration_transfer/far_increase"
+      ],
+      "rationale": "failed: calibration_transfer/far_increase (far_increase max_delta 0.05, gate not met)",
+      "required_capabilities": [
+        "calibration_transfer/far_increase",
+        "calibration_transfer/frr_increase",
+        "calibration_transfer/threshold_shift"
+      ],
+      "scope": "threshold_transfer",
+      "verdict": "FAIL"
+    },
+    {
+      "failed_capabilities": [],
+      "rationale": "",
+      "required_capabilities": [
+        "neighborhood_structure/overlap_at_10"
+      ],
+      "scope": "neighborhood_use",
+      "verdict": "PASS"
+    }
+  ]
+}

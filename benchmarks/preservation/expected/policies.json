@@ -1,0 +1,69 @@
+[
+  {
+    "policy_id": "a227ca5db14e560c",
+    "requirements": [
+      {
+        "advisory": false,
+        "bound": 0.9,
+        "capability": "counterpart_recovery",
+        "kind": "min_value",
+        "metric": "recall_at_1"
+      },
+      {
+        "advisory": false,
+        "bound": 0.15,
+        "capability": "hard_negative_ordering",
+        "kind": "max_abs_delta",
+        "metric": "accuracy_delta"
+      },
+      {
+        "advisory": true,
+        "bound": 0.5,
+        "capability": "neighborhood_structure",
+        "kind": "min_value",
+        "metric": "overlap_at_10"
+      }
+    ],
+    "scope": "retrieval"
+  },
+  {
+    "policy_id": "3ae648c5dc491701",
+    "requirements": [
+      {
+        "advisory": false,
+        "bound": 0.05,
+        "capability": "calibration_transfer",
+        "kind": "max_delta",
+        "metric": "far_increase"
+      },
+      {
+        "advisory": false,
+        "bound": 0.05,
+        "capability": "calibration_transfer",
+        "kind": "max_delta",
+        "metric": "frr_increase"
+      },
+      {
+        "advisory": false,
+        "bound": 0.05,
+        "capability": "calibration_transfer",
+        "kind": "max_abs_delta",
+        "metric": "threshold_shift"
+      }
+    ],
+    "scope": "threshold_transfer"
+  },
+  {
+    "policy_id": "5befb92021eb76f4",
+    "requirements": [
+      {
+        "advisory": false,
+        "bound": 0.5,
+        "capability": "neighborhood_structure",
+        "kind": "min_value",
+        "metric": "overlap_at_10"
+      }
+    ],
+    "scope": "neighborhood_use"
+  }
+]

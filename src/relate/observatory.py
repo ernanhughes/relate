@@ -13,12 +13,21 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from relate.bridges.base import Bridge, BridgeSpec, bridge_output_space
+from relate.bridges.base import (
+    Bridge,
+    BridgeSpec,
+    bridge_output_space,
+    code_identity,
+)
 from relate.bridges.fit import fit_bridge
 from relate.bridges.registry import BridgeRegistry
 from relate.evaluation.baselines import ScoreFn, cosine_scorer
 from relate.evaluation.cards import EvaluationCard
-from relate.evaluation.cross_space import CorrespondenceSet
+from relate.evaluation.cross_space import (
+    CorrespondenceSet,
+    compare_native_spaces,
+    identity_correspondence,
+)
 from relate.evaluation.hard_negatives import HardNegativeObservation
 from relate.evaluation.neighborhoods import (
     hubness_counts,
@@ -26,7 +35,12 @@ from relate.evaluation.neighborhoods import (
     make_hubness,
     shared_neighborhood_stability,
 )
-from relate.evaluation.preservation import PreservationProfile, make_preservation_profile
+from relate.evaluation.preservation import (
+    DEFAULT_POLICIES,
+    PreservationProfile,
+    build_preservation_profile,
+    results_from_space_comparison,
+)
 from relate.model import RelateError, RelationProjection
 from relate.relations.base import Relation, fit_relation
 from relate.retrieval.calibration import CalibrationRecord
@@ -129,42 +143,62 @@ class Observatory:
     def evaluate_bridge(
         self,
         bridge: Bridge,
+        evaluation_source,
+        evaluation_target,
         *,
-        source: np.ndarray,
-        target: np.ndarray,
-        thresholds: dict | None = None,
+        correspondence=None,
+        hard_negative_cases=None,
+        hard_negative_vectors=None,
+        scorer=None,
+        scorer_id: str = "",
+        policies=None,
+        k: int = 10,
     ) -> PreservationProfile:
-        """Measure counterpart recall + neighborhood agreement.
+        """Judge a bridge's candidates through the measurement spine.
 
-        Counterpart recovery != structural fidelity: a bridge can recover the
-        paired target while only partly rebuilding the neighborhood.
+        Transforms held-out source rows, compares candidates against the
+        native target with 4A machinery, converts the comparison into
+        preservation results, and verdicts them under declared policy.
+        Designed so 4D's ``usable_for``/``explain`` API falls out
+        naturally; this method already returns the profile they read.
         """
-        src = np.asarray(source, dtype=np.float64)
-        tgt = np.asarray(target, dtype=np.float64)
-        mapped = bridge.transform(src)
-        # counterpart Recall@1 (cosine)
-        mapped_n = mapped / np.linalg.norm(mapped, axis=1, keepdims=True).clip(min=1e-12)
-        tgt_n = tgt / np.linalg.norm(tgt, axis=1, keepdims=True).clip(min=1e-12)
-        sims = mapped_n @ tgt_n.T
-        top1 = np.argmax(sims, axis=1)
-        recall_at_1 = float(np.mean(top1 == np.arange(src.shape[0])))
-        # neighborhood agreement@5 (mapped vs native target neighborhoods)
-        k = min(5, tgt.shape[0] - 1)
-        agree: list[float] = []
-        tgt_sims = tgt_n @ tgt_n.T
-        map_sims = mapped_n @ mapped_n.T
-        for i in range(tgt.shape[0]):
-            native = set(np.argsort(-tgt_sims[i])[1 : k + 1].tolist())
-            mapped_nb = set(np.argsort(-map_sims[i])[1 : k + 1].tolist())
-            agree.append(len(native & mapped_nb) / max(1, k))
-        profile = make_preservation_profile(
-            bridge.source_space_hash,
-            bridge.target_space_hash,
-            {"retrieval": recall_at_1,
-             "neighborhood": float(np.mean(agree)) if agree else 0.0},
-            thresholds=thresholds or {"retrieval": 0.8, "neighborhood": 0.7},
+        candidate = bridge.transform(np.asarray(evaluation_source, dtype=np.float64))
+        target = np.asarray(evaluation_target, dtype=np.float64)
+        if correspondence is None:
+            correspondence = identity_correspondence(
+                [str(i) for i in range(candidate.shape[0])]
+            )
+        try:
+            source_space = self.spaces.require(bridge.source_space_hash)
+            target_space = self.spaces.require(bridge.target_space_hash)
+            candidate_space = bridge_output_space(source_space, bridge, target_space)
+            candidate_hash = candidate_space.space_hash
+        except RelateError:
+            candidate_hash = f"derived:{bridge.bridge_id}"
+        comparison = compare_native_spaces(
+            source_vectors=candidate,
+            target_vectors=target,
+            correspondence=correspondence,
+            source_space_hash=candidate_hash,
+            target_space_hash=bridge.target_space_hash,
+            k=k,
+            hard_negative_cases=hard_negative_cases,
+            hard_negative_vectors=hard_negative_vectors,
+            scorer=scorer,
+            scorer_id=scorer_id,
         )
-        return profile
+        results = results_from_space_comparison(comparison)
+        return build_preservation_profile(
+            source_space_hash=bridge.source_space_hash,
+            candidate_space_hash=candidate_hash,
+            target_space_hash=bridge.target_space_hash,
+            results=results,
+            policies=list(policies) if policies is not None else list(DEFAULT_POLICIES),
+            bridge_id=bridge.bridge_id,
+            evaluation_correspondence_hash=correspondence.content_hash,
+            scorer=scorer_id,
+            evaluator_version=code_identity(),
+        )
 
     # -- evidence -------------------------------------------------------
     def record_evaluation(self, card: EvaluationCard) -> EvaluationCard:
