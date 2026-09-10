@@ -9,6 +9,17 @@ from relate.evaluation.baselines import (
     scorer_id_of,
 )
 from relate.evaluation.cards import EvaluationCard
+from relate.evaluation.geometry import (
+    GeometryReport,
+    IntrinsicDimensionEstimate,
+    PairSamplingSpec,
+    covariance_eigenvalues,
+    describe_geometry,
+    effective_rank,
+    linear_cka,
+    participation_ratio,
+    twonn_estimate,
+)
 from relate.evaluation.hard_negatives import (
     GroupResult,
     HardNegativeCase,
@@ -26,6 +37,16 @@ from relate.evaluation.metrics import (
     mean,
     median,
 )
+from relate.evaluation.neighborhoods import (
+    CounterpartReport,
+    GeometryComparison,
+    NeighborhoodObservation,
+    NeighborhoodReport,
+    SpaceComparisonReport,
+    compare_geometry,
+    compare_neighborhoods,
+    counterpart_recovery,
+)
 from relate.evaluation.preservation import (
     PreservationProfile,
     make_preservation_profile,
@@ -33,25 +54,42 @@ from relate.evaluation.preservation import (
 
 __all__ = [
     "EvaluationCard",
+    "CounterpartReport",
+    "GeometryComparison",
+    "GeometryReport",
     "GroupResult",
     "HardNegativeCase",
     "HardNegativeDelta",
     "HardNegativeObservation",
     "HardNegativeReport",
+    "IntrinsicDimensionEstimate",
+    "NeighborhoodObservation",
+    "NeighborhoodReport",
+    "PairSamplingSpec",
     "PreservationProfile",
     "ScoreFn",
+    "SpaceComparisonReport",
     "chebyshev_distance",
+    "compare_geometry",
+    "compare_neighborhoods",
     "compare_reports",
     "cosine_scorer",
     "cosine_similarity",
+    "counterpart_recovery",
+    "covariance_eigenvalues",
+    "describe_geometry",
+    "effective_rank",
     "euclidean_distance",
     "euclidean_scorer",
     "evaluate_hard_negatives",
     "hard_negative_card",
+    "linear_cka",
     "make_preservation_profile",
     "mean",
     "median",
+    "participation_ratio",
     "random_scorer",
     "relation_scorer",
     "scorer_id_of",
+    "twonn_estimate",
 ]

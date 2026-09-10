@@ -1,0 +1,31 @@
+{
+  "cosine_mean": 0.48793422936830466,
+  "cosine_quantiles": {
+    "p25": 0.3867616924318504,
+    "p5": 0.22605236614351082,
+    "p50": 0.494203746669194,
+    "p75": 0.5982875606668507,
+    "p95": 0.7254818517772903
+  },
+  "cosine_std": 0.15186712977982242,
+  "dimensions": 256,
+  "effective_rank": 95.50068769543944,
+  "intrinsic_dimension": {
+    "estimate": 41.670188876443035,
+    "method": "twonn",
+    "n_samples": 1200,
+    "parameters": {}
+  },
+  "metadata": {},
+  "n_vectors": 1200,
+  "norm_mean": 1.0,
+  "norm_std": 1.0711398907408356e-16,
+  "participation_ratio": 33.811125560896805,
+  "sampling": {
+    "census": false,
+    "max_pairs": 100000,
+    "mode": "uniform_without_replacement",
+    "n_pairs": 100000,
+    "seed": 0
+  }
+}

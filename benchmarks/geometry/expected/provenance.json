@@ -1,0 +1,17 @@
+{
+  "benchmark_id": "geometry-v1",
+  "code_version": "relate-search 0.1.0",
+  "dimensions": 256,
+  "n": 1200,
+  "sampling": {
+    "max_pairs": 100000,
+    "mode": "uniform_without_replacement",
+    "seed": 0
+  },
+  "seed": 0,
+  "space_hashes": {
+    "aniso": "4672a6d35a64298c",
+    "iso": "41fa01556d685993",
+    "lowrank": "1c5714858e397e0a"
+  }
+}

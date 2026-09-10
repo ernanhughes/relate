@@ -1,0 +1,40 @@
+{
+  "benchmark_id": "neighborhoods-v1",
+  "code_version": "relate-search 0.1.0",
+  "k": 10,
+  "scorers": {
+    "cosine": "cosine_similarity",
+    "relation": "relation_chebyshev:complexity,depth,call_sites"
+  },
+  "seed": 0,
+  "signal_alpha": 0.7,
+  "source_space": {
+    "derivation": "",
+    "derived_from": "",
+    "dimensions": 32,
+    "dtype": "float64",
+    "model": "synthetic-paired-x-v1",
+    "normalize": true,
+    "post_processing": "",
+    "prefixes": "",
+    "revision": "seed=0",
+    "sequence_length": 0,
+    "tokenizer": "",
+    "truncation": ""
+  },
+  "target_space": {
+    "derivation": "",
+    "derived_from": "",
+    "dimensions": 32,
+    "dtype": "float64",
+    "model": "synthetic-paired-y-v1",
+    "normalize": true,
+    "post_processing": "",
+    "prefixes": "",
+    "revision": "seed=0;signal_alpha=0.7",
+    "sequence_length": 0,
+    "tokenizer": "",
+    "truncation": ""
+  },
+  "tie_tol": 1e-09
+}

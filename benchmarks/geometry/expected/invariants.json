@@ -1,0 +1,16 @@
+{
+  "rotation": {
+    "cosine_mean_drift": 4.336808689942018e-19,
+    "cosine_std_drift": 0.0,
+    "effective_rank_ratio": 0.9999999999999991
+  },
+  "scaling": {
+    "cosine_mean_base": -0.00018315746815487767,
+    "cosine_mean_scaled": -0.0001831574681548776,
+    "norm_ratio": 2.5
+  },
+  "translation": {
+    "cosine_mean_base": 0.48793422936830466,
+    "cosine_mean_shifted": 0.9999204053800972
+  }
+}

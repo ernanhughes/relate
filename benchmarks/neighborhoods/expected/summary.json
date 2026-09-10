@@ -1,0 +1,23 @@
+{
+  "identity": {
+    "counterpart_mrr": 1.0,
+    "counterpart_top1": 1.0,
+    "neighborhood_overlap": 1.0,
+    "top1_agreement": 1.0
+  },
+  "noise": {
+    "counterpart_mrr": 0.004461313567020076,
+    "counterpart_top1": 0.0005,
+    "neighborhood_overlap": 0.0048000000000000004,
+    "top1_agreement": 0.001
+  },
+  "translated": {
+    "cka": 0.9274179620974906,
+    "cosine_matrix_correlation": 0.9265350953474848,
+    "counterpart_mrr": 1.0,
+    "counterpart_top1": 1.0,
+    "neighborhood_overlap": 0.6257999999999999,
+    "relation_accuracy_delta": -0.14,
+    "top1_agreement": 0.5225
+  }
+}
