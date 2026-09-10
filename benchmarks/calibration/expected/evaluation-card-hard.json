@@ -1,0 +1,23 @@
+{
+  "baselines": {},
+  "corpus": "synthetic-v1",
+  "corpus_hash": "n/a-synthetic",
+  "evaluation_id": "duplicate-filter-hard-v1",
+  "manifest": "{\"corpus\": \"synthetic-v1\", \"corpus_hash\": \"n/a-synthetic\", \"evaluation_id\": \"duplicate-filter-hard-v1\", \"negatives\": {\"content_hash\": \"ad8626e71865d604\", \"kind\": \"gaussian-overlap\", \"n\": 1500, \"name\": \"adversarial-hard\"}, \"objective\": \"bounded_rates\", \"scope\": {\"domain\": \"general\", \"query_type\": \"\", \"task\": \"duplicate_filter\"}, \"scorer\": \"synthetic/gaussian:hard\", \"seed\": 0, \"space_hash\": \"040035d1662959eb\", \"task\": \"calibration\"}",
+  "metrics": {
+    "ambiguity_fraction": 0.47833333333333333,
+    "auc": 0.7742631111111111,
+    "eer_rate": 0.296,
+    "eer_threshold": 0.5336699988016802,
+    "false_accept_rate": 0.1,
+    "false_reject_rate": 0.1,
+    "n_negative": 1500,
+    "n_positive": 1500,
+    "threshold_high": 1.2951547055244992,
+    "threshold_low": -0.10025244800641087
+  },
+  "per_relation": {},
+  "scorer": "synthetic/gaussian:hard",
+  "space_hash": "040035d1662959eb",
+  "task": "calibration"
+}

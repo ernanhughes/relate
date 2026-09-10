@@ -1,0 +1,26 @@
+{
+  "benchmark_id": "calibration-v1",
+  "code_version": "relate-search 0.1.0",
+  "far_target": 0.1,
+  "frr_target": 0.1,
+  "n_per_side": 1500,
+  "scorers": [
+    "synthetic/gaussian:ordinary",
+    "synthetic/gaussian:hard"
+  ],
+  "seed": 0,
+  "space": {
+    "derivation": "",
+    "derived_from": "",
+    "dimensions": 1,
+    "dtype": "float64",
+    "model": "synthetic-score-distributions-v1",
+    "normalize": false,
+    "post_processing": "",
+    "prefixes": "",
+    "revision": "seed=0",
+    "sequence_length": 0,
+    "tokenizer": "",
+    "truncation": ""
+  }
+}

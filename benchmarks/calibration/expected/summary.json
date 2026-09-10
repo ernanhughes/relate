@@ -1,0 +1,20 @@
+{
+  "domain_eer_shift": 0.10881996292004725,
+  "hard": {
+    "ambiguity_fraction": 0.47833333333333333,
+    "auc": 0.7742631111111111,
+    "eer_rate": 0.296,
+    "eer_threshold": 0.5336699988016802
+  },
+  "ordinary": {
+    "ambiguity_fraction": 0.12633333333333333,
+    "auc": 0.9249417777777778,
+    "eer_rate": 0.15866666666666668
+  },
+  "seam_auc": 1.0,
+  "staleness_changed": [
+    "space_hash",
+    "domain",
+    "scorer"
+  ]
+}

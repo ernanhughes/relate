@@ -1,0 +1,34 @@
+{
+  "domain_a": {
+    "ambiguity_fraction": 0.5233333333333333,
+    "false_accept_rate": 0.1,
+    "false_reject_rate": 0.1,
+    "target": "bounded_rates",
+    "threshold_high": 1.2909813116160298,
+    "threshold_low": -0.3138076980003661
+  },
+  "domain_b": {
+    "ambiguity_fraction": 0.59,
+    "false_accept_rate": 0.1,
+    "false_reject_rate": 0.1,
+    "target": "bounded_rates",
+    "threshold_high": 1.45056444103252,
+    "threshold_low": -0.3138076980003661
+  },
+  "hard": {
+    "ambiguity_fraction": 0.47833333333333333,
+    "false_accept_rate": 0.1,
+    "false_reject_rate": 0.1,
+    "target": "bounded_rates",
+    "threshold_high": 1.2951547055244992,
+    "threshold_low": -0.10025244800641087
+  },
+  "ordinary": {
+    "ambiguity_fraction": 0.12633333333333333,
+    "false_accept_rate": 0.1,
+    "false_reject_rate": 0.1,
+    "target": "bounded_rates",
+    "threshold_high": 1.2856785919385918,
+    "threshold_low": 0.7409344678958798
+  }
+}
