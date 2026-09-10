@@ -1,0 +1,26 @@
+{
+  "baselines": {},
+  "corpus": "synthetic-v1",
+  "corpus_hash": "n/a-synthetic",
+  "evaluation_id": "python-structure-mirror-v1",
+  "manifest": "{\"corpus\": \"synthetic-v1\", \"corpus_hash\": \"n/a-synthetic\", \"evaluation_id\": \"python-structure-mirror-v1\", \"losses\": 55, \"scorer\": \"relation_chebyshev:complexity,depth,call_sites\", \"seed\": 0, \"space_hash\": \"85e23cd0a55c3781\", \"task\": \"hard_negative_ordering\", \"ties\": 0, \"total\": 200, \"wins\": 145, \"worst_groups\": [\"high\", \"same_structure\", \"low\"]}",
+  "metrics": {
+    "accuracy": 0.725,
+    "accuracy_excluding_ties": 0.725,
+    "loss_rate": 0.275,
+    "mean_margin": 0.18869503123199047,
+    "median_margin": 0.20192738757965722,
+    "tie_rate": 0.0,
+    "total": 200
+  },
+  "per_relation": {
+    "same_structure": {
+      "accuracy": 0.725,
+      "mean_margin": 0.18869503123199047,
+      "total": 200
+    }
+  },
+  "scorer": "relation_chebyshev:complexity,depth,call_sites",
+  "space_hash": "85e23cd0a55c3781",
+  "task": "hard_negative_ordering"
+}

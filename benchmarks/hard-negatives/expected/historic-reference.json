@@ -1,0 +1,23 @@
+{
+  "status": "EXTERNAL",
+  "note": "Preserved prose evidence, NOT recomputed here. The frozen CodeBERT embeddings and AST coordinates behind these figures are absent from this machine (no similarity_is_relative checkout, no .writer replay assets), so digit-level recomputation is blocked. The synthetic mirror in expected/report-*.json reproduces the observation structure through the generic evaluator instead.",
+  "experiment": "frozen CodeBERT embeddings of ~20k CodeSearchNet Python functions; ridge readout of three objective AST coordinates (complexity, depth, call-sites); hard-negative ordering accuracy",
+  "results": {
+    "chebyshev_relation_space": 0.7328515625,
+    "raw_cosine": 0.532458984375,
+    "raw_euclidean": 0.533314453125
+  },
+  "observation": "supervised relation readout exposes signal that raw geometry misses (+~20pp); cosine and Euclidean coincide",
+  "mirror": {
+    "relation": 0.725,
+    "cosine": 0.1,
+    "euclidean": 0.1,
+    "why_raw_geometry_is_harsher": "mirror negatives are adversarially mined (max cosine among latent-far items): the hard-negative regime RELATE itself targets. The historic pairs were fixed, not mined, hence ~0.53 instead of ~0.10. The shared facts survive: relation readout >> raw geometry, and cosine == euclidean (unit-norm embeddings in the mirror; normalized encoders in the original).",
+    "why_relation_matches": "same ridge readout (alpha=1.0), same Chebyshev ordering judgment, same three-coordinate structure, same evaluator code path"
+  },
+  "sources": [
+    "README.md (original real-code result)",
+    "src/relate/replay.py and src/relate/option_b_replay.py (replay machinery; assets absent)",
+    "book Chapter 15, claim X.1 (cited as EXTERNAL, not a book MEASURED claim)"
+  ]
+}

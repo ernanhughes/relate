@@ -1,0 +1,13 @@
+{
+  "accuracy_delta": 0.625,
+  "group_deltas": {
+    "high": 0.5900000000000001,
+    "low": 0.66
+  },
+  "mean_margin_delta": 0.42200305074086725,
+  "median_margin_delta": 0.4241733764126872,
+  "relation_deltas": {
+    "same_structure": 0.625
+  },
+  "tie_rate_delta": 0.0
+}

@@ -1,0 +1,35 @@
+{
+  "adapter": {
+    "cases": 937,
+    "corpus_hash": "8cad6816d90e06bc49e5b0b64cd460945e17ea4b1ec3c46054409669eda525b3",
+    "corpus_release": "relate-0.1.0",
+    "view": "hard-negative-v0.1.json"
+  },
+  "benchmark_id": "hard-negatives-v1",
+  "code_version": "relate-search 0.1.0",
+  "fixture_seed": 0,
+  "random_seed": 7,
+  "scorers": {
+    "cosine": "cosine_similarity",
+    "euclidean": "neg_euclidean_distance",
+    "random": "random_uniform:seed=7",
+    "relation": "relation_chebyshev:complexity,depth,call_sites"
+  },
+  "space": {
+    "derivation": "",
+    "derived_from": "",
+    "dimensions": 32,
+    "dtype": "float64",
+    "model": "synthetic-python-structure-mirror-v1",
+    "normalize": true,
+    "post_processing": "",
+    "prefixes": "",
+    "revision": "seed=0",
+    "sequence_length": 0,
+    "tokenizer": "",
+    "truncation": ""
+  },
+  "space_hash": "85e23cd0a55c3781",
+  "tie_tol": 1e-09,
+  "vectors_source": "synthetic-v1"
+}

@@ -1,0 +1,1647 @@
+{
+  "accuracy": 0.1,
+  "accuracy_excluding_ties": 0.1,
+  "by_group": {
+    "high": {
+      "accuracy": 0.09,
+      "losses": 91,
+      "mean_margin": -0.23445550283751854,
+      "ties": 0,
+      "total": 100,
+      "wins": 9
+    },
+    "low": {
+      "accuracy": 0.11,
+      "losses": 89,
+      "mean_margin": -0.23216053618023513,
+      "ties": 0,
+      "total": 100,
+      "wins": 11
+    }
+  },
+  "by_relation": {
+    "same_structure": {
+      "accuracy": 0.1,
+      "losses": 180,
+      "mean_margin": -0.23330801950887678,
+      "ties": 0,
+      "total": 200,
+      "wins": 20
+    }
+  },
+  "loss_rate": 0.9,
+  "losses": 180,
+  "mean_margin": -0.23330801950887678,
+  "median_margin": -0.22224598883302998,
+  "observations": [
+    {
+      "case_id": "syn-1500:1666:1724",
+      "correct": false,
+      "margin": -0.4509880821211381,
+      "negative_score": 0.5882100989179847,
+      "outcome": "LOSS",
+      "positive_score": 0.1372220167968466
+    },
+    {
+      "case_id": "syn-1501:1728:1878",
+      "correct": false,
+      "margin": -0.20367835831086892,
+      "negative_score": 0.3339707706286299,
+      "outcome": "LOSS",
+      "positive_score": 0.13029241231776098
+    },
+    {
+      "case_id": "syn-1502:1582:1654",
+      "correct": false,
+      "margin": -0.43080822346261194,
+      "negative_score": 0.4856914201386472,
+      "outcome": "LOSS",
+      "positive_score": 0.05488319667603524
+    },
+    {
+      "case_id": "syn-1503:1787:1864",
+      "correct": false,
+      "margin": -0.22659348659464232,
+      "negative_score": 0.4084483753416424,
+      "outcome": "LOSS",
+      "positive_score": 0.1818548887470001
+    },
+    {
+      "case_id": "syn-1504:1747:1529",
+      "correct": false,
+      "margin": -0.18775612536427438,
+      "negative_score": 0.32050228213347864,
+      "outcome": "LOSS",
+      "positive_score": 0.13274615676920426
+    },
+    {
+      "case_id": "syn-1505:1890:1512",
+      "correct": false,
+      "margin": -0.23684101545176126,
+      "negative_score": 0.38509651224435854,
+      "outcome": "LOSS",
+      "positive_score": 0.14825549679259728
+    },
+    {
+      "case_id": "syn-1506:1739:1630",
+      "correct": true,
+      "margin": 0.016186251828273934,
+      "negative_score": 0.30301151571141266,
+      "outcome": "WIN",
+      "positive_score": 0.3191977675396866
+    },
+    {
+      "case_id": "syn-1507:1531:1863",
+      "correct": false,
+      "margin": -0.39439138677852875,
+      "negative_score": 0.5209816606189125,
+      "outcome": "LOSS",
+      "positive_score": 0.12659027384038374
+    },
+    {
+      "case_id": "syn-1508:1694:1610",
+      "correct": false,
+      "margin": -0.16131441179090858,
+      "negative_score": 0.35725482505521455,
+      "outcome": "LOSS",
+      "positive_score": 0.19594041326430597
+    },
+    {
+      "case_id": "syn-1509:1850:1632",
+      "correct": false,
+      "margin": -0.44382568270239975,
+      "negative_score": 0.4505710191091006,
+      "outcome": "LOSS",
+      "positive_score": 0.006745336406700851
+    },
+    {
+      "case_id": "syn-1510:1890:1878",
+      "correct": false,
+      "margin": -0.3279982675061734,
+      "negative_score": 0.43720903822825474,
+      "outcome": "LOSS",
+      "positive_score": 0.10921077072208134
+    },
+    {
+      "case_id": "syn-1511:1785:1893",
+      "correct": false,
+      "margin": -0.15028451271733648,
+      "negative_score": 0.3925647838327551,
+      "outcome": "LOSS",
+      "positive_score": 0.24228027111541864
+    },
+    {
+      "case_id": "syn-1512:1916:1815",
+      "correct": true,
+      "margin": 0.05785352218469836,
+      "negative_score": 0.38523735191807884,
+      "outcome": "WIN",
+      "positive_score": 0.4430908741027772
+    },
+    {
+      "case_id": "syn-1513:1611:1701",
+      "correct": false,
+      "margin": -0.3172740959391991,
+      "negative_score": 0.5908245496991185,
+      "outcome": "LOSS",
+      "positive_score": 0.2735504537599194
+    },
+    {
+      "case_id": "syn-1514:1841:1585",
+      "correct": false,
+      "margin": -0.12348801463137504,
+      "negative_score": 0.4603470597192778,
+      "outcome": "LOSS",
+      "positive_score": 0.33685904508790276
+    },
+    {
+      "case_id": "syn-1515:1769:1812",
+      "correct": false,
+      "margin": -0.0034555059450392944,
+      "negative_score": 0.30219652534027935,
+      "outcome": "LOSS",
+      "positive_score": 0.29874101939524006
+    },
+    {
+      "case_id": "syn-1516:1698:1665",
+      "correct": false,
+      "margin": -0.25849420447838456,
+      "negative_score": 0.5124266845919835,
+      "outcome": "LOSS",
+      "positive_score": 0.2539324801135989
+    },
+    {
+      "case_id": "syn-1517:1924:1793",
+      "correct": false,
+      "margin": -0.3287736111201868,
+      "negative_score": 0.4250216219619495,
+      "outcome": "LOSS",
+      "positive_score": 0.09624801084176264
+    },
+    {
+      "case_id": "syn-1518:1957:1923",
+      "correct": true,
+      "margin": 0.05050365812456614,
+      "negative_score": 0.33407041259100834,
+      "outcome": "WIN",
+      "positive_score": 0.3845740707155745
+    },
+    {
+      "case_id": "syn-1519:1998:1874",
+      "correct": false,
+      "margin": -0.035232130023063024,
+      "negative_score": 0.5502714406396311,
+      "outcome": "LOSS",
+      "positive_score": 0.515039310616568
+    },
+    {
+      "case_id": "syn-1520:1838:1801",
+      "correct": false,
+      "margin": -0.2718087948444604,
+      "negative_score": 0.47181235746734873,
+      "outcome": "LOSS",
+      "positive_score": 0.20000356262288835
+    },
+    {
+      "case_id": "syn-1521:1798:1904",
+      "correct": false,
+      "margin": -0.1726578980547987,
+      "negative_score": 0.5318196988564765,
+      "outcome": "LOSS",
+      "positive_score": 0.3591618008016778
+    },
+    {
+      "case_id": "syn-1522:1583:1746",
+      "correct": false,
+      "margin": -0.07491444786985124,
+      "negative_score": 0.3953212219042167,
+      "outcome": "LOSS",
+      "positive_score": 0.32040677403436546
+    },
+    {
+      "case_id": "syn-1523:1669:1891",
+      "correct": false,
+      "margin": -0.057750598172746206,
+      "negative_score": 0.17272748307182625,
+      "outcome": "LOSS",
+      "positive_score": 0.11497688489908005
+    },
+    {
+      "case_id": "syn-1524:1568:1636",
+      "correct": false,
+      "margin": -0.5686637429069046,
+      "negative_score": 0.4994990789932221,
+      "outcome": "LOSS",
+      "positive_score": -0.06916466391368244
+    },
+    {
+      "case_id": "syn-1525:1818:1894",
+      "correct": false,
+      "margin": -0.4528322796744646,
+      "negative_score": 0.38259194685613845,
+      "outcome": "LOSS",
+      "positive_score": -0.07024033281832617
+    },
+    {
+      "case_id": "syn-1526:1555:1914",
+      "correct": false,
+      "margin": -0.21893883363608,
+      "negative_score": 0.3660037337420507,
+      "outcome": "LOSS",
+      "positive_score": 0.1470649001059707
+    },
+    {
+      "case_id": "syn-1527:1853:1611",
+      "correct": false,
+      "margin": -0.1998473679318964,
+      "negative_score": 0.5097829702505388,
+      "outcome": "LOSS",
+      "positive_score": 0.30993560231864237
+    },
+    {
+      "case_id": "syn-1528:1649:1760",
+      "correct": false,
+      "margin": -0.19588402861867915,
+      "negative_score": 0.467974553557817,
+      "outcome": "LOSS",
+      "positive_score": 0.2720905249391378
+    },
+    {
+      "case_id": "syn-1529:1677:1844",
+      "correct": false,
+      "margin": -0.264633800755171,
+      "negative_score": 0.4732780608204022,
+      "outcome": "LOSS",
+      "positive_score": 0.20864426006523118
+    },
+    {
+      "case_id": "syn-1530:1702:1975",
+      "correct": false,
+      "margin": -0.2657426181782142,
+      "negative_score": 0.43092567425732553,
+      "outcome": "LOSS",
+      "positive_score": 0.1651830560791113
+    },
+    {
+      "case_id": "syn-1531:1623:1983",
+      "correct": false,
+      "margin": -0.5371042444534648,
+      "negative_score": 0.6384009707076745,
+      "outcome": "LOSS",
+      "positive_score": 0.10129672625420971
+    },
+    {
+      "case_id": "syn-1532:1615:1636",
+      "correct": false,
+      "margin": -0.2449838002847818,
+      "negative_score": 0.3811473498115044,
+      "outcome": "LOSS",
+      "positive_score": 0.13616354952672258
+    },
+    {
+      "case_id": "syn-1533:1985:1948",
+      "correct": false,
+      "margin": -0.14500000107344457,
+      "negative_score": 0.3802436126010705,
+      "outcome": "LOSS",
+      "positive_score": 0.2352436115276259
+    },
+    {
+      "case_id": "syn-1534:1934:1811",
+      "correct": false,
+      "margin": -0.292663458912361,
+      "negative_score": 0.44280416481546875,
+      "outcome": "LOSS",
+      "positive_score": 0.15014070590310774
+    },
+    {
+      "case_id": "syn-1535:1830:1677",
+      "correct": false,
+      "margin": -0.2797701305858113,
+      "negative_score": 0.4752372108829483,
+      "outcome": "LOSS",
+      "positive_score": 0.195467080297137
+    },
+    {
+      "case_id": "syn-1536:1561:1527",
+      "correct": false,
+      "margin": -0.2008999461435782,
+      "negative_score": 0.4522678059554547,
+      "outcome": "LOSS",
+      "positive_score": 0.2513678598118765
+    },
+    {
+      "case_id": "syn-1537:1670:1578",
+      "correct": false,
+      "margin": -0.13484182105274656,
+      "negative_score": 0.49100601123243376,
+      "outcome": "LOSS",
+      "positive_score": 0.3561641901796872
+    },
+    {
+      "case_id": "syn-1538:1769:1639",
+      "correct": false,
+      "margin": -0.06161404771272072,
+      "negative_score": 0.3915969444010595,
+      "outcome": "LOSS",
+      "positive_score": 0.3299828966883388
+    },
+    {
+      "case_id": "syn-1539:1938:1704",
+      "correct": false,
+      "margin": -0.35002333634726907,
+      "negative_score": 0.3501637898599755,
+      "outcome": "LOSS",
+      "positive_score": 0.00014045351270638998
+    },
+    {
+      "case_id": "syn-1540:1642:1870",
+      "correct": false,
+      "margin": -0.39082140415706423,
+      "negative_score": 0.44365037986573075,
+      "outcome": "LOSS",
+      "positive_score": 0.05282897570866649
+    },
+    {
+      "case_id": "syn-1541:1623:1893",
+      "correct": false,
+      "margin": -0.4097708520274348,
+      "negative_score": 0.4887239204799865,
+      "outcome": "LOSS",
+      "positive_score": 0.07895306845255168
+    },
+    {
+      "case_id": "syn-1542:1941:1844",
+      "correct": false,
+      "margin": -0.2002656739204644,
+      "negative_score": 0.4406587853721337,
+      "outcome": "LOSS",
+      "positive_score": 0.2403931114516693
+    },
+    {
+      "case_id": "syn-1543:1861:1586",
+      "correct": false,
+      "margin": -0.2749813202718884,
+      "negative_score": 0.44177677870674925,
+      "outcome": "LOSS",
+      "positive_score": 0.16679545843486088
+    },
+    {
+      "case_id": "syn-1544:1724:1744",
+      "correct": false,
+      "margin": -0.37348526402973914,
+      "negative_score": 0.5381205194752063,
+      "outcome": "LOSS",
+      "positive_score": 0.1646352554454672
+    },
+    {
+      "case_id": "syn-1545:1762:1718",
+      "correct": false,
+      "margin": -0.11489213323899727,
+      "negative_score": 0.49912652911827804,
+      "outcome": "LOSS",
+      "positive_score": 0.38423439587928077
+    },
+    {
+      "case_id": "syn-1546:1518:1906",
+      "correct": true,
+      "margin": 0.18077896640272917,
+      "negative_score": 0.2866063189374397,
+      "outcome": "WIN",
+      "positive_score": 0.4673852853401689
+    },
+    {
+      "case_id": "syn-1547:1588:1857",
+      "correct": false,
+      "margin": -0.23196886504574227,
+      "negative_score": 0.3122832079152676,
+      "outcome": "LOSS",
+      "positive_score": 0.08031434286952532
+    },
+    {
+      "case_id": "syn-1548:1846:1752",
+      "correct": false,
+      "margin": -0.17753674197250685,
+      "negative_score": 0.3558223006126148,
+      "outcome": "LOSS",
+      "positive_score": 0.17828555864010792
+    },
+    {
+      "case_id": "syn-1549:1635:1997",
+      "correct": false,
+      "margin": -0.19336984548634176,
+      "negative_score": 0.3254464483283521,
+      "outcome": "LOSS",
+      "positive_score": 0.13207660284201037
+    },
+    {
+      "case_id": "syn-1550:1635:1514",
+      "correct": true,
+      "margin": 0.07412919865466727,
+      "negative_score": 0.2865892322354119,
+      "outcome": "WIN",
+      "positive_score": 0.36071843089007916
+    },
+    {
+      "case_id": "syn-1551:1845:1855",
+      "correct": false,
+      "margin": -0.36733515661377125,
+      "negative_score": 0.45601141959299474,
+      "outcome": "LOSS",
+      "positive_score": 0.0886762629792235
+    },
+    {
+      "case_id": "syn-1552:1723:1596",
+      "correct": false,
+      "margin": -0.10790928873934613,
+      "negative_score": 0.41650314399652416,
+      "outcome": "LOSS",
+      "positive_score": 0.30859385525717803
+    },
+    {
+      "case_id": "syn-1553:1639:1950",
+      "correct": true,
+      "margin": 0.05638362307659589,
+      "negative_score": 0.30288623282261073,
+      "outcome": "WIN",
+      "positive_score": 0.3592698558992066
+    },
+    {
+      "case_id": "syn-1554:1795:1806",
+      "correct": false,
+      "margin": -0.3062912421150981,
+      "negative_score": 0.49725950811534253,
+      "outcome": "LOSS",
+      "positive_score": 0.1909682660002444
+    },
+    {
+      "case_id": "syn-1555:1958:1605",
+      "correct": true,
+      "margin": 0.011877322879220498,
+      "negative_score": 0.3948363227223844,
+      "outcome": "WIN",
+      "positive_score": 0.4067136456016049
+    },
+    {
+      "case_id": "syn-1556:1773:1923",
+      "correct": false,
+      "margin": -0.43030406155415907,
+      "negative_score": 0.46381761486354933,
+      "outcome": "LOSS",
+      "positive_score": 0.03351355330939027
+    },
+    {
+      "case_id": "syn-1557:1621:1605",
+      "correct": false,
+      "margin": -0.3782993286462886,
+      "negative_score": 0.5256686199116417,
+      "outcome": "LOSS",
+      "positive_score": 0.1473692912653531
+    },
+    {
+      "case_id": "syn-1558:1840:1520",
+      "correct": false,
+      "margin": -0.21949509185256205,
+      "negative_score": 0.4209275503990243,
+      "outcome": "LOSS",
+      "positive_score": 0.20143245854646225
+    },
+    {
+      "case_id": "syn-1559:1609:1886",
+      "correct": false,
+      "margin": -0.4399121867435848,
+      "negative_score": 0.3667790134794947,
+      "outcome": "LOSS",
+      "positive_score": -0.07313317326409007
+    },
+    {
+      "case_id": "syn-1560:1801:1781",
+      "correct": false,
+      "margin": -0.39701257484115166,
+      "negative_score": 0.35901110023775806,
+      "outcome": "LOSS",
+      "positive_score": -0.03800147460339358
+    },
+    {
+      "case_id": "syn-1561:1752:1857",
+      "correct": false,
+      "margin": -0.04497283095715071,
+      "negative_score": 0.49797399485065164,
+      "outcome": "LOSS",
+      "positive_score": 0.4530011638935009
+    },
+    {
+      "case_id": "syn-1562:1664:1916",
+      "correct": false,
+      "margin": -0.384674514846291,
+      "negative_score": 0.40338150257825645,
+      "outcome": "LOSS",
+      "positive_score": 0.01870698773196544
+    },
+    {
+      "case_id": "syn-1563:1606:1813",
+      "correct": false,
+      "margin": -0.30365807838842157,
+      "negative_score": 0.4659797856858407,
+      "outcome": "LOSS",
+      "positive_score": 0.16232170729741913
+    },
+    {
+      "case_id": "syn-1564:1714:1543",
+      "correct": false,
+      "margin": -0.0724956463297825,
+      "negative_score": 0.3528195862104219,
+      "outcome": "LOSS",
+      "positive_score": 0.2803239398806394
+    },
+    {
+      "case_id": "syn-1565:1675:1816",
+      "correct": false,
+      "margin": -0.30287192241088073,
+      "negative_score": 0.45222467786976683,
+      "outcome": "LOSS",
+      "positive_score": 0.1493527554588861
+    },
+    {
+      "case_id": "syn-1566:1580:1915",
+      "correct": false,
+      "margin": -0.7483840785515247,
+      "negative_score": 0.6770668597382762,
+      "outcome": "LOSS",
+      "positive_score": -0.07131721881324851
+    },
+    {
+      "case_id": "syn-1567:1896:1844",
+      "correct": true,
+      "margin": 0.11855902423894565,
+      "negative_score": 0.2636172467051973,
+      "outcome": "WIN",
+      "positive_score": 0.38217627094414297
+    },
+    {
+      "case_id": "syn-1568:1868:1631",
+      "correct": false,
+      "margin": -0.49567571887216294,
+      "negative_score": 0.5038512403732068,
+      "outcome": "LOSS",
+      "positive_score": 0.0081755215010439
+    },
+    {
+      "case_id": "syn-1569:1612:1503",
+      "correct": true,
+      "margin": 0.014912510983320026,
+      "negative_score": 0.36123845622263884,
+      "outcome": "WIN",
+      "positive_score": 0.37615096720595886
+    },
+    {
+      "case_id": "syn-1570:1697:1886",
+      "correct": false,
+      "margin": -0.1735460526904536,
+      "negative_score": 0.5548918729738946,
+      "outcome": "LOSS",
+      "positive_score": 0.38134582028344105
+    },
+    {
+      "case_id": "syn-1571:1703:1637",
+      "correct": false,
+      "margin": -0.06784087844309628,
+      "negative_score": 0.3259264708356946,
+      "outcome": "LOSS",
+      "positive_score": 0.2580855923925983
+    },
+    {
+      "case_id": "syn-1572:1673:1759",
+      "correct": false,
+      "margin": -0.39868471175424147,
+      "negative_score": 0.4175450806783346,
+      "outcome": "LOSS",
+      "positive_score": 0.01886036892409315
+    },
+    {
+      "case_id": "syn-1573:1655:1725",
+      "correct": false,
+      "margin": -0.164740057648872,
+      "negative_score": 0.36022766074022833,
+      "outcome": "LOSS",
+      "positive_score": 0.19548760309135632
+    },
+    {
+      "case_id": "syn-1574:1816:1655",
+      "correct": false,
+      "margin": -0.41600639590254906,
+      "negative_score": 0.5298619378077851,
+      "outcome": "LOSS",
+      "positive_score": 0.11385554190523609
+    },
+    {
+      "case_id": "syn-1575:1736:1804",
+      "correct": true,
+      "margin": 0.011649459201581891,
+      "negative_score": 0.391598873535808,
+      "outcome": "WIN",
+      "positive_score": 0.4032483327373899
+    },
+    {
+      "case_id": "syn-1576:1714:1809",
+      "correct": false,
+      "margin": -0.1343338385470615,
+      "negative_score": 0.4807426159969286,
+      "outcome": "LOSS",
+      "positive_score": 0.3464087774498671
+    },
+    {
+      "case_id": "syn-1577:1680:1822",
+      "correct": false,
+      "margin": -0.17831969774765588,
+      "negative_score": 0.36017787339061935,
+      "outcome": "LOSS",
+      "positive_score": 0.18185817564296347
+    },
+    {
+      "case_id": "syn-1578:1808:1537",
+      "correct": false,
+      "margin": -0.18288189109071729,
+      "negative_score": 0.49100601123243376,
+      "outcome": "LOSS",
+      "positive_score": 0.3081241201417165
+    },
+    {
+      "case_id": "syn-1579:1802:1968",
+      "correct": false,
+      "margin": -0.20202515406992425,
+      "negative_score": 0.4082772827364249,
+      "outcome": "LOSS",
+      "positive_score": 0.20625212866650064
+    },
+    {
+      "case_id": "syn-1580:1566:1971",
+      "correct": false,
+      "margin": -0.484206675310244,
+      "negative_score": 0.41288945649699543,
+      "outcome": "LOSS",
+      "positive_score": -0.07131721881324851
+    },
+    {
+      "case_id": "syn-1581:1606:1689",
+      "correct": false,
+      "margin": -0.29356820888851404,
+      "negative_score": 0.5373011867533225,
+      "outcome": "LOSS",
+      "positive_score": 0.24373297786480846
+    },
+    {
+      "case_id": "syn-1582:1594:1847",
+      "correct": false,
+      "margin": -0.032728392235373216,
+      "negative_score": 0.3627658524945264,
+      "outcome": "LOSS",
+      "positive_score": 0.3300374602591532
+    },
+    {
+      "case_id": "syn-1583:1522:1731",
+      "correct": false,
+      "margin": -0.13241542200824918,
+      "negative_score": 0.45282219604261464,
+      "outcome": "LOSS",
+      "positive_score": 0.32040677403436546
+    },
+    {
+      "case_id": "syn-1584:1784:1835",
+      "correct": false,
+      "margin": -0.16341831351583674,
+      "negative_score": 0.5135848410604235,
+      "outcome": "LOSS",
+      "positive_score": 0.3501665275445867
+    },
+    {
+      "case_id": "syn-1585:1524:1514",
+      "correct": false,
+      "margin": -0.13850929229794978,
+      "negative_score": 0.4603470597192778,
+      "outcome": "LOSS",
+      "positive_score": 0.321837767421328
+    },
+    {
+      "case_id": "syn-1586:1815:1521",
+      "correct": false,
+      "margin": -0.6752264976613468,
+      "negative_score": 0.482354894378297,
+      "outcome": "LOSS",
+      "positive_score": -0.1928716032830498
+    },
+    {
+      "case_id": "syn-1587:1776:1560",
+      "correct": false,
+      "margin": -0.03515774437926025,
+      "negative_score": 0.2720592445563884,
+      "outcome": "LOSS",
+      "positive_score": 0.23690150017712816
+    },
+    {
+      "case_id": "syn-1588:1687:1563",
+      "correct": false,
+      "margin": -0.2129172229061109,
+      "negative_score": 0.39169997107084825,
+      "outcome": "LOSS",
+      "positive_score": 0.17878274816473735
+    },
+    {
+      "case_id": "syn-1589:1615:1876",
+      "correct": false,
+      "margin": -0.448574910081102,
+      "negative_score": 0.3476377027000513,
+      "outcome": "LOSS",
+      "positive_score": -0.1009372073810507
+    },
+    {
+      "case_id": "syn-1590:1653:1784",
+      "correct": false,
+      "margin": -0.1270936327905482,
+      "negative_score": 0.41229236363515104,
+      "outcome": "LOSS",
+      "positive_score": 0.28519873084460284
+    },
+    {
+      "case_id": "syn-1591:1821:1939",
+      "correct": false,
+      "margin": -0.3652399005658147,
+      "negative_score": 0.43706356157867954,
+      "outcome": "LOSS",
+      "positive_score": 0.07182366101286489
+    },
+    {
+      "case_id": "syn-1592:1774:1708",
+      "correct": false,
+      "margin": -0.4809855521528397,
+      "negative_score": 0.40435841441250225,
+      "outcome": "LOSS",
+      "positive_score": -0.07662713774033748
+    },
+    {
+      "case_id": "syn-1593:1940:1765",
+      "correct": false,
+      "margin": -0.4129883537665602,
+      "negative_score": 0.3510469363307931,
+      "outcome": "LOSS",
+      "positive_score": -0.06194141743576706
+    },
+    {
+      "case_id": "syn-1594:1783:1939",
+      "correct": false,
+      "margin": -0.3198270419274257,
+      "negative_score": 0.4162643324552428,
+      "outcome": "LOSS",
+      "positive_score": 0.09643729052781709
+    },
+    {
+      "case_id": "syn-1595:1850:1961",
+      "correct": false,
+      "margin": -0.28246803746442806,
+      "negative_score": 0.44105564607602044,
+      "outcome": "LOSS",
+      "positive_score": 0.15858760861159238
+    },
+    {
+      "case_id": "syn-1596:1689:1745",
+      "correct": false,
+      "margin": -0.26857892676310224,
+      "negative_score": 0.48166002122244383,
+      "outcome": "LOSS",
+      "positive_score": 0.2130810944593416
+    },
+    {
+      "case_id": "syn-1597:1820:1958",
+      "correct": false,
+      "margin": -0.1990351550380856,
+      "negative_score": 0.5317082968302184,
+      "outcome": "LOSS",
+      "positive_score": 0.33267314179213275
+    },
+    {
+      "case_id": "syn-1598:1943:1500",
+      "correct": true,
+      "margin": 0.06083965274438746,
+      "negative_score": 0.34676296180860916,
+      "outcome": "WIN",
+      "positive_score": 0.4076026145529966
+    },
+    {
+      "case_id": "syn-1599:1693:1696",
+      "correct": false,
+      "margin": -0.2576577352902155,
+      "negative_score": 0.459491227224102,
+      "outcome": "LOSS",
+      "positive_score": 0.20183349193388653
+    },
+    {
+      "case_id": "syn-1600:1520:1711",
+      "correct": false,
+      "margin": -0.23809052301364597,
+      "negative_score": 0.5786478418510067,
+      "outcome": "LOSS",
+      "positive_score": 0.34055731883736073
+    },
+    {
+      "case_id": "syn-1601:1762:1649",
+      "correct": false,
+      "margin": -0.14583642816003023,
+      "negative_score": 0.3996741520711839,
+      "outcome": "LOSS",
+      "positive_score": 0.25383772391115367
+    },
+    {
+      "case_id": "syn-1602:1729:1987",
+      "correct": false,
+      "margin": -0.5707499828258842,
+      "negative_score": 0.4708027456375048,
+      "outcome": "LOSS",
+      "positive_score": -0.09994723718837936
+    },
+    {
+      "case_id": "syn-1603:1708:1682",
+      "correct": false,
+      "margin": -0.011502817751461336,
+      "negative_score": 0.41153196998257324,
+      "outcome": "LOSS",
+      "positive_score": 0.4000291522311119
+    },
+    {
+      "case_id": "syn-1604:1627:1521",
+      "correct": false,
+      "margin": -0.22615876517542957,
+      "negative_score": 0.3497709682777209,
+      "outcome": "LOSS",
+      "positive_score": 0.12361220310229135
+    },
+    {
+      "case_id": "syn-1605:1804:1557",
+      "correct": false,
+      "margin": -0.23641488534245053,
+      "negative_score": 0.5256686199116417,
+      "outcome": "LOSS",
+      "positive_score": 0.2892537345691912
+    },
+    {
+      "case_id": "syn-1606:1581:1785",
+      "correct": false,
+      "margin": -0.12910755815872077,
+      "negative_score": 0.37284053602352923,
+      "outcome": "LOSS",
+      "positive_score": 0.24373297786480846
+    },
+    {
+      "case_id": "syn-1607:1845:1878",
+      "correct": false,
+      "margin": -0.180874838689392,
+      "negative_score": 0.4094606080369709,
+      "outcome": "LOSS",
+      "positive_score": 0.22858576934757888
+    },
+    {
+      "case_id": "syn-1608:1916:1793",
+      "correct": false,
+      "margin": -0.2793563923864839,
+      "negative_score": 0.48702060898478533,
+      "outcome": "LOSS",
+      "positive_score": 0.20766421659830145
+    },
+    {
+      "case_id": "syn-1609:1559:1859",
+      "correct": false,
+      "margin": -0.5183239892801186,
+      "negative_score": 0.44519081601602856,
+      "outcome": "LOSS",
+      "positive_score": -0.07313317326409007
+    },
+    {
+      "case_id": "syn-1610:1992:1600",
+      "correct": false,
+      "margin": -0.20243713442405326,
+      "negative_score": 0.5719687901118617,
+      "outcome": "LOSS",
+      "positive_score": 0.3695316556878085
+    },
+    {
+      "case_id": "syn-1611:1513:1527",
+      "correct": false,
+      "margin": -0.23623251649061938,
+      "negative_score": 0.5097829702505388,
+      "outcome": "LOSS",
+      "positive_score": 0.2735504537599194
+    },
+    {
+      "case_id": "syn-1612:1569:1689",
+      "correct": true,
+      "margin": 0.05244964252318629,
+      "negative_score": 0.3237013246827726,
+      "outcome": "WIN",
+      "positive_score": 0.37615096720595886
+    },
+    {
+      "case_id": "syn-1613:1728:1939",
+      "correct": false,
+      "margin": -0.0490047909256216,
+      "negative_score": 0.3903792804684743,
+      "outcome": "LOSS",
+      "positive_score": 0.3413744895428527
+    },
+    {
+      "case_id": "syn-1614:1659:1801",
+      "correct": false,
+      "margin": -0.453803161601343,
+      "negative_score": 0.437681039582118,
+      "outcome": "LOSS",
+      "positive_score": -0.01612212201922497
+    },
+    {
+      "case_id": "syn-1615:1589:1737",
+      "correct": false,
+      "margin": -0.47101207548457186,
+      "negative_score": 0.37007486810352114,
+      "outcome": "LOSS",
+      "positive_score": -0.1009372073810507
+    },
+    {
+      "case_id": "syn-1616:1783:1671",
+      "correct": false,
+      "margin": -0.1859718390848149,
+      "negative_score": 0.4081675549610324,
+      "outcome": "LOSS",
+      "positive_score": 0.2221957158762175
+    },
+    {
+      "case_id": "syn-1617:1905:1521",
+      "correct": false,
+      "margin": -0.2659634267755564,
+      "negative_score": 0.5183029532628829,
+      "outcome": "LOSS",
+      "positive_score": 0.2523395264873265
+    },
+    {
+      "case_id": "syn-1618:1665:1878",
+      "correct": false,
+      "margin": -0.3923144503548628,
+      "negative_score": 0.4054100285639207,
+      "outcome": "LOSS",
+      "positive_score": 0.013095578209057927
+    },
+    {
+      "case_id": "syn-1619:1501:1690",
+      "correct": true,
+      "margin": 0.1431879368847571,
+      "negative_score": 0.20927466550902754,
+      "outcome": "WIN",
+      "positive_score": 0.35246260239378463
+    },
+    {
+      "case_id": "syn-1620:1664:1630",
+      "correct": false,
+      "margin": -0.30612907986395144,
+      "negative_score": 0.3990013805149176,
+      "outcome": "LOSS",
+      "positive_score": 0.09287230065096616
+    },
+    {
+      "case_id": "syn-1621:1557:1676",
+      "correct": false,
+      "margin": -0.2987308362844702,
+      "negative_score": 0.4461001275498233,
+      "outcome": "LOSS",
+      "positive_score": 0.1473692912653531
+    },
+    {
+      "case_id": "syn-1622:1788:1509",
+      "correct": false,
+      "margin": -0.07462536943523407,
+      "negative_score": 0.42908961269233936,
+      "outcome": "LOSS",
+      "positive_score": 0.3544642432571053
+    },
+    {
+      "case_id": "syn-1623:1531:1886",
+      "correct": false,
+      "margin": -0.3478107003380913,
+      "negative_score": 0.449107426592301,
+      "outcome": "LOSS",
+      "positive_score": 0.10129672625420971
+    },
+    {
+      "case_id": "syn-1624:1870:1960",
+      "correct": false,
+      "margin": -0.19056038124480984,
+      "negative_score": 0.4659013155698704,
+      "outcome": "LOSS",
+      "positive_score": 0.27534093432506057
+    },
+    {
+      "case_id": "syn-1625:1929:1735",
+      "correct": false,
+      "margin": -0.21100709116967806,
+      "negative_score": 0.363741891926068,
+      "outcome": "LOSS",
+      "positive_score": 0.15273480075638993
+    },
+    {
+      "case_id": "syn-1626:1898:1637",
+      "correct": false,
+      "margin": -0.09386937085143532,
+      "negative_score": 0.3980723151423029,
+      "outcome": "LOSS",
+      "positive_score": 0.3042029442908676
+    },
+    {
+      "case_id": "syn-1627:1604:1971",
+      "correct": false,
+      "margin": -0.19124096618123929,
+      "negative_score": 0.31485316928353063,
+      "outcome": "LOSS",
+      "positive_score": 0.12361220310229135
+    },
+    {
+      "case_id": "syn-1628:1914:1772",
+      "correct": false,
+      "margin": -0.3366244488982717,
+      "negative_score": 0.43763406039719793,
+      "outcome": "LOSS",
+      "positive_score": 0.1010096114989262
+    },
+    {
+      "case_id": "syn-1629:1555:1995",
+      "correct": false,
+      "margin": -0.06631425487902548,
+      "negative_score": 0.4799012900751905,
+      "outcome": "LOSS",
+      "positive_score": 0.413587035196165
+    },
+    {
+      "case_id": "syn-1630:1528:1648",
+      "correct": false,
+      "margin": -0.2295965637718832,
+      "negative_score": 0.4961218541475117,
+      "outcome": "LOSS",
+      "positive_score": 0.2665252903756285
+    },
+    {
+      "case_id": "syn-1631:1719:1568",
+      "correct": false,
+      "margin": -0.50047326358447,
+      "negative_score": 0.5038512403732068,
+      "outcome": "LOSS",
+      "positive_score": 0.003377976788736845
+    },
+    {
+      "case_id": "syn-1632:1903:1509",
+      "correct": false,
+      "margin": -0.2777438905197211,
+      "negative_score": 0.4505710191091006,
+      "outcome": "LOSS",
+      "positive_score": 0.1728271285893795
+    },
+    {
+      "case_id": "syn-1633:1782:1844",
+      "correct": false,
+      "margin": -0.21384396253704535,
+      "negative_score": 0.48862158722947957,
+      "outcome": "LOSS",
+      "positive_score": 0.2747776246924342
+    },
+    {
+      "case_id": "syn-1634:1566:1525",
+      "correct": false,
+      "margin": -0.21126505782181831,
+      "negative_score": 0.3637634517513823,
+      "outcome": "LOSS",
+      "positive_score": 0.152498393929564
+    },
+    {
+      "case_id": "syn-1635:1549:1995",
+      "correct": false,
+      "margin": -0.18903860133217912,
+      "negative_score": 0.3211152041741895,
+      "outcome": "LOSS",
+      "positive_score": 0.13207660284201037
+    },
+    {
+      "case_id": "syn-1636:1710:1524",
+      "correct": false,
+      "margin": -0.176283639192521,
+      "negative_score": 0.4994990789932221,
+      "outcome": "LOSS",
+      "positive_score": 0.3232154398007011
+    },
+    {
+      "case_id": "syn-1637:1986:1792",
+      "correct": true,
+      "margin": 0.003371110822466772,
+      "negative_score": 0.5295807878992378,
+      "outcome": "WIN",
+      "positive_score": 0.5329518987217046
+    },
+    {
+      "case_id": "syn-1638:1816:1961",
+      "correct": false,
+      "margin": -0.22499688581349794,
+      "negative_score": 0.341941942996817,
+      "outcome": "LOSS",
+      "positive_score": 0.11694505718331907
+    },
+    {
+      "case_id": "syn-1639:1553:1966",
+      "correct": false,
+      "margin": -0.14223925667113663,
+      "negative_score": 0.5015091125703433,
+      "outcome": "LOSS",
+      "positive_score": 0.3592698558992066
+    },
+    {
+      "case_id": "syn-1640:1952:1566",
+      "correct": false,
+      "margin": -0.6525856300331102,
+      "negative_score": 0.5065428731686942,
+      "outcome": "LOSS",
+      "positive_score": -0.14604275686441603
+    },
+    {
+      "case_id": "syn-1641:1526:1837",
+      "correct": false,
+      "margin": -0.5524517537340391,
+      "negative_score": 0.36425098023719343,
+      "outcome": "LOSS",
+      "positive_score": -0.18820077349684566
+    },
+    {
+      "case_id": "syn-1642:1540:1951",
+      "correct": false,
+      "margin": -0.2551200347800284,
+      "negative_score": 0.30794901048869494,
+      "outcome": "LOSS",
+      "positive_score": 0.05282897570866649
+    },
+    {
+      "case_id": "syn-1643:1858:1685",
+      "correct": false,
+      "margin": -0.3574194712127504,
+      "negative_score": 0.3236561250945229,
+      "outcome": "LOSS",
+      "positive_score": -0.033763346118227525
+    },
+    {
+      "case_id": "syn-1644:1993:1870",
+      "correct": false,
+      "margin": -0.15375980106509296,
+      "negative_score": 0.4369080682020335,
+      "outcome": "LOSS",
+      "positive_score": 0.2831482671369405
+    },
+    {
+      "case_id": "syn-1645:1742:1578",
+      "correct": false,
+      "margin": -0.27209454182003723,
+      "negative_score": 0.48631237195829163,
+      "outcome": "LOSS",
+      "positive_score": 0.21421783013825443
+    },
+    {
+      "case_id": "syn-1646:1893:1617",
+      "correct": false,
+      "margin": -0.2843006436633849,
+      "negative_score": 0.418707770066866,
+      "outcome": "LOSS",
+      "positive_score": 0.1344071264034811
+    },
+    {
+      "case_id": "syn-1647:1982:1507",
+      "correct": false,
+      "margin": -0.23833239010357377,
+      "negative_score": 0.38886600412097266,
+      "outcome": "LOSS",
+      "positive_score": 0.1505336140173989
+    },
+    {
+      "case_id": "syn-1648:1843:1630",
+      "correct": false,
+      "margin": -0.7009855956990376,
+      "negative_score": 0.4961218541475117,
+      "outcome": "LOSS",
+      "positive_score": -0.20486374155152598
+    },
+    {
+      "case_id": "syn-1649:1971:1713",
+      "correct": false,
+      "margin": -0.07741705414337546,
+      "negative_score": 0.42523319203732857,
+      "outcome": "LOSS",
+      "positive_score": 0.3478161378939531
+    },
+    {
+      "case_id": "syn-1650:1894:1995",
+      "correct": false,
+      "margin": -0.4470523812162052,
+      "negative_score": 0.6007181797907825,
+      "outcome": "LOSS",
+      "positive_score": 0.15366579857457724
+    },
+    {
+      "case_id": "syn-1651:1932:1991",
+      "correct": false,
+      "margin": -0.7530843186374758,
+      "negative_score": 0.46455172112245435,
+      "outcome": "LOSS",
+      "positive_score": -0.28853259751502147
+    },
+    {
+      "case_id": "syn-1652:1888:1697",
+      "correct": false,
+      "margin": -0.18552391064902546,
+      "negative_score": 0.4977228161153727,
+      "outcome": "LOSS",
+      "positive_score": 0.31219890546634727
+    },
+    {
+      "case_id": "syn-1653:1993:1584",
+      "correct": false,
+      "margin": -0.10607786596572782,
+      "negative_score": 0.40261320478492696,
+      "outcome": "LOSS",
+      "positive_score": 0.29653533881919913
+    },
+    {
+      "case_id": "syn-1654:1657:1502",
+      "correct": false,
+      "margin": -0.3563166244389429,
+      "negative_score": 0.4856914201386472,
+      "outcome": "LOSS",
+      "positive_score": 0.12937479569970428
+    },
+    {
+      "case_id": "syn-1655:1573:1574",
+      "correct": false,
+      "margin": -0.3343743347164288,
+      "negative_score": 0.5298619378077851,
+      "outcome": "LOSS",
+      "positive_score": 0.19548760309135632
+    },
+    {
+      "case_id": "syn-1656:1740:1541",
+      "correct": true,
+      "margin": 0.06978896869963674,
+      "negative_score": 0.371496049851133,
+      "outcome": "WIN",
+      "positive_score": 0.44128501855076974
+    },
+    {
+      "case_id": "syn-1657:1652:1857",
+      "correct": false,
+      "margin": -0.23482252360374065,
+      "negative_score": 0.4234921333574726,
+      "outcome": "LOSS",
+      "positive_score": 0.18866960975373195
+    },
+    {
+      "case_id": "syn-1658:1946:1974",
+      "correct": true,
+      "margin": 0.13795413281978192,
+      "negative_score": 0.4141311922832565,
+      "outcome": "WIN",
+      "positive_score": 0.5520853251030384
+    },
+    {
+      "case_id": "syn-1659:1989:1584",
+      "correct": false,
+      "margin": -0.26568745191842164,
+      "negative_score": 0.4073136314037825,
+      "outcome": "LOSS",
+      "positive_score": 0.14162617948536088
+    },
+    {
+      "case_id": "syn-1660:1933:1971",
+      "correct": false,
+      "margin": -0.21513380493987483,
+      "negative_score": 0.34047002270514926,
+      "outcome": "LOSS",
+      "positive_score": 0.12533621776527443
+    },
+    {
+      "case_id": "syn-1661:1865:1874",
+      "correct": false,
+      "margin": -0.25431623114881363,
+      "negative_score": 0.5147682137692727,
+      "outcome": "LOSS",
+      "positive_score": 0.2604519826204591
+    },
+    {
+      "case_id": "syn-1662:1681:1921",
+      "correct": false,
+      "margin": -0.1170575918866002,
+      "negative_score": 0.4732304903689115,
+      "outcome": "LOSS",
+      "positive_score": 0.3561728984823113
+    },
+    {
+      "case_id": "syn-1663:1997:1574",
+      "correct": false,
+      "margin": -0.5530968684356785,
+      "negative_score": 0.5292074203765857,
+      "outcome": "LOSS",
+      "positive_score": -0.023889448059092766
+    },
+    {
+      "case_id": "syn-1664:1620:1605",
+      "correct": false,
+      "margin": -0.28289829170393743,
+      "negative_score": 0.3757705923549036,
+      "outcome": "LOSS",
+      "positive_score": 0.09287230065096616
+    },
+    {
+      "case_id": "syn-1665:1618:1516",
+      "correct": false,
+      "margin": -0.49933110638292555,
+      "negative_score": 0.5124266845919835,
+      "outcome": "LOSS",
+      "positive_score": 0.013095578209057927
+    },
+    {
+      "case_id": "syn-1666:1500:1866",
+      "correct": false,
+      "margin": -0.4022161628049788,
+      "negative_score": 0.5394381796018254,
+      "outcome": "LOSS",
+      "positive_score": 0.1372220167968466
+    },
+    {
+      "case_id": "syn-1667:1805:1652",
+      "correct": false,
+      "margin": -0.08869574681577376,
+      "negative_score": 0.20743394104828708,
+      "outcome": "LOSS",
+      "positive_score": 0.11873819423251332
+    },
+    {
+      "case_id": "syn-1668:1932:1591",
+      "correct": false,
+      "margin": -0.1664806358620152,
+      "negative_score": 0.40255096662382667,
+      "outcome": "LOSS",
+      "positive_score": 0.23607033076181147
+    },
+    {
+      "case_id": "syn-1669:1523:1891",
+      "correct": false,
+      "margin": -0.3385466837796172,
+      "negative_score": 0.45352356867869725,
+      "outcome": "LOSS",
+      "positive_score": 0.11497688489908005
+    },
+    {
+      "case_id": "syn-1670:1770:1887",
+      "correct": true,
+      "margin": 0.18976878119403157,
+      "negative_score": 0.3339523227809234,
+      "outcome": "WIN",
+      "positive_score": 0.523721103974955
+    },
+    {
+      "case_id": "syn-1671:1672:1605",
+      "correct": false,
+      "margin": -0.3300618933152215,
+      "negative_score": 0.4478667814011629,
+      "outcome": "LOSS",
+      "positive_score": 0.11780488808594136
+    },
+    {
+      "case_id": "syn-1672:1671:1926",
+      "correct": false,
+      "margin": -0.2873834933091083,
+      "negative_score": 0.40518838139504965,
+      "outcome": "LOSS",
+      "positive_score": 0.11780488808594136
+    },
+    {
+      "case_id": "syn-1673:1812:1797",
+      "correct": false,
+      "margin": -0.04051442567186825,
+      "negative_score": 0.41901149833213447,
+      "outcome": "LOSS",
+      "positive_score": 0.3784970726602662
+    },
+    {
+      "case_id": "syn-1674:1612:1710",
+      "correct": true,
+      "margin": 0.07900690972413241,
+      "negative_score": 0.2290853436295511,
+      "outcome": "WIN",
+      "positive_score": 0.3080922533536835
+    },
+    {
+      "case_id": "syn-1675:1964:1811",
+      "correct": true,
+      "margin": 0.01390331183434762,
+      "negative_score": 0.42549193091786197,
+      "outcome": "WIN",
+      "positive_score": 0.4393952427522096
+    },
+    {
+      "case_id": "syn-1676:1956:1621",
+      "correct": false,
+      "margin": -0.639082626108535,
+      "negative_score": 0.4461001275498233,
+      "outcome": "LOSS",
+      "positive_score": -0.19298249855871158
+    },
+    {
+      "case_id": "syn-1677:1529:1535",
+      "correct": false,
+      "margin": -0.2665929508177171,
+      "negative_score": 0.4752372108829483,
+      "outcome": "LOSS",
+      "positive_score": 0.20864426006523118
+    },
+    {
+      "case_id": "syn-1678:1885:1844",
+      "correct": false,
+      "margin": -0.23190867047046604,
+      "negative_score": 0.36705514016104424,
+      "outcome": "LOSS",
+      "positive_score": 0.1351464696905782
+    },
+    {
+      "case_id": "syn-1679:1990:1544",
+      "correct": false,
+      "margin": -0.35665360466687623,
+      "negative_score": 0.37768314498346506,
+      "outcome": "LOSS",
+      "positive_score": 0.0210295403165888
+    },
+    {
+      "case_id": "syn-1680:1577:1831",
+      "correct": false,
+      "margin": -0.10690776116603234,
+      "negative_score": 0.2887659368089958,
+      "outcome": "LOSS",
+      "positive_score": 0.18185817564296347
+    },
+    {
+      "case_id": "syn-1681:1709:1630",
+      "correct": true,
+      "margin": 0.07516318705199398,
+      "negative_score": 0.3793126431371768,
+      "outcome": "WIN",
+      "positive_score": 0.45447583018917076
+    },
+    {
+      "case_id": "syn-1682:1895:1603",
+      "correct": false,
+      "margin": -0.1542506913063501,
+      "negative_score": 0.41153196998257324,
+      "outcome": "LOSS",
+      "positive_score": 0.25728127867622314
+    },
+    {
+      "case_id": "syn-1683:1967:1832",
+      "correct": false,
+      "margin": -0.5205818606079342,
+      "negative_score": 0.42080374884088273,
+      "outcome": "LOSS",
+      "positive_score": -0.09977811176705148
+    },
+    {
+      "case_id": "syn-1684:1788:1596",
+      "correct": false,
+      "margin": -0.009963682067396562,
+      "negative_score": 0.4356289687397937,
+      "outcome": "LOSS",
+      "positive_score": 0.4256652866723971
+    },
+    {
+      "case_id": "syn-1685:1623:1794",
+      "correct": false,
+      "margin": -0.760722989380409,
+      "negative_score": 0.5516019318604248,
+      "outcome": "LOSS",
+      "positive_score": -0.2091210575199842
+    },
+    {
+      "case_id": "syn-1686:1573:1740",
+      "correct": false,
+      "margin": -0.22861975161984718,
+      "negative_score": 0.35377179082966287,
+      "outcome": "LOSS",
+      "positive_score": 0.12515203920981569
+    },
+    {
+      "case_id": "syn-1687:1608:1971",
+      "correct": false,
+      "margin": -0.18322091992052433,
+      "negative_score": 0.33167580321327556,
+      "outcome": "LOSS",
+      "positive_score": 0.14845488329275122
+    },
+    {
+      "case_id": "syn-1688:1739:1630",
+      "correct": false,
+      "margin": -0.3554064426075958,
+      "negative_score": 0.48567593268198256,
+      "outcome": "LOSS",
+      "positive_score": 0.1302694900743868
+    },
+    {
+      "case_id": "syn-1689:1709:1581",
+      "correct": false,
+      "margin": -0.07020885607799804,
+      "negative_score": 0.5373011867533225,
+      "outcome": "LOSS",
+      "positive_score": 0.46709233067532446
+    },
+    {
+      "case_id": "syn-1690:1994:1535",
+      "correct": false,
+      "margin": -0.0364601088217511,
+      "negative_score": 0.38230864270402587,
+      "outcome": "LOSS",
+      "positive_score": 0.34584853388227477
+    },
+    {
+      "case_id": "syn-1691:1504:1536",
+      "correct": false,
+      "margin": -0.022304950428917558,
+      "negative_score": 0.3797960048252414,
+      "outcome": "LOSS",
+      "positive_score": 0.35749105439632384
+    },
+    {
+      "case_id": "syn-1692:1745:1746",
+      "correct": false,
+      "margin": -0.18863433603383595,
+      "negative_score": 0.4572038964357775,
+      "outcome": "LOSS",
+      "positive_score": 0.2685695604019416
+    },
+    {
+      "case_id": "syn-1693:1599:1772",
+      "correct": false,
+      "margin": -0.191934015301181,
+      "negative_score": 0.39376750723506754,
+      "outcome": "LOSS",
+      "positive_score": 0.20183349193388653
+    },
+    {
+      "case_id": "syn-1694:1508:1891",
+      "correct": false,
+      "margin": -0.2132523539207898,
+      "negative_score": 0.4091927671850958,
+      "outcome": "LOSS",
+      "positive_score": 0.19594041326430597
+    },
+    {
+      "case_id": "syn-1695:1743:1632",
+      "correct": false,
+      "margin": -0.2814226485334201,
+      "negative_score": 0.42138311601426437,
+      "outcome": "LOSS",
+      "positive_score": 0.1399604674808443
+    },
+    {
+      "case_id": "syn-1696:1871:1599",
+      "correct": false,
+      "margin": -0.0002196041111256486,
+      "negative_score": 0.459491227224102,
+      "outcome": "LOSS",
+      "positive_score": 0.45927162311297637
+    },
+    {
+      "case_id": "syn-1697:1835:1914",
+      "correct": false,
+      "margin": -0.34657125370580744,
+      "negative_score": 0.5208816307583253,
+      "outcome": "LOSS",
+      "positive_score": 0.17431037705251787
+    },
+    {
+      "case_id": "syn-1698:1879:1652",
+      "correct": false,
+      "margin": -0.002360682707949313,
+      "negative_score": 0.28985732061758634,
+      "outcome": "LOSS",
+      "positive_score": 0.28749663790963703
+    },
+    {
+      "case_id": "syn-1699:1530:1701",
+      "correct": false,
+      "margin": -0.14677002679659956,
+      "negative_score": 0.45105221066579193,
+      "outcome": "LOSS",
+      "positive_score": 0.30428218386919237
+    }
+  ],
+  "tie_rate": 0.0,
+  "ties": 0,
+  "total": 200,
+  "wins": 20,
+  "worst_groups": [
+    "high",
+    "same_structure",
+    "low"
+  ]
+}

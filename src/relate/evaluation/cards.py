@@ -14,6 +14,9 @@ class EvaluationCard:
     baselines: dict = field(default_factory=dict)
     per_relation: dict = field(default_factory=dict)
     manifest: str = ""
+    evaluation_id: str = ""
+    corpus_hash: str = ""
+    scorer: str = ""
 
     def metric(self, name: str) -> float | None:
         value = self.metrics.get(name)

@@ -1,0 +1,22 @@
+{
+  "by_group": {
+    "biomed-claims": 62,
+    "corporate-events": 210,
+    "everyday-statements": 35,
+    "geo-civics": 548,
+    "product-support": 82
+  },
+  "by_method": {
+    "entity_matched": 201,
+    "lexical_overlap_matched": 394,
+    "structured_perturbation": 342
+  },
+  "by_negative_relation": {
+    "entity-related": 329,
+    "negation": 257,
+    "relation-swap": 61,
+    "temporal-mismatch": 24,
+    "topic-related": 266
+  },
+  "total": 937
+}
