@@ -161,17 +161,51 @@ RELATE does **not** contain an experiment manager, artifact ledger, authorizatio
 ## Runtime: Observatory
 
 `RelationProjection` is now one capability inside RELATE rather than the
-entirety of RELATE:
+entirety of RELATE. The canonical path:
 
 ```python
 import relate
 
 runtime = relate.Observatory()
-space = runtime.register_space(model="sentence-transformers/all-mpnet-base-v2", dimensions=768)
-bridge = runtime.fit_bridge(source, target, source_space=a, target_space=b, method="procrustes")
-profile = runtime.evaluate_bridge(bridge, source=source, target=target)
-profile.usable_for("retrieval")  # only True on a measured PASS
+source = runtime.register_space(model="encoder-a", dimensions=32)
+target = runtime.register_space(model="encoder-b", dimensions=32)
+
+native = runtime.compare_spaces(source_vectors, target_vectors,
+                                correspondence=eval_correspondence,
+                                source_space=source, target_space=target)
+
+bridge = runtime.fit_bridge(source_vectors, target_vectors,
+                            source_space=source, target_space=target,
+                            correspondence=train_correspondence, method="ridge")
+
+evaluation = runtime.evaluate_bridge_full(
+    bridge, source_vectors, target_vectors,
+    correspondence=eval_correspondence,
+    source_space=source, target_space=target)
+
+evaluation.profile.usable_for("retrieval")      # True on a measured PASS
+evaluation.profile.explain("threshold_transfer")  # names the failed gates
 ```
+
+Try `python -m relate.cli demo` for the whole thesis in eight lines.
+
+## The three layers
+
+```text
+IDENTITY
+What produced this vector?
+Exact and hashable (space_hash).
+
+COMPATIBILITY
+What behavior survives between representations?
+Measured and task-dependent (native comparison, preservation results).
+
+USABILITY
+What may this transformed representation be used for?
+Policy-scoped and fail-closed (usable_for over declared verdicts).
+```
+
+> **Same identity does not prove quality. Different identity does not prohibit comparison. A bridge does not grant usability. Measurement earns scoped permission.**
 
 Every operation knows which space it belongs to (`SpaceIdentity` /
 `space_hash`), which relation is asked (`Relation` / `RelationProjection`),

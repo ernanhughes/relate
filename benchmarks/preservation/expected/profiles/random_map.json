@@ -185,7 +185,7 @@
       "failed_capabilities": [
         "counterpart_recovery/recall_at_1"
       ],
-      "rationale": "failed: counterpart_recovery/recall_at_1 (recall_at_1 min_value 0.9, gate not met); advisory miss: neighborhood_structure/overlap_at_10 (overlap_at_10 min_value 0.5)",
+      "rationale": "failed: counterpart_recovery/recall_at_1 = 0.005 (requires recall_at_1 min_value 0.9; frame target_native, reference 1); advisory miss: neighborhood_structure/overlap_at_10 = 0.396833 (requires overlap_at_10 min_value 0.5; frame target_native, reference 1)",
       "required_capabilities": [
         "counterpart_recovery/recall_at_1",
         "hard_negative_ordering/accuracy_delta"
@@ -198,7 +198,7 @@
         "calibration_transfer/far_increase",
         "calibration_transfer/frr_increase"
       ],
-      "rationale": "failed: calibration_transfer/far_increase (far_increase max_delta 0.05, gate not met); failed: calibration_transfer/frr_increase (frr_increase max_delta 0.05, gate not met)",
+      "rationale": "failed: calibration_transfer/far_increase = 0.22 (requires far_increase max_delta 0.05; frame target_native, reference 0.1); failed: calibration_transfer/frr_increase = 0.07 (requires frr_increase max_delta 0.05; frame target_native, reference 0.1)",
       "required_capabilities": [
         "calibration_transfer/far_increase",
         "calibration_transfer/frr_increase",
@@ -211,7 +211,7 @@
       "failed_capabilities": [
         "neighborhood_structure/overlap_at_10"
       ],
-      "rationale": "failed: neighborhood_structure/overlap_at_10 (overlap_at_10 min_value 0.5, gate not met)",
+      "rationale": "failed: neighborhood_structure/overlap_at_10 = 0.396833 (requires overlap_at_10 min_value 0.5; frame target_native, reference 1)",
       "required_capabilities": [
         "neighborhood_structure/overlap_at_10"
       ],

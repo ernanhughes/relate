@@ -215,7 +215,7 @@
       "failed_capabilities": [
         "calibration_transfer/frr_increase"
       ],
-      "rationale": "failed: calibration_transfer/frr_increase (frr_increase max_delta 0.05, gate not met)",
+      "rationale": "failed: calibration_transfer/frr_increase = 0.19 (requires frr_increase max_delta 0.05; frame target_native, reference 0.1)",
       "required_capabilities": [
         "calibration_transfer/far_increase",
         "calibration_transfer/frr_increase",

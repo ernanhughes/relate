@@ -22,6 +22,10 @@ from relate.evaluation.cross_space import CorrespondenceSet, aligned_matrices
 from relate.model import RelateError
 from relate.spaces.identity import SpaceIdentity, derive_space
 
+
+class BridgeMismatchError(RelateError):
+    """A bridge was combined with vectors from the wrong space."""
+
 VALID_STATUSES = ("ACTIVE", "EXPERIMENTAL", "DEPRECATED")
 BRIDGE_METHODS = (
     "procrustes",

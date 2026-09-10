@@ -213,12 +213,32 @@ class PreservationProfile:
         verdict = self.verdict_for(scope)
         if verdict is None:
             return f"UNKNOWN {scope}: no verdict measured"
-        lines = [f"{verdict.verdict.value} {scope}:"]
+        lines = [f"{verdict.verdict.value} — {scope}"]
         if verdict.rationale:
             lines.append(f"- {verdict.rationale}")
         elif verdict.verdict == PreservationVerdict.PASS:
             lines.append("- all required gates pass")
         return "\n".join(lines)
+
+
+def _observed(requirement: Requirement, result: PreservationResult | None):
+    if result is None:
+        return None
+    if requirement.kind in ("min_value", "max_value"):
+        return result.value
+    if requirement.kind == "min_ratio":
+        return result.ratio
+    return result.delta
+
+
+def _where(requirement: Requirement, result: PreservationResult | None) -> str:
+    frame = result.reference_frame.value if result is not None else "unmeasured"
+    reference = (
+        f", reference {result.reference_value:g}"
+        if result is not None and result.reference_value is not None
+        else ""
+    )
+    return f"frame {frame}{reference}"
 
 
 def _judge(
@@ -229,18 +249,26 @@ def _judge(
     required: list[str] = []
     notes: list[str] = []
     for requirement in policy.requirements:
-        outcome = requirement.check(results.get((requirement.capability, requirement.metric)))
+        result = results.get((requirement.capability, requirement.metric))
+        outcome = requirement.check(result)
         label = f"{requirement.capability}/{requirement.metric}"
+        observed = _observed(requirement, result)
+        detail = (
+            f"{label} = {observed:g} "
+            f"(requires {requirement.metric} {requirement.kind} "
+            f"{requirement.bound:g}; {_where(requirement, result)})"
+            if observed is not None
+            else f"{label} unmeasured (requires {requirement.describe()})"
+        )
         if requirement.advisory:
             if outcome is not True:
                 advisory_missed.append(label)
-                notes.append(f"advisory miss: {label} ({requirement.describe()})")
+                notes.append(f"advisory miss: {detail}")
             continue
         required.append(label)
         if outcome is not True:
             failed.append(label)
-            reason = "unmeasured" if outcome is None else "gate not met"
-            notes.append(f"failed: {label} ({requirement.describe()}, {reason})")
+            notes.append(f"failed: {detail}")
     if failed:
         verdict = PreservationVerdict.FAIL
     elif advisory_missed:

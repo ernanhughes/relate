@@ -3,10 +3,10 @@
 RELATE treats embedding geometry as measured evidence rather than permission.
 """
 
-from relate.bridges import Bridge, BridgeRegistry, BridgeSpec, fit_bridge
+from relate.bridges import Bridge, BridgeMismatchError, BridgeRegistry, BridgeSpec, fit_bridge
 from relate.evaluation import EvaluationCard, PreservationProfile
 from relate.model import RelateError, RelationProjection, SearchHit
-from relate.observatory import Observatory
+from relate.observatory import BridgeEvaluation, Observatory
 from relate.python import PYTHON_RELATION_NAMES, PythonStructure, extract_python_structure
 from relate.relations import Relation
 from relate.retrieval import (
@@ -23,6 +23,8 @@ from relate.transformations import CompressionRecord, TransformationRecord
 __all__ = [
     "PYTHON_RELATION_NAMES",
     "Bridge",
+    "BridgeEvaluation",
+    "BridgeMismatchError",
     "BridgeRegistry",
     "BridgeSpec",
     "CalibrationRecord",

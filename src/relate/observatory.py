@@ -1,10 +1,17 @@
-"""Observatory: compose spaces, relations, evidence and policy.
+"""Observatory: the one coherent runtime façade.
 
-The runtime refuses to trust unmeasured things. Denial is the default;
-permission must cite a record.
+Canonical flow (each step delegates to the authoritative layer, none
+reimplemented here):
 
-Identity is exact (``space_hash``), compatibility is empirical (measured
-bridge), usability is policy (``usable_for(scope)``).
+register source/target spaces -> attach vectors -> compare native
+spaces (evidence only) -> fit bridge (registered producer) -> derive
+bridge-output space -> evaluate candidates against authority (4A +
+Step-3 spine) -> PreservationProfile -> usable_for(scope) / explain.
+
+Future transformations (compression, semantic operators) follow the
+same orchestration shape: native space -> transformation ->
+derived space -> measurement -> preservation profile. Bridges are
+today's first mature producer, nothing more.
 """
 
 from __future__ import annotations
@@ -15,6 +22,7 @@ import numpy as np
 
 from relate.bridges.base import (
     Bridge,
+    BridgeMismatchError,
     BridgeSpec,
     bridge_output_space,
     code_identity,
@@ -29,6 +37,7 @@ from relate.evaluation.cross_space import (
     identity_correspondence,
 )
 from relate.evaluation.hard_negatives import HardNegativeObservation
+from relate.evaluation.neighborhoods import SpaceComparisonReport
 from relate.evaluation.neighborhoods import (
     hubness_counts,
     local_density,
@@ -49,10 +58,24 @@ from relate.retrieval.signals import (
     SignalBundle,
     build_signal_bundle,
 )
-from relate.spaces.comparison import SpaceComparison, compare_spaces
 from relate.spaces.identity import SpaceIdentity
 from relate.spaces.registry import SpaceRegistry
 from relate.transformations.records import CompressionRecord, check_compression
+
+
+@dataclass(frozen=True, slots=True)
+class BridgeEvaluation:
+    """One bridge judgment: pure container over existing objects.
+
+    ``PreservationProfile`` stays the sole scoped verdict authority;
+    this object only keeps the bridge, its derived candidate identity,
+    the 4A comparison, and the profile together for one call chain.
+    """
+
+    bridge: Bridge
+    candidate_space: SpaceIdentity | None
+    comparison: SpaceComparisonReport
+    profile: PreservationProfile
 
 
 @dataclass
@@ -88,9 +111,36 @@ class Observatory:
         }
 
     def compare_spaces(
-        self, a: SpaceIdentity, b: SpaceIdentity, **kwargs
-    ) -> SpaceComparison:
-        return compare_spaces(a, b, **kwargs)
+        self,
+        source_vectors,
+        target_vectors,
+        *,
+        correspondence: CorrespondenceSet,
+        source_space: SpaceIdentity | None = None,
+        target_space: SpaceIdentity | None = None,
+        k: int = 10,
+        hard_negative_cases=None,
+        hard_negative_vectors=None,
+        scorer=None,
+        scorer_id: str = "",
+    ) -> SpaceComparisonReport:
+        """Native comparison through 4A machinery. Evidence only.
+
+        Comparing spaces is allowed with distinct hashes; the report
+        carries no compatibility verdict and no permission.
+        """
+        return compare_native_spaces(
+            source_vectors=source_vectors,
+            target_vectors=target_vectors,
+            correspondence=correspondence,
+            source_space_hash=source_space.space_hash if source_space else "",
+            target_space_hash=target_space.space_hash if target_space else "",
+            k=k,
+            hard_negative_cases=hard_negative_cases,
+            hard_negative_vectors=hard_negative_vectors,
+            scorer=scorer,
+            scorer_id=scorer_id,
+        )
 
     # -- relations ------------------------------------------------------
     def fit_relation(self, name, embeddings, coordinates, **kwargs) -> Relation:
@@ -115,7 +165,14 @@ class Observatory:
         params: dict | None = None,
         coverage: dict | None = None,
     ) -> Bridge:
-        """Fit a directional producer on explicit anchor correspondence."""
+        """Fit a directional producer on explicit anchor correspondence.
+
+        Source and target identities must already be registered: fitting
+        against unknown spaces is refused, and a successful fit returns
+        the registered artifact.
+        """
+        self.spaces.require(source_space.space_hash)
+        self.spaces.require(target_space.space_hash)
         spec = BridgeSpec(
             source_space_hash=source_space.space_hash,
             target_space_hash=target_space.space_hash,
@@ -146,7 +203,9 @@ class Observatory:
         evaluation_source,
         evaluation_target,
         *,
-        correspondence=None,
+        correspondence: CorrespondenceSet,
+        source_space: SpaceIdentity | None = None,
+        target_space: SpaceIdentity | None = None,
         hard_negative_cases=None,
         hard_negative_vectors=None,
         scorer=None,
@@ -154,26 +213,72 @@ class Observatory:
         policies=None,
         k: int = 10,
     ) -> PreservationProfile:
-        """Judge a bridge's candidates through the measurement spine.
+        """Judge a bridge's candidates; identity mistakes fail first.
 
-        Transforms held-out source rows, compares candidates against the
-        native target with 4A machinery, converts the comparison into
-        preservation results, and verdicts them under declared policy.
-        Designed so 4D's ``usable_for``/``explain`` API falls out
-        naturally; this method already returns the profile they read.
+        A held-out correspondence is required -- training correspondence
+        can never silently become evaluation correspondence. Supplied
+        space identities must match the bridge direction, otherwise no
+        measurement runs.
         """
+        return self.evaluate_bridge_full(
+            bridge,
+            evaluation_source,
+            evaluation_target,
+            correspondence=correspondence,
+            source_space=source_space,
+            target_space=target_space,
+            hard_negative_cases=hard_negative_cases,
+            hard_negative_vectors=hard_negative_vectors,
+            scorer=scorer,
+            scorer_id=scorer_id,
+            policies=policies,
+            k=k,
+        ).profile
+
+    def evaluate_bridge_full(
+        self,
+        bridge: Bridge,
+        evaluation_source,
+        evaluation_target,
+        *,
+        correspondence: CorrespondenceSet,
+        source_space: SpaceIdentity | None = None,
+        target_space: SpaceIdentity | None = None,
+        hard_negative_cases=None,
+        hard_negative_vectors=None,
+        scorer=None,
+        scorer_id: str = "",
+        policies=None,
+        k: int = 10,
+    ) -> BridgeEvaluation:
+        """Full judgment container: bridge, candidate space, comparison, profile."""
+        if source_space is not None and (
+            source_space.space_hash != bridge.source_space_hash
+        ):
+            raise BridgeMismatchError(
+                "BRIDGE SOURCE MISMATCH: bridge expects "
+                f"{bridge.source_space_hash}, evaluation supplied "
+                f"{source_space.space_hash}"
+            )
+        if target_space is not None and (
+            target_space.space_hash != bridge.target_space_hash
+        ):
+            raise BridgeMismatchError(
+                "BRIDGE TARGET MISMATCH: bridge expects "
+                f"{bridge.target_space_hash}, evaluation supplied "
+                f"{target_space.space_hash}"
+            )
         candidate = bridge.transform(np.asarray(evaluation_source, dtype=np.float64))
         target = np.asarray(evaluation_target, dtype=np.float64)
-        if correspondence is None:
-            correspondence = identity_correspondence(
-                [str(i) for i in range(candidate.shape[0])]
-            )
         try:
-            source_space = self.spaces.require(bridge.source_space_hash)
-            target_space = self.spaces.require(bridge.target_space_hash)
-            candidate_space = bridge_output_space(source_space, bridge, target_space)
+            registered_source = self.spaces.require(bridge.source_space_hash)
+            registered_target = self.spaces.require(bridge.target_space_hash)
+            candidate_space: SpaceIdentity | None = bridge_output_space(
+                registered_source, bridge, registered_target
+            )
             candidate_hash = candidate_space.space_hash
         except RelateError:
+            candidate_space = None
             candidate_hash = f"derived:{bridge.bridge_id}"
         comparison = compare_native_spaces(
             source_vectors=candidate,
@@ -188,7 +293,7 @@ class Observatory:
             scorer_id=scorer_id,
         )
         results = results_from_space_comparison(comparison)
-        return build_preservation_profile(
+        profile = build_preservation_profile(
             source_space_hash=bridge.source_space_hash,
             candidate_space_hash=candidate_hash,
             target_space_hash=bridge.target_space_hash,
@@ -198,6 +303,12 @@ class Observatory:
             evaluation_correspondence_hash=correspondence.content_hash,
             scorer=scorer_id,
             evaluator_version=code_identity(),
+        )
+        return BridgeEvaluation(
+            bridge=bridge,
+            candidate_space=candidate_space,
+            comparison=comparison,
+            profile=profile,
         )
 
     # -- evidence -------------------------------------------------------

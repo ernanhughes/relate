@@ -104,8 +104,9 @@ def test_explain_names_gates():
             Requirement("counterpart_recovery", "recall_at_1", "min_value", 0.90),))],
     )
     text = profile.explain("retrieval")
-    assert text.startswith("FAIL retrieval:")
+    assert text.startswith("FAIL — retrieval")
     assert "counterpart_recovery/recall_at_1" in text
+    assert "0.5" in text and "0.9" in text
     assert "unmeasured" not in text
     assert profile.explain("missing").startswith("UNKNOWN")
 
