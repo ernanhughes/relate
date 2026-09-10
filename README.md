@@ -2,7 +2,12 @@
 
 **Search frozen embeddings by a relation they contain, not only by the cosine geometry they expose by default.**
 
-RELATE is deliberately small. It takes embeddings you already have, learns a projection into one or more measurable relation coordinates, and ranks targets in that relation space.
+**RELATE treats embedding geometry as measured evidence rather than permission.**
+
+RELATE is a relation-aware embedding runtime for measuring, comparing,
+transforming, and governing embedding spaces. Its core remains tiny:
+`RelationProjection` takes embeddings you already have, learns a projection
+into measurable relation coordinates, and ranks targets in that relation space.
 
 ```python
 import numpy as np
@@ -152,3 +157,26 @@ RELATE contains:
 - focused unit tests.
 
 RELATE does **not** contain an experiment manager, artifact ledger, authorization system, publication workflow, model downloader, or agent architecture.
+
+## Runtime: Observatory
+
+`RelationProjection` is now one capability inside RELATE rather than the
+entirety of RELATE:
+
+```python
+import relate
+
+runtime = relate.Observatory()
+space = runtime.register_space(model="sentence-transformers/all-mpnet-base-v2", dimensions=768)
+bridge = runtime.fit_bridge(source, target, source_space=a, target_space=b, method="procrustes")
+profile = runtime.evaluate_bridge(bridge, source=source, target=target)
+profile.usable_for("retrieval")  # only True on a measured PASS
+```
+
+Every operation knows which space it belongs to (`SpaceIdentity` /
+`space_hash`), which relation is asked (`Relation` / `RelationProjection`),
+and what evidence authorizes it (`EvaluationCard`, `CalibrationRecord`,
+`PreservationProfile`, `usable_for`). Cross-space use without a measured
+bridge is denied; a bridge without a preservation profile is not usable for
+anything. See `src/relate/observatory.py`, `corpus/README.md`,
+`benchmarks/README.md`, and `evidence/README.md`.

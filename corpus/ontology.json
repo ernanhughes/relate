@@ -1,0 +1,191 @@
+{
+  "spec_version": "0.1.0",
+  "spec_source": "experiments/embeddings-from-first-principles/relate/spec/RELATE-v0.1.md",
+  "frozen": "2026-09-08",
+  "notes": "Machine-readable freeze of RELATE v0.1 section 3 (relations), section 2 (domains), section 4 (relevance grades), section 5 (overlap bands), section 6 (hard-negative methods). Changing anything here is a MINOR version bump and must be recorded in spec/RELATE-CHANGELOG.md.",
+
+  "relations": [
+    {
+      "id": "equivalent",
+      "adjudication_rank": 1,
+      "symmetric": true,
+      "directional": false,
+      "definition": "a and b express the same proposition; a entails b and b entails a; truth-conditionally identical.",
+      "decision_procedure": "Could a careful reader be shown one then the other and say 'that's the same statement, reworded'? Swapping them in any factual context changes nothing.",
+      "constraints": {}
+    },
+    {
+      "id": "negation",
+      "adjudication_rank": 2,
+      "symmetric": false,
+      "directional": true,
+      "direction_meaning": "b is the explicit negation of a",
+      "definition": "b is a with the main predicate explicitly negated (surface 'not', 'no', 'never', 'fails to'), minimal other change; high lexical overlap by construction. A lexically-closest subset of contradiction.",
+      "decision_procedure": "Can b be produced from a by inserting/removing a negation on the main verb or a core quantifier, changing little else?",
+      "constraints": {
+        "lexical_overlap_min": 0.7,
+        "lexical_overlap_min_reason": "spec 3.6 - a low-overlap 'negation' is mislabeled and should be 'contradiction'"
+      }
+    },
+    {
+      "id": "relation-swap",
+      "adjudication_rank": 3,
+      "symmetric": false,
+      "directional": true,
+      "direction_meaning": "b has a's entities and relation type with the argument roles reversed",
+      "definition": "b contains the same entities and same relation type as a but with argument roles reversed (A acquired B -> B acquired A; X is north of Y -> Y is north of X).",
+      "decision_procedure": "Same entities, same relation predicate, arguments swapped. Always also a contradiction when the relation is asymmetric.",
+      "constraints": {
+        "requires_asymmetric_relation": true,
+        "entity_overlap_min": 1
+      }
+    },
+    {
+      "id": "contradiction",
+      "adjudication_rank": 4,
+      "symmetric": true,
+      "directional": false,
+      "stored_direction_for_provenance": true,
+      "definition": "a and b cannot both be true in the same world; at least one atomic claim is directly negated or made incompatible (mutually exclusive values, incompatible relations). Distinct from negation: contradiction may be lexically diverse.",
+      "decision_procedure": "Is there NO consistent world containing both? If both can be true at different times AND both carry/imply a time index, it is temporal-mismatch, not contradiction.",
+      "constraints": {}
+    },
+    {
+      "id": "temporal-mismatch",
+      "adjudication_rank": 5,
+      "symmetric": false,
+      "directional": true,
+      "direction_meaning": "b is a at a different (usually later) time",
+      "definition": "a and b state the same relation about the same entity with different, time-dependent values; each is (or was) true at its own time; the mismatch is only temporal.",
+      "decision_procedure": "Same subject, same relation, values differ, difference explained by 'measured at different times'. Requires both items to carry or plausibly imply a time.",
+      "constraints": {
+        "both_items_require_time_index": true
+      }
+    },
+    {
+      "id": "entailment",
+      "adjudication_rank": 6,
+      "symmetric": false,
+      "directional": true,
+      "direction_meaning": "a entails b, and NOT b entails a (strict one-directional)",
+      "definition": "Every situation making a true makes b true; the reverse fails.",
+      "decision_procedure": "Assume a: is b guaranteed? Assume b: is a still possibly false? Both yes -> entailment(a->b). If the reverse also holds it is paraphrase/equivalent.",
+      "constraints": {}
+    },
+    {
+      "id": "partial-support",
+      "adjudication_rank": 7,
+      "symmetric": false,
+      "directional": true,
+      "direction_meaning": "b partially supports a",
+      "definition": "b provides evidence for some but not all of a; b neither entails nor contradicts a; a reader using b to check a would say 'supports part of this, silent on the rest'.",
+      "decision_procedure": "Decompose a into atomic claims. Does b entail at least one and leave at least one unaddressed (not contradicted)?",
+      "constraints": {
+        "a_requires_atomic_claims": true,
+        "a_min_atomic_claims": 2
+      }
+    },
+    {
+      "id": "paraphrase",
+      "adjudication_rank": 8,
+      "symmetric": true,
+      "directional": false,
+      "definition": "Same core meaning, possibly differing in emphasis, register, or non-truth-conditional detail; mutual entailment holds for the salient claim but one side may carry minor extra or softened content. If mutual entailment is exact and total -> equivalent instead.",
+      "decision_procedure": "Same event/claim, different words; a reader accepts 'these say basically the same thing' but not necessarily 'identical'.",
+      "constraints": {}
+    },
+    {
+      "id": "topic-related",
+      "adjudication_rank": 9,
+      "symmetric": true,
+      "directional": false,
+      "definition": "a and b concern the same topic or event but make different, logically independent claims (neither entails, contradicts, nor partially supports the other).",
+      "decision_procedure": "Shared topic, independent claims, none of the higher-precedence relations apply.",
+      "constraints": {}
+    },
+    {
+      "id": "entity-related",
+      "adjudication_rank": 10,
+      "symmetric": true,
+      "directional": false,
+      "definition": "a and b share at least one named entity but are about different topics/claims and are not topic-related in a strong sense.",
+      "decision_procedure": "Shared entity only; different topic; none of the higher-precedence relations apply.",
+      "constraints": {
+        "entity_overlap_min": 1
+      }
+    },
+    {
+      "id": "unrelated",
+      "adjudication_rank": 11,
+      "symmetric": true,
+      "directional": false,
+      "definition": "No shared topic, no shared salient entity, no logical relation. Often cross-domain.",
+      "decision_procedure": "A reader says 'these have nothing to do with each other'.",
+      "constraints": {
+        "lexical_overlap_max": 0.1,
+        "entity_overlap_max": 0
+      }
+    }
+  ],
+
+  "adjudication_order": [
+    "equivalent",
+    "negation",
+    "relation-swap",
+    "contradiction",
+    "temporal-mismatch",
+    "entailment",
+    "partial-support",
+    "paraphrase",
+    "topic-related",
+    "entity-related",
+    "unrelated"
+  ],
+
+  "hard_negative": {
+    "is_role_not_base_relation": true,
+    "definition": "A role tag on a (query, candidate) pair meaning the candidate is highly similar to the query under lexical/topical/entity signals but is NOT a correct answer. Every hard negative also carries its underlying base relation.",
+    "underlying_relations_allowed": ["negation", "relation-swap", "temporal-mismatch", "topic-related", "entity-related", "partial-support"],
+    "methods": ["structured_perturbation", "lexical_overlap_matched", "in_model_mined", "entity_matched"],
+    "headline_method": "structured_perturbation",
+    "structured_perturbations": ["negation", "relation_swap", "temporal_shift", "quantifier_weaken", "entity_substitute"]
+  },
+
+  "domains": [
+    {"id": "geo-civics", "register": "encyclopedic"},
+    {"id": "biomed-claims", "register": "scientific-abstract"},
+    {"id": "product-support", "register": "informal-user-written"},
+    {"id": "corporate-events", "register": "news-wire"},
+    {"id": "everyday-statements", "register": "conversational"}
+  ],
+
+  "relevance_grades": {
+    "3": "answers the query and is correct (equivalent / paraphrase / forward entailment to the query claim, and true)",
+    "2": "substantially supports the query (partial-support covering the main claim)",
+    "1": "on-topic, does not answer (topic-related)",
+    "0": "everything else (entity-related, contradiction, negation, temporal-mismatch, unrelated) - contradiction/negation get 0 by design, making RELATE a polarity probe"
+  },
+
+  "lexical_overlap_bands": {
+    "low": {"min": 0.0, "max": 0.2},
+    "mid": {"min": 0.2, "max": 0.5},
+    "high": {"min": 0.5, "max": 1.0001}
+  },
+  "overlap_balanced_relations": ["paraphrase", "entailment", "contradiction", "topic-related"],
+  "overlap_band_min_fraction_per_band": 0.25,
+
+  "query_styles": ["restatement", "question", "keyword", "long-nl"],
+
+  "splits": ["random", "entity", "template", "domain"],
+  "split_fractions": {"train": 0.6, "dev": 0.2, "test": 0.2},
+
+  "provenance_kinds": ["authored", "adapted", "perturbed"],
+
+  "id_patterns": {
+    "item": "^i-[a-z0-9]{6,}$",
+    "pair": "^p-[a-z0-9]{6,}$",
+    "query": "^q-[a-z0-9]{6,}$",
+    "template_family": "^tf-[a-z0-9-]{2,}$",
+    "entity_family": "^ef-[a-z0-9-]{2,}$"
+  }
+}
