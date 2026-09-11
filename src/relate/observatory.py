@@ -3,15 +3,16 @@
 Canonical flow (each step delegates to the authoritative layer, none
 reimplemented here):
 
-register source/target spaces -> attach vectors -> compare native
-spaces (evidence only) -> fit bridge (registered producer) -> derive
-bridge-output space -> evaluate candidates against authority (4A +
-Step-3 spine) -> PreservationProfile -> usable_for(scope) / explain.
+producer (bridge, compression, operator)
+  -> source representation -> transform -> derived candidate identity
+  -> explicit authority/reference -> evaluate_transformation
+  -> SpaceComparisonReport -> PreservationProfile
+  -> usable_for(scope) / explain(scope).
 
-Future transformations (compression, semantic operators) follow the
-same orchestration shape: native space -> transformation ->
-derived space -> measurement -> preservation profile. Bridges are
-today's first mature producer, nothing more.
+Bridges, compression cartridges, and semantic operators differ in how
+candidates are produced -- never in how candidates are identified,
+measured, or judged. Lineage composes identity; preservation permission
+never propagates transitively: every hop needs fresh measurement.
 """
 
 from __future__ import annotations
@@ -34,7 +35,6 @@ from relate.evaluation.cards import EvaluationCard
 from relate.evaluation.cross_space import (
     CorrespondenceSet,
     compare_native_spaces,
-    identity_correspondence,
 )
 from relate.evaluation.hard_negatives import HardNegativeObservation
 from relate.evaluation.neighborhoods import SpaceComparisonReport
@@ -47,6 +47,7 @@ from relate.evaluation.neighborhoods import (
 from relate.evaluation.preservation import (
     DEFAULT_POLICIES,
     PreservationProfile,
+    ReferenceFrame,
     build_preservation_profile,
     results_from_space_comparison,
 )
@@ -60,7 +61,29 @@ from relate.retrieval.signals import (
 )
 from relate.spaces.identity import SpaceIdentity
 from relate.spaces.registry import SpaceRegistry
+from relate.transformations.contract import (
+    DerivationRecord,
+    VectorTransformation,
+    derived_transformation_space,
+)
 from relate.transformations.records import CompressionRecord, check_compression
+
+
+@dataclass(frozen=True, slots=True)
+class TransformationEvaluation:
+    """One transformation judgment: pure aggregate container.
+
+    ``PreservationProfile`` stays the sole scoped verdict authority;
+    this object only keeps the producer, the derived candidate and
+    reference identities, the 4A comparison, and the profile together
+    for one call chain.
+    """
+
+    transformation: object
+    candidate_space: SpaceIdentity | None
+    reference_space: SpaceIdentity | None
+    comparison: SpaceComparisonReport
+    profile: PreservationProfile
 
 
 @dataclass(frozen=True, slots=True)
@@ -86,6 +109,7 @@ class Observatory:
     bridges: BridgeRegistry = field(default_factory=BridgeRegistry)
     evaluations: list = field(default_factory=list)
     calibrations: list = field(default_factory=list)
+    derived: dict = field(default_factory=dict)
 
     # -- spaces ---------------------------------------------------------
     def register_space(self, space: SpaceIdentity | None = None, **kwargs) -> SpaceIdentity:
@@ -195,7 +219,64 @@ class Observatory:
         target_reference: SpaceIdentity,
     ) -> SpaceIdentity:
         """Derived identity for a bridge's candidates (never the native hash)."""
-        return bridge_output_space(source_space, bridge, target_reference)
+        space = bridge_output_space(source_space, bridge, target_reference)
+        self.spaces.register(space)
+        self.derived[space.space_hash] = DerivationRecord(
+            space_hash=space.space_hash,
+            parent_hash=source_space.space_hash,
+            transformation_id=bridge.bridge_id,
+            kind="bridge",
+            reference_hash=target_reference.space_hash,
+        )
+        return space
+
+    def derive_transformation_space(
+        self,
+        *,
+        parent: SpaceIdentity,
+        transformation_id: str,
+        parameters: dict | None,
+        dimensions: int | None,
+        kind: str = "transformation",
+        reference_hash: str = "",
+    ) -> SpaceIdentity:
+        """Generic derived identity: the underlying mechanism for all kinds.
+
+        ``bridge_output_space`` remains the bridge specialization (stable
+        recipe, target-reference lineage); everything else flows through
+        here. The space is registered and its lineage recorded.
+        """
+        space = derived_transformation_space(
+            parent, transformation_id, parameters,
+            dimensions=dimensions, kind=kind,
+        )
+        self.spaces.register(space)
+        self.derived[space.space_hash] = DerivationRecord(
+            space_hash=space.space_hash,
+            parent_hash=parent.space_hash,
+            transformation_id=transformation_id,
+            kind=kind,
+            reference_hash=reference_hash,
+        )
+        return space
+
+    def lineage(self, space_hash: str) -> tuple[DerivationRecord, ...]:
+        """Deterministic ancestry, candidate first: identity only.
+
+        Carries no verdicts and authorizes nothing: preservation never
+        propagates transitively, however clean the lineage looks.
+        """
+        chain: list[DerivationRecord] = []
+        seen: set[str] = set()
+        current: str = space_hash
+        while current and current not in seen:
+            seen.add(current)
+            record = self.derived.get(current)
+            if record is None:
+                break
+            chain.append(record)
+            current = record.parent_hash
+        return tuple(chain)
 
     def evaluate_bridge(
         self,
@@ -235,6 +316,170 @@ class Observatory:
             k=k,
         ).profile
 
+    def evaluate_transformation(
+        self,
+        transformation: VectorTransformation,
+        source_vectors,
+        reference_vectors,
+        *,
+        correspondence: CorrespondenceSet,
+        reference_frame: ReferenceFrame,
+        candidate_space: SpaceIdentity | None = None,
+        reference_space: SpaceIdentity | None = None,
+        k: int = 10,
+        with_counterpart: bool = True,
+        hard_negative_cases=None,
+        hard_negative_vectors=None,
+        scorer=None,
+        scorer_id: str = "",
+        policies=None,
+    ) -> TransformationEvaluation:
+        """Canonical transformation evaluation: one path for every producer.
+
+        The authority is required as a typed frame, never defaulted:
+        friendly wrappers choose it only where the operation makes it
+        unambiguous (bridge target, compression source, operator target).
+        All measurement delegates to existing evaluators.
+        """
+        if not isinstance(transformation, VectorTransformation):
+            raise RelateError("evaluation needs a VectorTransformation producer")
+        candidate = transformation.transform(
+            np.asarray(source_vectors, dtype=np.float64)
+        )
+        reference = np.asarray(reference_vectors, dtype=np.float64)
+        candidate_hash = (
+            candidate_space.space_hash
+            if candidate_space is not None
+            else f"derived:{transformation.transformation_id}"
+        )
+        comparison = compare_native_spaces(
+            source_vectors=candidate,
+            target_vectors=reference,
+            correspondence=correspondence,
+            source_space_hash=candidate_hash,
+            target_space_hash=(
+                reference_space.space_hash if reference_space is not None else ""
+            ),
+            k=k,
+            with_counterpart=with_counterpart,
+            hard_negative_cases=hard_negative_cases,
+            hard_negative_vectors=hard_negative_vectors,
+            scorer=scorer,
+            scorer_id=scorer_id,
+        )
+        results = results_from_space_comparison(comparison, frame=reference_frame)
+        profile = build_preservation_profile(
+            source_space_hash=transformation.source_space_hash,
+            candidate_space_hash=candidate_hash,
+            target_space_hash=(
+                reference_space.space_hash if reference_space is not None else ""
+            ),
+            results=results,
+            policies=list(policies) if policies is not None else list(DEFAULT_POLICIES),
+            bridge_id=transformation.transformation_id,
+            evaluation_correspondence_hash=correspondence.content_hash,
+            scorer=scorer_id,
+            evaluator_version=code_identity(),
+        )
+        return TransformationEvaluation(
+            transformation=transformation,
+            candidate_space=candidate_space,
+            reference_space=reference_space,
+            comparison=comparison,
+            profile=profile,
+        )
+
+    def evaluate_compression(
+        self,
+        transformation: VectorTransformation,
+        source_vectors,
+        reference_vectors,
+        *,
+        correspondence: CorrespondenceSet,
+        reference_frame: ReferenceFrame = ReferenceFrame.SOURCE_NATIVE,
+        candidate_space: SpaceIdentity | None = None,
+        reference_space: SpaceIdentity | None = None,
+        k: int = 10,
+        hard_negative_cases=None,
+        hard_negative_vectors=None,
+        scorer=None,
+        scorer_id: str = "",
+        policies=None,
+    ) -> TransformationEvaluation:
+        """Compression façade: source-native authority, width-aware counterpart.
+
+        Counterpart recovery needs shared coordinates, so width-changing
+        candidates skip it automatically; every other measurement is the
+        generic path unchanged.
+        """
+        candidate = transformation.transform(
+            np.asarray(source_vectors, dtype=np.float64)
+        )
+        reference = np.asarray(reference_vectors, dtype=np.float64)
+        with_counterpart = candidate.shape == reference.shape
+        return self.evaluate_transformation(
+            transformation,
+            source_vectors,
+            reference_vectors,
+            correspondence=correspondence,
+            reference_frame=reference_frame,
+            candidate_space=candidate_space,
+            reference_space=reference_space,
+            k=k,
+            with_counterpart=with_counterpart,
+            hard_negative_cases=hard_negative_cases,
+            hard_negative_vectors=hard_negative_vectors,
+            scorer=scorer,
+            scorer_id=scorer_id,
+            policies=policies,
+        )
+
+    def evaluate_operator(
+        self,
+        transformation: VectorTransformation,
+        source_vectors,
+        reference_vectors,
+        *,
+        correspondence: CorrespondenceSet,
+        reference_frame: ReferenceFrame = ReferenceFrame.TARGET_NATIVE,
+        candidate_space: SpaceIdentity | None = None,
+        reference_space: SpaceIdentity | None = None,
+        k: int = 10,
+        hard_negative_cases=None,
+        hard_negative_vectors=None,
+        scorer=None,
+        scorer_id: str = "",
+        policies=None,
+    ) -> TransformationEvaluation:
+        """Operator façade: relation-bound artifacts, transformed-content authority.
+
+        The artifact must name the trained relation; the authority is the
+        transformed content embedded normally. Then the generic path.
+        """
+        artifact = getattr(transformation, "artifact", None)
+        relation = (
+            artifact.spec.parameters.get("relation") if artifact is not None else ""
+        )
+        if not relation:
+            raise RelateError(
+                "operator evaluation needs a relation-bound artifact"
+            )
+        return self.evaluate_transformation(
+            transformation,
+            source_vectors,
+            reference_vectors,
+            correspondence=correspondence,
+            reference_frame=reference_frame,
+            candidate_space=candidate_space,
+            reference_space=reference_space,
+            k=k,
+            hard_negative_cases=hard_negative_cases,
+            hard_negative_vectors=hard_negative_vectors,
+            scorer=scorer,
+            scorer_id=scorer_id,
+            policies=policies,
+        )
+
     def evaluate_bridge_full(
         self,
         bridge: Bridge,
@@ -251,7 +496,11 @@ class Observatory:
         policies=None,
         k: int = 10,
     ) -> BridgeEvaluation:
-        """Full judgment container: bridge, candidate space, comparison, profile."""
+        """Bridge façade: identity checks, then the generic path.
+
+        Behaviorally identical to the 4D implementation; only the
+        science path moved underneath into ``evaluate_transformation``.
+        """
         if source_space is not None and (
             source_space.space_hash != bridge.source_space_hash
         ):
@@ -268,47 +517,34 @@ class Observatory:
                 f"{bridge.target_space_hash}, evaluation supplied "
                 f"{target_space.space_hash}"
             )
-        candidate = bridge.transform(np.asarray(evaluation_source, dtype=np.float64))
-        target = np.asarray(evaluation_target, dtype=np.float64)
         try:
             registered_source = self.spaces.require(bridge.source_space_hash)
             registered_target = self.spaces.require(bridge.target_space_hash)
-            candidate_space: SpaceIdentity | None = bridge_output_space(
+            resolved_space: SpaceIdentity | None = bridge_output_space(
                 registered_source, bridge, registered_target
             )
-            candidate_hash = candidate_space.space_hash
         except RelateError:
-            candidate_space = None
-            candidate_hash = f"derived:{bridge.bridge_id}"
-        comparison = compare_native_spaces(
-            source_vectors=candidate,
-            target_vectors=target,
+            resolved_space = None
+        generic = self.evaluate_transformation(
+            bridge,
+            evaluation_source,
+            evaluation_target,
             correspondence=correspondence,
-            source_space_hash=candidate_hash,
-            target_space_hash=bridge.target_space_hash,
+            reference_frame=ReferenceFrame.TARGET_NATIVE,
+            candidate_space=resolved_space,
+            reference_space=target_space,
             k=k,
             hard_negative_cases=hard_negative_cases,
             hard_negative_vectors=hard_negative_vectors,
             scorer=scorer,
             scorer_id=scorer_id,
-        )
-        results = results_from_space_comparison(comparison)
-        profile = build_preservation_profile(
-            source_space_hash=bridge.source_space_hash,
-            candidate_space_hash=candidate_hash,
-            target_space_hash=bridge.target_space_hash,
-            results=results,
-            policies=list(policies) if policies is not None else list(DEFAULT_POLICIES),
-            bridge_id=bridge.bridge_id,
-            evaluation_correspondence_hash=correspondence.content_hash,
-            scorer=scorer_id,
-            evaluator_version=code_identity(),
+            policies=policies,
         )
         return BridgeEvaluation(
             bridge=bridge,
-            candidate_space=candidate_space,
-            comparison=comparison,
-            profile=profile,
+            candidate_space=generic.candidate_space,
+            comparison=generic.comparison,
+            profile=generic.profile,
         )
 
     # -- evidence -------------------------------------------------------

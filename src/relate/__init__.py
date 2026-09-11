@@ -6,7 +6,7 @@ RELATE treats embedding geometry as measured evidence rather than permission.
 from relate.bridges import Bridge, BridgeMismatchError, BridgeRegistry, BridgeSpec, fit_bridge
 from relate.evaluation import EvaluationCard, PreservationProfile
 from relate.model import RelateError, RelationProjection, SearchHit
-from relate.observatory import BridgeEvaluation, Observatory
+from relate.observatory import BridgeEvaluation, Observatory, TransformationEvaluation
 from relate.python import PYTHON_RELATION_NAMES, PythonStructure, extract_python_structure
 from relate.relations import Relation
 from relate.retrieval import (
@@ -43,6 +43,7 @@ __all__ = [
     "SignalProvenance",
     "SpaceIdentity",
     "SpaceRegistry",
+    "TransformationEvaluation",
     "TransformationRecord",
     "build_signal_bundle",
     "compare_spaces",

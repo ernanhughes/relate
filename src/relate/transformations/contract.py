@@ -58,6 +58,22 @@ class TransformationProvenance:
 
 
 @dataclass(frozen=True, slots=True)
+class DerivationRecord:
+    """One ancestry hop: identity and provenance only, never verdicts.
+
+    Lineage composes (a derived space can parent another derivation);
+    preservation permission never propagates through it: every hop
+    needs its own measurement and profile.
+    """
+
+    space_hash: str = ""
+    parent_hash: str = ""
+    transformation_id: str = ""
+    kind: str = ""
+    reference_hash: str = ""
+
+
+@dataclass(frozen=True, slots=True)
 class TransformationArtifact:
     """A persisted transformation: spec plus deterministic identity."""
 

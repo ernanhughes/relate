@@ -27,14 +27,22 @@ def run_demo() -> int:
         CorrespondenceSet,
         HardNegativeCase,
         PreservationPolicy,
+        PreservationResult,
+        ReferenceFrame,
         Requirement,
         build_preservation_profile,
         calibrate,
         calibration_transfer_results,
         compare_native_spaces,
         cosine_scorer,
+        cosine_similarity,
         results_from_space_comparison,
         scorer_id_of,
+    )
+    from relate.transformations import (
+        fit_constant_delta,
+        fit_pca,
+        identity_map,
     )
 
     rng = np.random.default_rng(0)
@@ -85,9 +93,9 @@ def run_demo() -> int:
         )
 
     train_corr = correspondence(rows_for(range(80)))
-    eval_corr = correspondence(rows_for(range(80, 120)))
-    eval_rows = [index[(a, k)] for a in range(80, 120)
-                 for k in ("base", "paraphrase", "negation", "topic")]
+    eval_rows = rows_for(range(80, 120))
+    eval_corr = correspondence(eval_rows)
+    eval_rows = rows_for(range(80, 120))
     cases = []
     for anchor in range(80, 120):
         positive = index[(anchor, "paraphrase")]
@@ -160,6 +168,85 @@ def run_demo() -> int:
     for verdict in profile.verdicts:
         print(f"VERDICT  {verdict.scope:17s} {verdict.verdict.value}")
     print(f"WHY      {profile.explain('threshold_transfer').replace(chr(10), ' / ')}")
+
+    print("COMPRESSION")
+    cartridge = fit_pca(fine, output_dimensions=12,
+                        source_space_hash=fine_space.space_hash)
+    cartridge_space = runtime.derive_transformation_space(
+        parent=fine_space, transformation_id=cartridge.transformation_id,
+        parameters={"method": "pca", "output_dimensions": 12}, dimensions=12)
+    cartridge_candidates = cartridge.transform(fine)
+    compression = runtime.evaluate_compression(
+        cartridge, fine, fine, correspondence=eval_corr,
+        candidate_space=cartridge_space, reference_space=fine_space,
+        k=5, hard_negative_cases=cases,
+        hard_negative_vectors=(
+            {f"item-{r}": cartridge_candidates[r] for r in eval_rows},
+            {f"item-{r}": fine[r] for r in eval_rows},
+        ),
+        scorer=scorer, scorer_id=scorer_id_of(scorer),
+        policies=[
+            PreservationPolicy(scope="retrieval", requirements=(
+                Requirement("neighborhood_structure", "overlap_at_5",
+                            "min_value", 0.60),)),
+            PreservationPolicy(scope="threshold_transfer", requirements=(
+                Requirement("calibration_transfer", "far_increase",
+                            "max_delta", 0.05),)),
+        ],
+    )
+    for verdict in compression.profile.verdicts:
+        print(f"VERDICT  compression/{verdict.scope:17s} {verdict.verdict.value}")
+
+    print("OPERATOR")
+    shift = np.zeros(4)
+    shift[0] = 3.0
+    op_source, op_target = [], []
+    op_rng = np.random.default_rng(2)
+    for _ in range(60):
+        latent = op_rng.normal(size=(4,))
+        op_source.append(latent)
+        op_target.append(latent + shift)
+    op_source = np.array(op_source)
+    op_target = np.array(op_target)
+    op_space = runtime.register_space(model="demo-operator", dimensions=4)
+    delta = fit_constant_delta(op_source[:40], op_target[:40], relation="weakened",
+                               source_space_hash=op_space.space_hash)
+    plain = identity_map(relation="weakened", source_space_hash=op_space.space_hash)
+    op_corr = CorrespondenceSet(ids=tuple(f"op-{i}" for i in range(20)),
+                                source_rows=tuple(range(40, 60)),
+                                target_rows=tuple(range(40, 60)))
+    op_source_eval = op_source[40:]
+    op_target_eval = op_target[40:]
+    fidelity_policy = PreservationPolicy(scope="operator_fidelity", requirements=(
+        Requirement("operator_fidelity", "mean_cosine_to_native", "min_value", 0.85),))
+    for operator, label in ((delta, "constant_delta"), (plain, "identity_map")):
+        judged = runtime.evaluate_operator(
+            operator, op_source, op_target, correspondence=op_corr,
+            reference_space=op_space,
+            policies=[fidelity_policy],
+        )
+        candidate = operator.transform(op_source_eval)
+        fidelity = float(np.mean([
+            cosine_similarity(candidate[i], op_target_eval[i])
+            for i in range(len(op_target_eval))]))
+        rebuilt = build_preservation_profile(
+            source_space_hash=op_space.space_hash,
+            candidate_space_hash=f"derived:{operator.transformation_id}",
+            target_space_hash=op_space.space_hash,
+            results=list(judged.profile.results) + [PreservationResult(
+                capability="operator_fidelity", metric="mean_cosine_to_native",
+                value=fidelity, reference_value=1.0,
+                reference_frame=ReferenceFrame.TARGET_NATIVE,
+                evidence_id=operator.transformation_id)],
+            policies=[fidelity_policy],
+            bridge_id=operator.transformation_id,
+            evaluation_correspondence_hash=op_corr.content_hash,
+            scorer="cosine_similarity",
+        )
+        print(f"VERDICT  operator/{label:17s} "
+              f"{rebuilt.verdict_for('operator_fidelity').verdict.value} ({fidelity:.3f})")
+    print("DOCTRINE transform -> derive identity -> measure -> scoped verdict; "
+          "lineage composes, permission does not.")
     # The point, in one line: a map proves coordinates can be
     # transformed; the profile determines what it is good for.
     return 0

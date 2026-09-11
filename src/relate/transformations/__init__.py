@@ -10,6 +10,7 @@ from relate.transformations.compression import (
 )
 from relate.transformations.contract import (
     ContentTransformation,
+    DerivationRecord,
     TransformationArtifact,
     TransformationProvenance,
     TransformationSpec,
@@ -52,6 +53,7 @@ __all__ = [
     "ConstantDelta",
     "ContentTransformation",
     "ContentTransformationCase",
+    "DerivationRecord",
     "IdentityMap",
     "LinearOperator",
     "OperatorSelection",

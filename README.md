@@ -187,7 +187,8 @@ evaluation.profile.usable_for("retrieval")      # True on a measured PASS
 evaluation.profile.explain("threshold_transfer")  # names the failed gates
 ```
 
-Try `python -m relate.cli demo` for the whole thesis in eight lines.
+Try `python -m relate.cli demo` for the whole book in one command:
+bridge, compression, and operator cartridges judged through one path.
 
 ## The three layers
 
@@ -206,6 +207,30 @@ Policy-scoped and fail-closed (usable_for over declared verdicts).
 ```
 
 > **Same identity does not prove quality. Different identity does not prohibit comparison. A bridge does not grant usability. Measurement earns scoped permission.**
+
+## One transformation lifecycle
+
+```text
+Bridge
+Compression
+Semantic operator
+        │
+        ▼
+VectorTransformation
+        │
+        ▼
+Derived Space
+        │
+        ▼
+Measurement Spine
+        │
+        ▼
+PreservationProfile
+```
+
+> **Every transformation creates a new representation identity and an obligation to measure what survived.**
+>
+> Transformation lineage is composable. Preservation permission is not.
 
 Every operation knows which space it belongs to (`SpaceIdentity` /
 `space_hash`), which relation is asked (`Relation` / `RelationProjection`),
