@@ -1,0 +1,101 @@
+{
+  "active_to_passive": {
+    "evaluated": [
+      "active_to_passive/affine",
+      "active_to_passive/constant_delta",
+      "active_to_passive/identity_map",
+      "active_to_passive/linear"
+    ],
+    "outcome": "selected",
+    "policy": "04253f63a9b993e7",
+    "selected": "active_to_passive/identity_map"
+  },
+  "claim_strengthened": {
+    "evaluated": [
+      "claim_strengthened/affine",
+      "claim_strengthened/constant_delta",
+      "claim_strengthened/identity_map",
+      "claim_strengthened/linear"
+    ],
+    "outcome": "selected",
+    "policy": "04253f63a9b993e7",
+    "selected": "claim_strengthened/identity_map"
+  },
+  "claim_weakened": {
+    "evaluated": [
+      "claim_weakened/affine",
+      "claim_weakened/constant_delta",
+      "claim_weakened/identity_map",
+      "claim_weakened/linear"
+    ],
+    "outcome": "selected",
+    "policy": "04253f63a9b993e7",
+    "selected": "claim_weakened/constant_delta"
+  },
+  "formal_to_informal": {
+    "evaluated": [
+      "formal_to_informal/affine",
+      "formal_to_informal/constant_delta",
+      "formal_to_informal/identity_map",
+      "formal_to_informal/linear"
+    ],
+    "outcome": "none_pass",
+    "policy": "04253f63a9b993e7",
+    "selected": null
+  },
+  "present_to_past": {
+    "evaluated": [
+      "present_to_past/affine",
+      "present_to_past/constant_delta",
+      "present_to_past/identity_map",
+      "present_to_past/linear"
+    ],
+    "outcome": "selected",
+    "policy": "04253f63a9b993e7",
+    "selected": "present_to_past/identity_map"
+  },
+  "relation_swap": {
+    "evaluated": [
+      "relation_swap/affine",
+      "relation_swap/constant_delta",
+      "relation_swap/identity_map",
+      "relation_swap/linear"
+    ],
+    "outcome": "selected",
+    "policy": "04253f63a9b993e7",
+    "selected": "relation_swap/identity_map"
+  },
+  "statement_to_negation": {
+    "evaluated": [
+      "statement_to_negation/affine",
+      "statement_to_negation/constant_delta",
+      "statement_to_negation/identity_map",
+      "statement_to_negation/linear"
+    ],
+    "outcome": "none_pass",
+    "policy": "04253f63a9b993e7",
+    "selected": null
+  },
+  "temporal_shift": {
+    "evaluated": [
+      "temporal_shift/affine",
+      "temporal_shift/constant_delta",
+      "temporal_shift/identity_map",
+      "temporal_shift/linear"
+    ],
+    "outcome": "selected",
+    "policy": "04253f63a9b993e7",
+    "selected": "temporal_shift/identity_map"
+  },
+  "verbose_to_concise": {
+    "evaluated": [
+      "verbose_to_concise/affine",
+      "verbose_to_concise/constant_delta",
+      "verbose_to_concise/identity_map",
+      "verbose_to_concise/linear"
+    ],
+    "outcome": "none_pass",
+    "policy": "04253f63a9b993e7",
+    "selected": null
+  }
+}

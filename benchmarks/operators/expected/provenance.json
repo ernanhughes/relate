@@ -1,0 +1,37 @@
+{
+  "benchmark_id": "operators-v1",
+  "code_version": "relate-search 0.1.0",
+  "corpus_hash": "111cc2bb9008557d632061f98a0e4f847b91293e31bcdb2d78285a35de7f7914",
+  "corpus_release": "relate-doc-0.1.0",
+  "dimensions": 64,
+  "fidelity_bar": 0.85,
+  "policy": {
+    "requirements": [
+      {
+        "advisory": false,
+        "bound": 0.85,
+        "capability": "operator_fidelity",
+        "kind": "min_value",
+        "metric": "mean_cosine_to_native"
+      }
+    ],
+    "scope": "operator_fidelity"
+  },
+  "scope": "operator_fidelity",
+  "scorer": "cosine_similarity",
+  "seed": 0,
+  "space": {
+    "derivation": "",
+    "derived_from": "",
+    "dimensions": 64,
+    "dtype": "float32",
+    "model": "synthetic-operator-mirror-v1",
+    "normalize": true,
+    "post_processing": "",
+    "prefixes": "",
+    "revision": "",
+    "sequence_length": 0,
+    "tokenizer": "",
+    "truncation": ""
+  }
+}

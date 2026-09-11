@@ -1,0 +1,146 @@
+{
+  "active_to_passive": {
+    "eval_case_set_hash": "b4e450d42c80dd63",
+    "fidelities": {
+      "affine": 0.9374245432071066,
+      "constant_delta": 0.9947041432568534,
+      "identity_map": 0.9948496244895532,
+      "linear": 0.944746871949898
+    },
+    "n_eval": 15,
+    "n_train": 30,
+    "native_cosine": 0.9948496244895532,
+    "outcome": "selected",
+    "selection": "active_to_passive/identity_map",
+    "train_case_set_hash": "ea4c99df6ee950da",
+    "train_linear_diagnostic": 1.0
+  },
+  "claim_strengthened": {
+    "eval_case_set_hash": "d05fb33e8863cdcd",
+    "fidelities": {
+      "affine": 0.8269992058326281,
+      "constant_delta": 0.993936849287729,
+      "identity_map": 0.9945404594063181,
+      "linear": 0.863560787847718
+    },
+    "n_eval": 5,
+    "n_train": 10,
+    "native_cosine": 0.9945404594063181,
+    "outcome": "selected",
+    "selection": "claim_strengthened/identity_map",
+    "train_case_set_hash": "0a1ecf50035a167c",
+    "train_linear_diagnostic": 1.0
+  },
+  "claim_weakened": {
+    "eval_case_set_hash": "f5ace071623480d7",
+    "fidelities": {
+      "affine": 0.7968530172311908,
+      "constant_delta": 0.9679428388268928,
+      "identity_map": 0.8313307541081256,
+      "linear": 0.3065985524844288
+    },
+    "n_eval": 5,
+    "n_train": 10,
+    "native_cosine": 0.8313307541081256,
+    "outcome": "selected",
+    "selection": "claim_weakened/constant_delta",
+    "train_case_set_hash": "98470733dc2de9ce",
+    "train_linear_diagnostic": 1.0
+  },
+  "formal_to_informal": {
+    "eval_case_set_hash": "5a59021ca6890421",
+    "fidelities": {
+      "affine": 0.32280197130939187,
+      "constant_delta": 0.646063725192307,
+      "identity_map": 0.6823432256938514,
+      "linear": 0.36378208291800823
+    },
+    "n_eval": 12,
+    "n_train": 23,
+    "native_cosine": 0.6823432256938514,
+    "outcome": "none_pass",
+    "selection": null,
+    "train_case_set_hash": "57ffacaee3fb5a68",
+    "train_linear_diagnostic": 1.0
+  },
+  "present_to_past": {
+    "eval_case_set_hash": "65cefd7fa2baf919",
+    "fidelities": {
+      "affine": 0.9142588662828305,
+      "constant_delta": 0.9945795768890585,
+      "identity_map": 0.9946844393019503,
+      "linear": 0.9202267855668405
+    },
+    "n_eval": 12,
+    "n_train": 23,
+    "native_cosine": 0.9946844393019503,
+    "outcome": "selected",
+    "selection": "present_to_past/identity_map",
+    "train_case_set_hash": "9bcbc2368e60fbda",
+    "train_linear_diagnostic": 1.0
+  },
+  "relation_swap": {
+    "eval_case_set_hash": "c3ed3b1fe9741db2",
+    "fidelities": {
+      "affine": 0.5375325580655613,
+      "constant_delta": 0.9916827293413968,
+      "identity_map": 0.9925181568095438,
+      "linear": 0.6323800069716449
+    },
+    "n_eval": 4,
+    "n_train": 6,
+    "native_cosine": 0.9925181568095438,
+    "outcome": "selected",
+    "selection": "relation_swap/identity_map",
+    "train_case_set_hash": "04df900a0bb9099a",
+    "train_linear_diagnostic": 1.0
+  },
+  "statement_to_negation": {
+    "eval_case_set_hash": "13632d0c7e146d77",
+    "fidelities": {
+      "affine": 0.44370340826725063,
+      "constant_delta": 0.6493559437402502,
+      "identity_map": 0.6606333199260451,
+      "linear": 0.4814269211914939
+    },
+    "n_eval": 15,
+    "n_train": 30,
+    "native_cosine": 0.6606333199260451,
+    "outcome": "none_pass",
+    "selection": null,
+    "train_case_set_hash": "f42c89bff01541d7",
+    "train_linear_diagnostic": 1.0
+  },
+  "temporal_shift": {
+    "eval_case_set_hash": "75173a9cf1ede4e6",
+    "fidelities": {
+      "affine": 0.8986181794807035,
+      "constant_delta": 0.9941966686903461,
+      "identity_map": 0.9944687043090636,
+      "linear": 0.9124969871637104
+    },
+    "n_eval": 9,
+    "n_train": 16,
+    "native_cosine": 0.9944687043090636,
+    "outcome": "selected",
+    "selection": "temporal_shift/identity_map",
+    "train_case_set_hash": "e21fdc0e96d4cdc0",
+    "train_linear_diagnostic": 1.0
+  },
+  "verbose_to_concise": {
+    "eval_case_set_hash": "c435f6a7a3ec97c9",
+    "fidelities": {
+      "affine": 0.44420978409450385,
+      "constant_delta": 0.7610975676871852,
+      "identity_map": 0.784481068772768,
+      "linear": 0.4796268934696803
+    },
+    "n_eval": 12,
+    "n_train": 23,
+    "native_cosine": 0.784481068772768,
+    "outcome": "none_pass",
+    "selection": null,
+    "train_case_set_hash": "73f513ac9355355e",
+    "train_linear_diagnostic": 1.0
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "bridge_id": "20c7ef8a63e6b91d",
+  "candidate_space_hash": "derived:20c7ef8a63e6b91d",
+  "evaluation_correspondence_hash": "13632d0c7e146d77",
+  "provenance": {
+    "bridge_id": "20c7ef8a63e6b91d",
+    "candidate_space_hash": "derived:20c7ef8a63e6b91d",
+    "evaluation_correspondence_hash": "13632d0c7e146d77",
+    "evaluator_version": "",
+    "policy_ids": [
+      "04253f63a9b993e7"
+    ],
+    "scorer": "cosine_similarity",
+    "source_space_hash": "3552dcd4036c10a7",
+    "target_space_hash": "3552dcd4036c10a7"
+  },
+  "results": [
+    {
+      "capability": "representation_similarity",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "cka",
+      "ratio": 0.5305393614406492,
+      "reference_frame": "target_native",
+      "reference_value": 1.0,
+      "value": 0.5305393614406492
+    },
+    {
+      "capability": "representation_similarity",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "cosine_matrix_correlation",
+      "ratio": 0.2612774331442433,
+      "reference_frame": "target_native",
+      "reference_value": 1.0,
+      "value": 0.2612774331442433
+    },
+    {
+      "capability": "representation_similarity",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "distance_matrix_correlation",
+      "ratio": 0.22851642866022942,
+      "reference_frame": "target_native",
+      "reference_value": 1.0,
+      "value": 0.22851642866022942
+    },
+    {
+      "capability": "neighborhood_structure",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "overlap_at_10",
+      "ratio": 0.7600000000000001,
+      "reference_frame": "target_native",
+      "reference_value": 1.0,
+      "value": 0.7600000000000001
+    },
+    {
+      "capability": "neighborhood_structure",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "top1_agreement",
+      "ratio": 0.0,
+      "reference_frame": "target_native",
+      "reference_value": 1.0,
+      "value": 0.0
+    },
+    {
+      "capability": "counterpart_recovery",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "recall_at_1",
+      "ratio": 0.4666666666666667,
+      "reference_frame": "target_native",
+      "reference_value": 1.0,
+      "value": 0.4666666666666667
+    },
+    {
+      "capability": "counterpart_recovery",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "mrr",
+      "ratio": 0.638888888888889,
+      "reference_frame": "target_native",
+      "reference_value": 1.0,
+      "value": 0.638888888888889
+    },
+    {
+      "capability": "operator_fidelity",
+      "delta": null,
+      "evidence_id": "20c7ef8a63e6b91d",
+      "metric": "mean_cosine_to_native",
+      "ratio": null,
+      "reference_frame": "target_native",
+      "reference_value": 1.0,
+      "value": 0.4814269211914939
+    }
+  ],
+  "source_space_hash": "3552dcd4036c10a7",
+  "target_space_hash": "3552dcd4036c10a7",
+  "verdicts": [
+    {
+      "failed_capabilities": [
+        "operator_fidelity/mean_cosine_to_native"
+      ],
+      "rationale": "failed: operator_fidelity/mean_cosine_to_native = 0.481427 (requires mean_cosine_to_native min_value 0.85; frame target_native, reference 1)",
+      "required_capabilities": [
+        "operator_fidelity/mean_cosine_to_native"
+      ],
+      "scope": "operator_fidelity",
+      "verdict": "FAIL"
+    }
+  ]
+}

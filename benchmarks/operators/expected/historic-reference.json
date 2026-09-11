@@ -1,0 +1,27 @@
+{
+  "status": "EXTERNAL",
+  "note": "Preserved prose evidence, NOT recomputed here. The Wave-5 operator bakeoff ran on all-mpnet-base-v2 embeddings of these exact RELATE-DOC pairs; no sentence encoder runs in this repository. The bakeoff in expected/summary.json mirrors the taxonomy through production operator APIs on a deterministic mirror encoder over the real frozen pairs.",
+  "experiment": "Wave 5 operator bakeoff (operator ladder identity -> delta -> rank-1 -> low-rank -> full affine -> local affine -> MLP, held out by base sentence; wave5/artifacts/operator-bakeoff.json)",
+  "results": {
+    "identity_like": ["active_to_passive", "present_to_past", "relation_swap", "claim_strengthened", "temporal_shift"],
+    "identity_pair_cosine": [0.88, 0.98],
+    "constant_delta": ["claim_weakened"],
+    "constant_delta_note": "identity 0.80 below the 0.85 bar, delta 0.94 clears it -- the lone rung-1 passer",
+    "none_pass": ["formal_to_informal", "verbose_to_concise", "statement_to_negation"],
+    "none_identity_cosine": [0.67, 0.75],
+    "mid_complexity_passers": 0,
+    "reconstruction_bar": 0.85
+  },
+  "observation": "transformation complexity is near-binary: grammatical edits are identity, one edit is a constant delta, the rest admit no passing operator at any ladder rung; expressiveness never rescues them",
+  "mirror": {
+    "identity_map": ["active_to_passive", "present_to_past", "relation_swap", "claim_strengthened", "temporal_shift"],
+    "constant_delta": ["claim_weakened"],
+    "none_pass": ["formal_to_informal", "verbose_to_concise", "statement_to_negation"],
+    "bar": 0.85
+  },
+  "sources": [
+    "experiments/embeddings-from-first-principles/wave5/artifacts/operator-bakeoff.json",
+    "experiments/embeddings-from-first-principles/wave5/WAVE5_FINDINGS.md rows T.1-T.4",
+    "book Chapter 25"
+  ]
+}

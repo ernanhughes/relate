@@ -20,6 +20,23 @@ from relate.transformations.contract import (
     make_transformation_id,
 )
 from relate.transformations.evaluate import evaluate_transformation
+from relate.transformations.operators import (
+    OPERATOR_COMPLEXITY,
+    AffineOperator,
+    ConstantDelta,
+    ContentTransformationCase,
+    IdentityMap,
+    LinearOperator,
+    OperatorSelection,
+    OperatorSelectionOutcome,
+    fit_affine_operator,
+    fit_constant_delta,
+    fit_linear_operator,
+    hash_case_set,
+    hash_content,
+    identity_map,
+    select_simplest_passing,
+)
 from relate.transformations.records import (
     OPERATOR_CLASSES,
     CompressionRecord,
@@ -29,8 +46,16 @@ from relate.transformations.records import (
 
 __all__ = [
     "OPERATOR_CLASSES",
+    "OPERATOR_COMPLEXITY",
+    "AffineOperator",
     "CompressionRecord",
+    "ConstantDelta",
     "ContentTransformation",
+    "ContentTransformationCase",
+    "IdentityMap",
+    "LinearOperator",
+    "OperatorSelection",
+    "OperatorSelectionOutcome",
     "PCACompression",
     "PrefixTruncation",
     "RandomProjection",
@@ -43,9 +68,16 @@ __all__ = [
     "check_compression",
     "derived_transformation_space",
     "evaluate_transformation",
+    "fit_affine_operator",
+    "fit_constant_delta",
+    "fit_linear_operator",
     "fit_pca",
+    "hash_case_set",
+    "hash_content",
     "hash_parameters",
+    "identity_map",
     "make_transformation_id",
     "prefix_truncation",
     "random_projection",
+    "select_simplest_passing",
 ]
