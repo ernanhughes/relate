@@ -87,6 +87,10 @@ extension for Ch 22 (compression / faithfulness) and Ch 23 (transformation / ope
   Hugo `content/` is a publication boundary. `ontology.json` `spec_source`
   updated.
 
+  Repository note: the historical claim ledger is not vendored in this RELATE
+  repository. The active book-to-benchmark map lives at
+  `../../evidence/BOOK-EVIDENCE-MAP.md`.
+
 Known gaps:
 - **RELATE-DOC** (spec §11) not built — gates Wave 4 + Transformation Wave.
 - **Query difficulty** — Wave 1 (2026-09-08) found the query set saturates

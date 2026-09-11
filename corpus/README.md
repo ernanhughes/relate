@@ -15,7 +15,8 @@
 # RELATE — the continuous experimental artifact for *Embeddings From First Principles*
 
 Spec: `spec/RELATE-v0.1.md` (in this directory — the executable experiment owns it)
-Claim ledger: `claims.md` (in this directory)
+Book/evidence map: `../evidence/BOOK-EVIDENCE-MAP.md`
+Public book: https://programmer.ie/books/embeddings-from-first-principles/
 
 RELATE is a **diagnostic instrument**, not a general benchmark: ~1,200 short
 text items with typed pairwise relations, built so that a failure localizes to a
@@ -59,7 +60,6 @@ build_full.py          orchestrator: validate -> balance -> dedup/leakage -> spl
 build_dev.py           the tiny DEV build (unchanged)
 dev/                   RELATE-DEV + its findings
 spec/                  RELATE-v0.1.md, RELATE-CHANGELOG.md  (moved out of Hugo content: the experiment owns its spec)
-claims.md              claim-to-experiment ledger (moved out of Hugo content)
 relate-0.1.0/          THE FROZEN RELEASE — items/pairs/queries JSONL, splits/, views/, bm25_scores.jsonl, datasheet.md, corpus_hash.txt, manifest.json
 ```
 

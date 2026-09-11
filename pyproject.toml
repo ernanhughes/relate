@@ -15,6 +15,14 @@ dependencies = [
     "typing-extensions>=4.10; python_version < '3.11'",
 ]
 
+[project.urls]
+Homepage = "https://programmer.ie/solutions/relate/"
+Repository = "https://github.com/ernanhughes/relate"
+Documentation = "https://github.com/ernanhughes/relate/blob/main/docs/reference-map.md"
+"Embeddings From First Principles" = "https://programmer.ie/books/embeddings-from-first-principles/"
+"Programmer.ie Article" = "https://programmer.ie/post/relate/"
+"Live Demo" = "https://huggingface.co/spaces/ernanhughes/relate-demo"
+
 [project.optional-dependencies]
 replay = ["scikit-learn>=1.4"]
 dev = ["pytest>=8", "scikit-learn>=1.4"]

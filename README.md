@@ -9,6 +9,22 @@ transforming, and governing embedding spaces. Its core remains tiny:
 `RelationProjection` takes embeddings you already have, learns a projection
 into measurable relation coordinates, and ranks targets in that relation space.
 
+## Public reference map
+
+RELATE is the implementation and evidence reference for
+[*Embeddings From First Principles*](https://programmer.ie/books/embeddings-from-first-principles/).
+
+- Book: [Embeddings From First Principles](https://programmer.ie/books/embeddings-from-first-principles/)
+- Solution page: [RELATE](https://programmer.ie/solutions/relate/)
+- Background article: [RELATE: Searching Embeddings by Relation, Not Just Similarity](https://programmer.ie/post/relate/)
+- Interactive demo: [RELATE on Hugging Face Spaces](https://huggingface.co/spaces/ernanhughes/relate-demo)
+- Programmer.ie source: [book](https://github.com/ernanhughes/next-books/tree/main/content/books/embeddings-from-first-principles), [solution](https://github.com/ernanhughes/next-books/blob/main/content/solutions/relate.md), [article](https://github.com/ernanhughes/next-books/blob/main/content/post/relate.md)
+- Repo reference guide: [`docs/reference-map.md`](docs/reference-map.md)
+
+The public writing explains the argument. This repository preserves the
+runtime, corpus, benchmarks, replay paths, and audit trail that make the
+argument inspectable.
+
 ```python
 import numpy as np
 from relate import RelationProjection
