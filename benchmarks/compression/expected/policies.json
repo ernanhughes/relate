@@ -1,0 +1,69 @@
+[
+  {
+    "policy_id": "802398332ced774c",
+    "requirements": [
+      {
+        "advisory": false,
+        "bound": 0.78,
+        "capability": "neighborhood_structure",
+        "kind": "min_value",
+        "metric": "overlap_at_10"
+      },
+      {
+        "advisory": false,
+        "bound": 0.1,
+        "capability": "hard_negative_ordering",
+        "kind": "max_abs_delta",
+        "metric": "accuracy_delta"
+      },
+      {
+        "advisory": true,
+        "bound": 0.95,
+        "capability": "representation_similarity",
+        "kind": "min_value",
+        "metric": "cka"
+      }
+    ],
+    "scope": "retrieval"
+  },
+  {
+    "policy_id": "fe16a985d0fcbb10",
+    "requirements": [
+      {
+        "advisory": false,
+        "bound": 0.05,
+        "capability": "hard_negative_ordering",
+        "kind": "max_abs_delta",
+        "metric": "accuracy_delta"
+      },
+      {
+        "advisory": false,
+        "bound": 0.08,
+        "capability": "hard_negative_ordering/negation",
+        "kind": "max_abs_delta",
+        "metric": "accuracy_delta"
+      }
+    ],
+    "scope": "fine_ordering"
+  },
+  {
+    "policy_id": "b62670c94e7b05be",
+    "requirements": [
+      {
+        "advisory": false,
+        "bound": 0.05,
+        "capability": "calibration_transfer",
+        "kind": "max_delta",
+        "metric": "far_increase"
+      },
+      {
+        "advisory": false,
+        "bound": 0.05,
+        "capability": "calibration_transfer",
+        "kind": "max_delta",
+        "metric": "frr_increase"
+      }
+    ],
+    "scope": "threshold_transfer"
+  }
+]

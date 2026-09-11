@@ -371,11 +371,18 @@ def compare_geometry(
     reference_space_hash: str | None = None,
     candidate_space_hash: str | None = None,
 ) -> GeometryComparison:
-    """Pairwise-geometry agreement plus optional CKA and neighborhoods."""
+    """Pairwise-geometry agreement plus optional CKA and neighborhoods.
+
+    Row counts must match; widths may differ ( Grams and neighborhoods
+    are width-agnostic), which is what lets compression candidates meet
+    their native source in this path.
+    """
     ref = np.asarray(reference_vectors, dtype=np.float64)
     cand = np.asarray(candidate_vectors, dtype=np.float64)
-    if ref.shape != cand.shape:
-        raise RelateError("geometry comparison needs identically shaped matrices")
+    if ref.ndim != 2 or cand.ndim != 2:
+        raise RelateError("geometry comparison needs two matrices")
+    if ref.shape[0] != cand.shape[0]:
+        raise RelateError("geometry comparison needs the same row count")
     names = (
         list(ids)
         if ids is not None

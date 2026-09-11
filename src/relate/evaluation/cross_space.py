@@ -157,6 +157,7 @@ def compare_native_spaces(
     k: int = 10,
     metric: str = "cosine",
     counterpart_ks: tuple[int, ...] = (1, 5, 10),
+    with_counterpart: bool = True,
     hard_negative_cases: list[HardNegativeCase] | None = None,
     hard_negative_vectors: tuple[dict, dict] | None = None,
     scorer: ScoreFn | None = None,
@@ -182,7 +183,11 @@ def compare_native_spaces(
         candidate_space_hash=target_space_hash or None,
     )
     neighborhood = compare_neighborhoods(source, target, names, k=k, metric=metric)
-    counterpart = counterpart_recovery(source, target, names, ks=counterpart_ks)
+    counterpart = (
+        counterpart_recovery(source, target, names, ks=counterpart_ks)
+        if with_counterpart
+        else None
+    )
 
     delta = None
     if hard_negative_cases is not None:

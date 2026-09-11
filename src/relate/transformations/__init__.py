@@ -1,5 +1,13 @@
 """Transformations package."""
 
+from relate.transformations.compression import (
+    PCACompression,
+    PrefixTruncation,
+    RandomProjection,
+    fit_pca,
+    prefix_truncation,
+    random_projection,
+)
 from relate.transformations.contract import (
     ContentTransformation,
     TransformationArtifact,
@@ -23,6 +31,9 @@ __all__ = [
     "OPERATOR_CLASSES",
     "CompressionRecord",
     "ContentTransformation",
+    "PCACompression",
+    "PrefixTruncation",
+    "RandomProjection",
     "TransformationArtifact",
     "TransformationProvenance",
     "TransformationRecord",
@@ -32,6 +43,9 @@ __all__ = [
     "check_compression",
     "derived_transformation_space",
     "evaluate_transformation",
+    "fit_pca",
     "hash_parameters",
     "make_transformation_id",
+    "prefix_truncation",
+    "random_projection",
 ]

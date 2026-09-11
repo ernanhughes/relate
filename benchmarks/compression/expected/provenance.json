@@ -1,0 +1,31 @@
+{
+  "benchmark_id": "compression-v1",
+  "code_version": "relate-search 0.1.0",
+  "eval_correspondence_hash": "8e08028fd3339017",
+  "fit_correspondence_hash": "d5fc53790ac2316a",
+  "k": 10,
+  "reference_frame": "source_native",
+  "scorer": "cosine_similarity",
+  "seed": 0,
+  "source_space": {
+    "derivation": "",
+    "derived_from": "",
+    "dimensions": 128,
+    "dtype": "float32",
+    "model": "synthetic-compression-128-v1",
+    "normalize": true,
+    "post_processing": "",
+    "prefixes": "",
+    "revision": "",
+    "sequence_length": 0,
+    "tokenizer": "",
+    "truncation": ""
+  },
+  "tie_tol": 1e-09,
+  "widths": [
+    64,
+    32,
+    16,
+    8
+  ]
+}

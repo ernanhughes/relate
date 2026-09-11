@@ -1,0 +1,69 @@
+{
+  "pca_knees": {
+    "fine_ordering": 16,
+    "retrieval": 64,
+    "threshold_transfer": null
+  },
+  "verdicts": {
+    "pca-16": {
+      "fine_ordering": "PASS",
+      "retrieval": "FAIL",
+      "threshold_transfer": "FAIL"
+    },
+    "pca-32": {
+      "fine_ordering": "PASS",
+      "retrieval": "FAIL",
+      "threshold_transfer": "FAIL"
+    },
+    "pca-64": {
+      "fine_ordering": "PASS",
+      "retrieval": "PASS",
+      "threshold_transfer": "FAIL"
+    },
+    "pca-8": {
+      "fine_ordering": "FAIL",
+      "retrieval": "FAIL",
+      "threshold_transfer": "FAIL"
+    },
+    "prefix-16": {
+      "fine_ordering": "FAIL",
+      "retrieval": "FAIL",
+      "threshold_transfer": "FAIL"
+    },
+    "prefix-32": {
+      "fine_ordering": "FAIL",
+      "retrieval": "FAIL",
+      "threshold_transfer": "FAIL"
+    },
+    "prefix-64": {
+      "fine_ordering": "FAIL",
+      "retrieval": "FAIL",
+      "threshold_transfer": "FAIL"
+    },
+    "prefix-8": {
+      "fine_ordering": "FAIL",
+      "retrieval": "FAIL",
+      "threshold_transfer": "FAIL"
+    },
+    "random-16": {
+      "fine_ordering": "FAIL",
+      "retrieval": "FAIL",
+      "threshold_transfer": "FAIL"
+    },
+    "random-32": {
+      "fine_ordering": "FAIL",
+      "retrieval": "FAIL",
+      "threshold_transfer": "FAIL"
+    },
+    "random-64": {
+      "fine_ordering": "FAIL",
+      "retrieval": "FAIL",
+      "threshold_transfer": "FAIL"
+    },
+    "random-8": {
+      "fine_ordering": "FAIL",
+      "retrieval": "FAIL",
+      "threshold_transfer": "FAIL"
+    }
+  }
+}

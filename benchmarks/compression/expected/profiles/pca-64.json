@@ -1,0 +1,197 @@
+{
+  "bridge_id": "82f55b0eb9a8d871",
+  "candidate_space_hash": "678fbea8fc7cedb1",
+  "evaluation_correspondence_hash": "8e08028fd3339017",
+  "provenance": {
+    "bridge_id": "82f55b0eb9a8d871",
+    "candidate_space_hash": "678fbea8fc7cedb1",
+    "evaluation_correspondence_hash": "8e08028fd3339017",
+    "evaluator_version": "",
+    "policy_ids": [
+      "802398332ced774c",
+      "fe16a985d0fcbb10",
+      "b62670c94e7b05be"
+    ],
+    "scorer": "cosine_similarity",
+    "source_space_hash": "1495ca73cd83253b",
+    "target_space_hash": "1495ca73cd83253b"
+  },
+  "results": [
+    {
+      "capability": "representation_similarity",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "cka",
+      "ratio": 0.9950473353402455,
+      "reference_frame": "source_native",
+      "reference_value": 1.0,
+      "value": 0.9950473353402455
+    },
+    {
+      "capability": "representation_similarity",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "cosine_matrix_correlation",
+      "ratio": 0.988648564908772,
+      "reference_frame": "source_native",
+      "reference_value": 1.0,
+      "value": 0.988648564908772
+    },
+    {
+      "capability": "representation_similarity",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "distance_matrix_correlation",
+      "ratio": 0.9916133874147615,
+      "reference_frame": "source_native",
+      "reference_value": 1.0,
+      "value": 0.9916133874147615
+    },
+    {
+      "capability": "neighborhood_structure",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "overlap_at_10",
+      "ratio": 0.8083333333333333,
+      "reference_frame": "source_native",
+      "reference_value": 1.0,
+      "value": 0.8083333333333333
+    },
+    {
+      "capability": "neighborhood_structure",
+      "delta": null,
+      "evidence_id": "",
+      "metric": "top1_agreement",
+      "ratio": 0.5479166666666667,
+      "reference_frame": "source_native",
+      "reference_value": 1.0,
+      "value": 0.5479166666666667
+    },
+    {
+      "capability": "hard_negative_ordering",
+      "delta": -0.025000000000000022,
+      "evidence_id": "",
+      "metric": "accuracy_delta",
+      "ratio": null,
+      "reference_frame": "source_native",
+      "reference_value": 0.0,
+      "value": -0.025000000000000022
+    },
+    {
+      "capability": "hard_negative_ordering/negation",
+      "delta": -0.050000000000000044,
+      "evidence_id": "",
+      "metric": "accuracy_delta",
+      "ratio": null,
+      "reference_frame": "source_native",
+      "reference_value": 0.0,
+      "value": -0.050000000000000044
+    },
+    {
+      "capability": "hard_negative_ordering/relation-swap",
+      "delta": -0.07500000000000007,
+      "evidence_id": "",
+      "metric": "accuracy_delta",
+      "ratio": null,
+      "reference_frame": "source_native",
+      "reference_value": 0.0,
+      "value": -0.07500000000000007
+    },
+    {
+      "capability": "hard_negative_ordering/temporal-mismatch",
+      "delta": 0.025000000000000022,
+      "evidence_id": "",
+      "metric": "accuracy_delta",
+      "ratio": null,
+      "reference_frame": "source_native",
+      "reference_value": 0.0,
+      "value": 0.025000000000000022
+    },
+    {
+      "capability": "hard_negative_ordering/topic-related",
+      "delta": 0.0,
+      "evidence_id": "",
+      "metric": "accuracy_delta",
+      "ratio": null,
+      "reference_frame": "source_native",
+      "reference_value": 0.0,
+      "value": 0.0
+    },
+    {
+      "capability": "calibration_transfer",
+      "delta": 0.45625000000000004,
+      "evidence_id": "native-operating-point",
+      "metric": "far_increase",
+      "ratio": null,
+      "reference_frame": "source_native",
+      "reference_value": 0.1,
+      "value": 0.55625
+    },
+    {
+      "capability": "calibration_transfer",
+      "delta": -0.1,
+      "evidence_id": "native-operating-point",
+      "metric": "frr_increase",
+      "ratio": null,
+      "reference_frame": "source_native",
+      "reference_value": 0.1,
+      "value": 0.0
+    },
+    {
+      "capability": "calibration_transfer",
+      "delta": -0.29375,
+      "evidence_id": "native-operating-point",
+      "metric": "ambiguity_increase",
+      "ratio": null,
+      "reference_frame": "source_native",
+      "reference_value": 0.3234375,
+      "value": 0.0296875
+    },
+    {
+      "capability": "calibration_transfer",
+      "delta": 0.13946022281117143,
+      "evidence_id": "eer-operating-point",
+      "metric": "threshold_shift",
+      "ratio": null,
+      "reference_frame": "source_native",
+      "reference_value": 0.5818020961109938,
+      "value": 0.7212623189221652
+    }
+  ],
+  "source_space_hash": "1495ca73cd83253b",
+  "target_space_hash": "1495ca73cd83253b",
+  "verdicts": [
+    {
+      "failed_capabilities": [],
+      "rationale": "",
+      "required_capabilities": [
+        "neighborhood_structure/overlap_at_10",
+        "hard_negative_ordering/accuracy_delta"
+      ],
+      "scope": "retrieval",
+      "verdict": "PASS"
+    },
+    {
+      "failed_capabilities": [],
+      "rationale": "",
+      "required_capabilities": [
+        "hard_negative_ordering/accuracy_delta",
+        "hard_negative_ordering/negation/accuracy_delta"
+      ],
+      "scope": "fine_ordering",
+      "verdict": "PASS"
+    },
+    {
+      "failed_capabilities": [
+        "calibration_transfer/far_increase"
+      ],
+      "rationale": "failed: calibration_transfer/far_increase = 0.45625 (requires far_increase max_delta 0.05; frame source_native, reference 0.1)",
+      "required_capabilities": [
+        "calibration_transfer/far_increase",
+        "calibration_transfer/frr_increase"
+      ],
+      "scope": "threshold_transfer",
+      "verdict": "FAIL"
+    }
+  ]
+}
