@@ -22,6 +22,17 @@ class RelateError(ValueError):
     """Raised when RELATE receives incompatible or invalid data."""
 
 
+def code_identity() -> str:
+    """Implementation identity bound into fitted/provenance artifacts."""
+    try:
+        import importlib.metadata
+
+        version = importlib.metadata.version("relate-search")
+    except importlib.metadata.PackageNotFoundError:
+        version = "unknown"
+    return f"relate-search {version}"
+
+
 @dataclass(frozen=True, slots=True)
 class SearchHit:
     """One relation-ranked target."""

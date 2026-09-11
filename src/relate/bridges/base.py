@@ -11,7 +11,6 @@ transfer are downstream measurements, never bridge fields.
 from __future__ import annotations
 
 import hashlib
-import importlib.metadata
 import json
 from dataclasses import dataclass, field
 
@@ -19,7 +18,7 @@ import numpy as np
 import numpy.typing as npt
 
 from relate.evaluation.cross_space import CorrespondenceSet, aligned_matrices
-from relate.model import RelateError
+from relate.model import RelateError, code_identity
 from relate.spaces.identity import SpaceIdentity, derive_space
 
 
@@ -35,15 +34,6 @@ BRIDGE_METHODS = (
     "constant_target_centroid",
     "random_map",
 )
-
-
-def code_identity() -> str:
-    """Implementation identity bound into every fitted artifact."""
-    try:
-        version = importlib.metadata.version("relate-search")
-    except importlib.metadata.PackageNotFoundError:
-        version = "unknown"
-    return f"relate-search {version}"
 
 
 @dataclass(frozen=True, slots=True)
@@ -121,6 +111,16 @@ class Bridge:
         digest.update(np.ascontiguousarray(self.bias).tobytes())
         digest.update(json.dumps(list(self.mapping.shape), separators=(",", ":")).encode())
         return digest.hexdigest()[:16]
+
+    @property
+    def transformation_id(self) -> str:
+        """Generic-transformation identity: the bridge artifact id.
+
+        Read-only alias, no duplicated state: this is what lets a
+        ``Bridge`` satisfy the ``VectorTransformation`` protocol
+        structurally while keeping its bridge-specific API intact.
+        """
+        return self.bridge_id
 
     def transform(self, vectors: npt.ArrayLike) -> np.ndarray:
         """Produce candidate vectors: input contract enforced, nothing judged.

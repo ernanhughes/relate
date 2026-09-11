@@ -8,6 +8,7 @@ DERIVATION_KINDS = (
     "pca",
     "whitening",
     "bridge",
+    "transformation",
     "matryoshka-truncate",
     "truncate",
     "quantize",
