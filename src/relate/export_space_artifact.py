@@ -2,8 +2,10 @@
 
 The exporter reconstructs the frozen training and test embedding matrices from
 one read-only SQLite cache, refits the three published ridge readouts, verifies
-their coefficient/intercept hashes and the complete frozen test-prediction
-array, then writes one small pickle-free projection archive for the Space.
+their coefficient/intercept hashes and the frozen published prediction artifact,
+then verifies that the compact runtime projection reproduces those predictions
+either bit-for-bit or within an explicit strict numerical-equivalence contract.
+It then writes one small pickle-free projection archive for the Space.
 """
 
 from __future__ import annotations
@@ -25,6 +27,12 @@ MODEL_ID = "microsoft/codebert-base"
 MODEL_REVISION = "3b0952feddeffad0063f274080e3c23d75e7eb39"
 MAX_LENGTH = 256
 POOLING_POLICY = "attention-mask mean pooling"
+
+# The historical prediction artifact is preserved by exact file/array hashes.
+# Runtime predictions may follow a different BLAS/vectorization path, so their
+# scientific equivalence is verified separately under this strict contract.
+PREDICTION_RTOL = 1e-12
+PREDICTION_ATOL = 1e-12
 
 
 class SpaceArtifactError(ValueError):
@@ -72,6 +80,93 @@ def _verify_text_sha256(path: Path, expected: str) -> None:
 def _parameter_sha256(value: np.ndarray | float) -> str:
     return array_sha256(np.asarray(value, dtype=np.float64))
 
+def _prediction_diff_summary(
+    actual: np.ndarray,
+    expected: np.ndarray,
+    *,
+    stable_keys: tuple[str, ...],
+    relation_names: tuple[str, ...],
+    max_examples: int = 10,
+) -> str:
+    actual = np.asarray(actual, dtype=np.float64)
+    expected = np.asarray(expected, dtype=np.float64)
+
+    lines = [
+        f"refitted shape:  {actual.shape}",
+        f"published shape: {expected.shape}",
+        f"refitted array sha256:  {array_sha256(actual)}",
+        f"published array sha256: {array_sha256(expected)}",
+    ]
+
+    if actual.shape != expected.shape:
+        lines.append("cannot compute elementwise diff because shapes differ")
+        return "\n".join(lines)
+
+    mismatch = actual != expected
+    mismatch_count = int(np.count_nonzero(mismatch))
+    total = int(actual.size)
+
+    abs_diff = np.abs(actual - expected)
+
+    with np.errstate(divide="ignore", invalid="ignore"):
+        rel_diff = abs_diff / np.maximum(np.abs(expected), np.finfo(np.float64).tiny)
+
+    lines.extend(
+        [
+            f"exact mismatches: {mismatch_count}/{total}",
+            f"allclose rtol={PREDICTION_RTOL:.0e} "
+            f"atol={PREDICTION_ATOL:.0e}: "
+            f"{np.allclose(actual, expected, rtol=PREDICTION_RTOL, atol=PREDICTION_ATOL)}",
+            f"allclose rtol=1e-10 atol=1e-12: "
+            f"{np.allclose(actual, expected, rtol=1e-10, atol=1e-12)}",
+            f"max absolute diff: {float(np.max(abs_diff)):.17g}",
+            f"max relative diff: {float(np.max(rel_diff)):.17g}",
+        ]
+    )
+
+    lines.append("per relation:")
+    for column, relation_name in enumerate(relation_names):
+        relation_mismatch = mismatch[:, column]
+        count = int(np.count_nonzero(relation_mismatch))
+        relation_abs = abs_diff[:, column]
+
+        lines.append(
+            f"  {relation_name}: mismatches={count}/{actual.shape[0]}, "
+            f"max_abs_diff={float(np.max(relation_abs)):.17g}"
+        )
+
+    if mismatch_count:
+        lines.append(f"largest {min(max_examples, mismatch_count)} mismatches:")
+
+        mismatch_flat = np.flatnonzero(mismatch.ravel())
+        order = mismatch_flat[
+            np.argsort(abs_diff.ravel()[mismatch_flat])[::-1]
+        ]
+
+        for flat_index in order[:max_examples]:
+            row, column = np.unravel_index(flat_index, actual.shape)
+
+            key = (
+                stable_keys[row]
+                if row < len(stable_keys)
+                else f"<row {row}>"
+            )
+            relation = (
+                relation_names[column]
+                if column < len(relation_names)
+                else f"<column {column}>"
+            )
+
+            lines.append(
+                "  "
+                f"row={row} key={key} relation={relation} "
+                f"refitted={actual[row, column]:.17g} "
+                f"published={expected[row, column]:.17g} "
+                f"abs_diff={abs_diff[row, column]:.17g} "
+                f"rel_diff={rel_diff[row, column]:.17g}"
+            )
+
+    return "\n".join(lines)
 
 def _selection_rows(
     canonical_root: Path,
@@ -251,13 +346,53 @@ def export_space_artifact(
     if file_sha256(prediction_path) != str(expected_predictions["file_sha256"]):
         raise SpaceArtifactError("published test prediction file hash mismatch")
     published_predictions = np.load(prediction_path, allow_pickle=False)
-    if not np.array_equal(predictions, published_predictions):
+
+    # First verify the historical publication artifact itself exactly. This is
+    # the archival contract: the checked-in .npy must still be the frozen array
+    # named by the publication metadata.
+    published_prediction_hash = array_sha256(published_predictions)
+    expected_published_prediction_hash = str(expected_predictions["array_sha256"])
+    if published_prediction_hash != expected_published_prediction_hash:
         raise SpaceArtifactError(
-            "refitted projection does not exactly reproduce the published test predictions"
+            "loaded published prediction array does not match its frozen array hash"
         )
-    prediction_hash = array_sha256(predictions)
-    if prediction_hash != str(expected_predictions["array_sha256"]):
-        raise SpaceArtifactError("refitted test prediction array hash mismatch")
+
+    # Then compare the compact RelationProjection runtime path with that frozen
+    # artifact. Exact equality is recorded when available, but a different
+    # BLAS/vectorization accumulation order may legitimately change low-order
+    # float64 bits without changing the fitted model or scientific result.
+    predictions_exact = np.array_equal(predictions, published_predictions)
+    predictions_numerically_equivalent = np.allclose(
+        predictions,
+        published_predictions,
+        rtol=PREDICTION_RTOL,
+        atol=PREDICTION_ATOL,
+    )
+
+    prediction_abs_diff = np.abs(predictions - published_predictions)
+    prediction_max_abs_diff = float(np.max(prediction_abs_diff))
+    prediction_mismatch_count = int(
+        np.count_nonzero(predictions != published_predictions)
+    )
+
+    if not predictions_numerically_equivalent:
+        details = _prediction_diff_summary(
+            predictions,
+            published_predictions,
+            stable_keys=test_keys,
+            relation_names=projection.relation_names,
+        )
+        raise SpaceArtifactError(
+            "refitted projection materially differs from the published "
+            f"test predictions\n\n{details}"
+        )
+
+    runtime_prediction_hash = array_sha256(predictions)
+    prediction_reproduction = (
+        "BIT_EXACT"
+        if predictions_exact
+        else "NUMERICALLY_EQUIVALENT_NON_BIT_EXACT"
+    )
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     projection.save(output_path)
@@ -265,6 +400,7 @@ def export_space_artifact(
     result = {
         "artifact_id": "relate-option-b-space-projection-v1",
         "status": "SPACE_PROJECTION_EXPORTED_AND_VERIFIED",
+        "verification_mode": prediction_reproduction,
         "scientific_scope": "historical_option_b_live_readout",
         "model": {
             "repo_id": MODEL_ID,
@@ -286,9 +422,25 @@ def export_space_artifact(
         "verification": {
             "train_embedding_array_sha256": str(train_expected["array_sha256"]),
             "test_embedding_array_sha256": str(test_expected["array_sha256"]),
-            "published_test_prediction_array_sha256": prediction_hash,
-            "published_test_predictions_exact": True,
             "probe_bundle_file_sha256": file_sha256(probe_bundle_path),
+
+            # Historical publication artifact: exact archival identity.
+            "published_test_prediction_file_sha256": file_sha256(prediction_path),
+            "published_test_prediction_array_sha256": published_prediction_hash,
+            "published_prediction_artifact_exact": True,
+
+            # Current compact runtime path: distinguish bit identity from strict
+            # numerical equivalence instead of conflating the two.
+            "runtime_test_prediction_array_sha256": runtime_prediction_hash,
+            "runtime_predictions_bit_exact": predictions_exact,
+            "runtime_predictions_numerically_equivalent": (
+                predictions_numerically_equivalent
+            ),
+            "runtime_prediction_reproduction": prediction_reproduction,
+            "runtime_prediction_rtol": PREDICTION_RTOL,
+            "runtime_prediction_atol": PREDICTION_ATOL,
+            "runtime_prediction_exact_mismatch_count": prediction_mismatch_count,
+            "runtime_prediction_max_abs_diff": prediction_max_abs_diff,
         },
         "relate_e01_affected": False,
     }

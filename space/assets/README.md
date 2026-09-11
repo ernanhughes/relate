@@ -3,8 +3,8 @@ this directory to Hugging Face:
 
 ```powershell
 python -m relate.export_space_artifact `
-  --canonical-root C:\Projects\similarity_is_relative\artifacts\canonical\option-b `
-  --cache C:\Projects\relate_new\.writer\option-b\cache\gpu-batch10-a.sqlite3 `
+  --canonical-root F:\Projects\similarity_is_relative\artifacts\canonical\option-b `
+  --cache F:\Projects\relate_new\.writer\option-b\cache\gpu-batch10-a.sqlite3 `
   --output .\space\assets\option-b-demo-projection.npz
 ```
 
